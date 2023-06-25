@@ -33,6 +33,7 @@ COMPONENT: Navbar
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5%;
 }
 
 .navbar-container {
