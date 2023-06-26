@@ -8,6 +8,11 @@ const Navbar = () => {
                 <div className="navbar-logo">Add Logo Here</div>
                 <ul className="nav-menu">
                     <li className="nav-item">
+                        <Link to="/products" className="nav-link">
+                            All Products
+                        </Link>
+                    </li>
+                    <li className="nav-item">
                         <Link to="/account/login" className="nav-link">
                             Login
                         </Link>

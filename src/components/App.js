@@ -4,7 +4,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 /* 
 IMPORT REACT COMPONENTS BELOW
 */
-import { AccountForm, Navbar } from '../components'
+import { AccountForm, Navbar, ProductListPage } from '../components'
 
 const App = () => {
 
@@ -12,6 +12,12 @@ const App = () => {
     <>
       <Navbar />
       <Switch>
+        <Route
+          path='/products'
+          render={() => (
+            <ProductListPage />
+          )}
+        />
         <Route
           path='/account/:actionType'
           render={() => (
