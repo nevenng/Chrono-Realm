@@ -128,3 +128,69 @@ COMPONENT: AccountForm
   text-decoration: none;
 }
 
+/* 
+COMPONENT: ProductListPage
+*/
+
+.plp-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  height: 100vh;
+}
+
+
+/* 
+COMPONENT: ProductListItem
+*/
+
+.plp-item {
+  flex: 1 0 25%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 250px;
+}
+
+.plp-item img {
+  width: 100%;
+  height: auto;
+}
+
+.plp-item h3 {
+  margin-top: 10px;
+}
+
+.plp-item p {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.plp-item button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.plp-item button.add-to-cart:hover {
+  background-color: #007bff;
+  border: none;
+  color: white;
+}
+
+/* Optional styling for the product list items */
+.plp-item {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  margin: 10px;
+}
+
