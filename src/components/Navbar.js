@@ -3,8 +3,11 @@ import { Link } from "react-router-dom"
 import { Logout } from '../components'
 
 const Navbar = () => {
-    // need to pass in token, or user in order for the conditional for 
+    // need to pass in token, or user in order for the conditional 
     // comment in line 21-23 & 27 when token is defined
+
+    const token = false;
+    // ^^^^ to test UI change to true
 
     return (
         <nav className="navbar">
@@ -16,13 +19,23 @@ const Navbar = () => {
                             All Products
                         </Link>
                     </li>
+                    {/* Fror now we can have an inline navbar, discuss later if implementing modal */}
+                    {token ? (
+                        <li className="nav-item">
+                            <Link to="/orders" className="nav-link">
+                                My Orders
+                            </Link>
+                        </li>
+                    ) : (
+                        null
+                    )}
                     <li className="nav-item">
                         {/* {token ? (
                             <Logout />
-                        ) : ( */} 
-                            <Link to="/account/login" className="nav-link">
-                                Login
-                            </Link>
+                        ) : ( */}
+                        <Link to="/account/login" className="nav-link">
+                            Login
+                        </Link>
                         {/* )} */}
                     </li>
                 </ul>

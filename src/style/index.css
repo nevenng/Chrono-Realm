@@ -212,3 +212,37 @@ COMPONENT: ProductListItem
   color: #007bff;
   cursor: pointer;
 }
+
+/* Component for MyOrders */
+
+.myOrders-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.myOrders-container h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.myOrders-container p {
+  margin: 5px 0;
+}
+
+.myOrders-container h4 {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.myOrders-container a {
+  display: block;
+  margin-top: 10px;
+}
+
+.myOrders-container img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+}
