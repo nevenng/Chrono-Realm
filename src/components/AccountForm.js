@@ -16,8 +16,8 @@ const AccountForm = () => {
             <br></br>
             <label htmlFor="email" className="form-label">Email</label>
             <input type="text" name="email" className="form-input" required></input>
-            <label htmlFor="password" className="form-label">Password</label>
-            <input type="text" name="password" className="form-input" required></input>
+            <label htmlFor="password" className="form-label" >Password</label>
+            <input type="password" name="password" className="form-input" required></input>
             <button type="submit" className="form-button">Submit</button>
             <div>
                 {actionType === 'login'
