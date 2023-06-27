@@ -194,3 +194,21 @@ COMPONENT: ProductListItem
   margin: 10px;
 }
 
+/* Component for Logout */ 
+
+.logout-button {
+  display: flex;
+  width: 80.45px;
+  border: none;
+  background-color: transparent;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+}
+
+.logout-button:hover {
+  color: #007bff;
+  cursor: pointer;
+}

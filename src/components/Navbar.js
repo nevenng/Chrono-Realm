@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import { Logout } from '../components'
 
 const Navbar = () => {
+    // need to pass in token, or user in order for the conditional for 
+    // comment in line 21-23 & 27 when token is defined
+
     return (
         <nav className="navbar">
             <div className="navbar-container">
@@ -13,9 +17,13 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/account/login" className="nav-link">
-                            Login
-                        </Link>
+                        {/* {token ? (
+                            <Logout />
+                        ) : ( */} 
+                            <Link to="/account/login" className="nav-link">
+                                Login
+                            </Link>
+                        {/* )} */}
                     </li>
                 </ul>
             </div>
