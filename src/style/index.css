@@ -285,6 +285,8 @@ COMPONENT: Cart
   padding: 20px;
   margin-bottom: 20px;
   background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-container h3 {

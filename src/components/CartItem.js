@@ -1,25 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
 const CartItem = () => {
-    const [itemQuantity, setItemQuantity] = useState(1)
-
-    const handleQuantityClicker = (event) => {
-        setItemQuantity(parseInt(event.target.value,10))
-    }
 
     return (
         <tr>
             <td>Product Name 1</td>
             <td>$10</td>
             <td>
-                <input
-                    type="number"
-                    value={itemQuantity}
-                    onChange={handleQuantityClicker}
-                    >
-                </input>
+                <form>
+                    <input type="number"></input>
+                </form>
             </td>
-            <td>${itemQuantity * 10}</td>
+            <td>${100}</td>
         </tr>
     )
 }
