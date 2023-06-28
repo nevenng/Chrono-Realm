@@ -2,7 +2,7 @@ import React from "react";
 import { MyItems } from "../components"
 
 const MyOrders = () => {
-    
+
     // const handleMyOrders = (async (user) => {
     //     try {
     //         const response = await fetch(`${BASE_URL}/api/users/${user}/orders`, {

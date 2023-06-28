@@ -5,7 +5,6 @@ const MyItems = () => {
     // Need to pass in { prodBrand, prodModelName } 
 
     // const [myItems, setMyItems] = useState([]);
-    // My orders could live on the App level to pass thru? 
 
     // const handleMyItems = (async (user) => {
     //     try {
