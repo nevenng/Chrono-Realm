@@ -14,9 +14,14 @@ const CartSummary = () => {
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                    <CartItem />
+                    <CartItem />
+                    <CartItem />
+                    <CartItem />
                     <CartItem />
                     <CartItem />
                     <CartItem />

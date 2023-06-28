@@ -315,6 +315,14 @@ COMPONENT: Cart
   font-weight: bold;
 }
 
-/* .cart-table tbody tr:nth-child(even) {
-  background-color: #f5f5f5;
-} */
+.cart-table td:last-child {
+  text-align: right;
+  width: 1%;
+}
+
+.cart-item-remove-button {
+  border: none;
+  background-color: transparent;
+  color: red;
+  cursor: pointer;
+}

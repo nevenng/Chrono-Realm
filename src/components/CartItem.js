@@ -12,6 +12,7 @@ const CartItem = () => {
                 </form>
             </td>
             <td>${100}</td>
+            <td><button className="cart-item-remove-button">remove</button></td>
         </tr>
     )
 }
