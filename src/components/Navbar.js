@@ -6,7 +6,7 @@ const Navbar = () => {
     // need to pass in token, or user in order for the conditional 
     // comment in line 21-23 & 27 when token is defined
 
-    const token = false;
+    const token = true;
     // ^^^^ to test UI change to true
 
     return (
