@@ -1,7 +1,6 @@
 const apiRouter = require('express').Router();
 const jwt = require("jsonwebtoken");
 const express = require('express');
-const router = express.Router();
 const {JWT_SECRET} = process.env;
 const { getUserById } = require("../db");
 
@@ -57,7 +56,7 @@ apiRouter.use(async (req, res, next) => {
 
 // ROUTER: /api/users
 const usersRouter = require('./users');
-router.use('/users', usersRouter);
+apiRouter.use('/users', usersRouter);
 
 
 // // ROUTER: /api/products
