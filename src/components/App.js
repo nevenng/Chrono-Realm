@@ -8,7 +8,8 @@ import {
   AccountForm,
   Navbar,
   ProductListPage,
-  MyOrders
+  MyOrders,
+  CartSummary
 } from '../components'
 
 const App = () => {
@@ -27,6 +28,12 @@ const App = () => {
           path='/orders'
           render={() => (
             <MyOrders />
+          )}
+        />
+        <Route
+          path='/cart'
+          render={() => (
+            <CartSummary />
           )}
         />
         <Route
