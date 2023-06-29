@@ -9,7 +9,8 @@ import {
   Navbar,
   ProductListPage,
   MyOrders,
-  ProductDisplayPage
+  ProductDisplayPage,
+  CartSummary
 } from '../components'
 
 const App = () => {
@@ -34,6 +35,12 @@ const App = () => {
           path='/orders'
           render={() => (
             <MyOrders />
+          )}
+        />
+        <Route
+          path='/cart'
+          render={() => (
+            <CartSummary />
           )}
         />
         <Route
