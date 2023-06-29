@@ -8,6 +8,8 @@ const ProductDisplayPage = () => {
   // Need to map thru data 
   // Redo UI once products are live
 
+  // test data 
+
   return (
     <div>
       <img src={product.prodImg} alt={product.prodModelName} />
