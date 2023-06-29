@@ -10,10 +10,10 @@ const client = require("./client");
 async function dropTables() {
   console.log("Dropping All Tables...")
   try {
-    await client.query(`      
-      DROP TABLE IF EXISTS products;      
+    await client.query(`    
+      DROP TABLE IF EXISTS orders;    
       DROP TABLE IF EXISTS cart;
-      DROP TABLE IF EXISTS orders;
+      DROP TABLE IF EXISTS products;          
       DROP TABLE IF EXISTS users;
       `);
 
@@ -37,11 +37,12 @@ async function createTables() {
           password VARCHAR(255) NOT NULL
       );    
       CREATE TABLE products (
-        prodId INT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
+        prodId VARCHAR(255) NULL,
         brand VARCHAR(255) NULL,
         prodModelName VARCHAR(255) NOT NULL ,
         prodDescription VARCHAR(255) NOT NULL,
-        prodImg VARCHAR(255) NOT NULL,
+        prodImg TEXT NOT NULL,
         prodPrice DECIMAL(10, 2),
         prodAttributes VARCHAR(255),
         reviews VARCHAR(255),
@@ -57,14 +58,14 @@ async function createTables() {
         cartStatus VARCHAR(255) NOT NULL
       );  
       CREATE TABLE orders (
-        orderId SERIAL PRIMARY KEY,
-        productId INT NOT NULL,
-        productName VARCHAR(255) NOT NULL,
-        quantity INT NOT NULL,
+        id SERIAL PRIMARY KEY,
+        orderId VARCHAR(255) NOT NULL,
+        orderProdId INT NOT NULL,
+        orderProdModelName VARCHAR(255) NOT NULL,
+        orderQTY INT NOT NULL,
         orderDate VARCHAR(255) NOT NULL,
-        totalPrice DECIMAL(10, 2) NOT NULL
+        orderTotalPrice DECIMAL(10, 2) NOT NULL
       );
-          
 
       `);
   }
@@ -199,7 +200,7 @@ async function createInitialProducts() {
         brand: 'Grand Seiko',
         prodModelName: 'Grand Seiko SBGH271',
         prodDescription: 'The Grand Seiko SBGH271 is a high-beat mechanical watch with a gold case and a black dial, exemplifying Grand Seiko\'s craftsmanship and precision.',
-        prodPrice: '$5,200.00',
+        prodPrice: 5200.00,
         prodImg: 'https://cdn.shopify.com/s/files/1/0416/5874/4986/products/grand-seiko-heritage-sbgh271-sbgh271-100854'
       },
       {
@@ -228,7 +229,7 @@ async function createInitialProducts() {
       },
       {
         prodId: "prodId19",
-        brand: IWC,
+        brand: "IWC",
         prodModelName: "Portofino Chronograph",
         prodDescription: "The IWC Portofino is a collection of elegant and understated watches suitable for any occasion.",
         prodPrice: 6250.00,
@@ -517,6 +518,25 @@ async function createInitialUsers() {
   }
 }
 
+// async function createInitialOrders() {
+//   console.log("Starting to create orders...")
+//   try {
+//     const ordersToCreate = [
+//       {
+//         orderId:"ORD001",
+//         orderProdId:"prodId21",
+//         orderProdModelName:"Master Ultra Thin Moon Rose Gold",
+//         orderQty:1
+//         orderTotalPrice:
+//         orderDate:
+//       }
+
+//     ]
+
+//   }
+// }
+
+
 async function buildTables() {
   try {
     await dropTables()
@@ -529,7 +549,10 @@ async function buildTables() {
   }
 
 }
-
+ client.connect();
 buildTables()
   .catch(console.error)
   .finally(() => client.end());
+
+
+

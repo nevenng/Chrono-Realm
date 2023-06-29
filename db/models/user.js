@@ -46,6 +46,26 @@ const getUserByUsername = async (userName) => {
 
 }
 
+const getUser = async ({ username, password }) => {
+  try {
+    const user = await getUserByUsername(username);
+
+    if (user) {
+      const hashedPassword = user.password;
+      const isValid = await bcrypt.compare(password, hashedPassword);
+
+      if (isValid) {
+        delete user.password;
+        return user;
+      }
+    }
+    // If the user is not found or the password is not valid, return null or throw an error.
+    return null;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
 const getUserById = async (userId) => {
 
@@ -88,6 +108,7 @@ const getAllUsers = async () => {
 module.exports = {
   // add your database adapter fns here
   getAllUsers,
+  getUser,
   createUser,
   getUserById,
   getUserByUsername
