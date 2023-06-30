@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 const express = require("express");
-const { getUserByUsername, createUser, getUser, updateUserRole, validatePasskey, getUserById} = require("../db");
+const { getUserByUsername, createUser, getUser, updateUserRole, validatePasskey, getUserById, getAllUsers} = require("../db");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -8,11 +8,14 @@ const { JWT_SECRET } = process.env;
 
 // POST /api/users/register
 
+
+
 router.use((req, res, next) => {
     console.log("A request has been made to /users");
 
     next();
 })
+
 
 router.post("/register", async (req, res, next) => {
     const { username, password } = req.body;
@@ -64,52 +67,77 @@ router.post("/register", async (req, res, next) => {
 // POST /api/users/login
 
 router.post("/login", async (req, res, next) => {
-    const { username, password } = req.body;
-  
-    if (!username || !password) {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return next({
+      name: "MissingCredentialsError",
+      message: "Please supply both a username and password",
+      status: 400,
+    });
+  }
+
+  try {
+    const user = await getUser({ username, password });
+
+    if (user) {
+      const token = jwt.sign(
+        {
+          id: user.id,
+          username: user.username,
+          role: user.role
+        },
+        process.env.JWT_SECRET
+      );
+
+      return res.json({
+        user: {
+          id: user.id,
+          username: user.username,
+          role: user.role
+        },
+        message: "You're logged in!",
+        token,
+      });
+    } else {
       return next({
-        name: "MissingCredentialsError",
-        message: "Please supply both a username and password",
-        status: 400,
+        name: "IncorrectCredentialsError",
+        message: "Username or password is incorrect",
+        status: 401,
       });
     }
-  
-    try {
-      const user = await getUser({ username, password });
-  
-      if (user) {
-        const token = jwt.sign(
-          {
-            id: user.id,
-            username: user.username,
-          },
-          process.env.JWT_SECRET
-        );
-  
-        return res.json({
-          user: {
-            id: user.id,
-            username: user.username,
-          },
-          message: "You're logged in!",
-          token,
-        });
-      } else {
-        return next({
-          name: "IncorrectCredentialsError",
-          message: "Username or password is incorrect",
-          status: 401,
-        });
-      }
-    } catch (error) {
-      next(error);
-    }
-  });
+  } catch (error) {
+    next(error);
+  }
+});
 
-  //PATCH /api/users/:userId to change role to admin
+//GET /api/users/all (needs Admin role)
+
+// function checkRole(req, res, next) {
+
+//   const user = req.user;
+//   console.log("role", user);
+
+//   if (user.role === 'admin') {
+//     next();
+//   } else {
+//     res.status(403).json({ message: 'Access denied. You need admin privileges.' });
+//   }
+// }
+
+router.get("/all", async (req, res, next) => {
+  try {
+    const users = await getAllUsers();
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
 
 
-  //GET /api/users/:username
+  //GET /api/users/me
   router.get('/me', async (req, res, next) => {
     const header = req.headers.authorization
 
@@ -133,6 +161,7 @@ router.post("/login", async (req, res, next) => {
     }
 });
 
+  //PATCH /api/users/roles/update to change role to admin
 
   router.patch("/roles/update", async (req, res, next) => {
     
