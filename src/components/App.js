@@ -15,18 +15,13 @@ import {
 
 const App = () => {
 
-  const [userToken, setUserToken] = useState(null);
-  // const persistentUserToken = userToken || null;
-  const persistentUserToken = userToken || localStorage.getItem('userToken');
-  
-  useEffect(() => {
-    
-    localStorage.setItem('userToken', JSON.stringify(userToken));
-  },[userToken])
+  const [userToken, setUserToken] = useState(() => {
+    return localStorage.getItem('userToken')
+  });
 
   return (
     <>
-      <Navbar persistentUserToken={persistentUserToken} setUserToken={setUserToken}/>
+      <Navbar userToken={userToken} setUserToken={setUserToken}/>
       <Switch>
         <Route
           path='/products'
