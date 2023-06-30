@@ -1,31 +1,25 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
 
-const Logout = () => {
-// pass in { setToken, setUser, token }
+const Logout = (props) => {
+  const { setUserToken } = props;
 
-    // const history = useHistory();
+  const history = useHistory();
 
-    // if (token) {
-    //     const handleLogout = async (event) => {
-    //         event.preventDefault();
-    //         try {
-    //             setToken(null);
-    //             setUser(null)
-    //             history.push('/')
-    //         } catch (err) {
-    //             console.error(err)
-    //         }
-    //     }
-        return (
-            <>
-                <div className="navbar-container">
-                <button className="logout-button" onClick={handleLogout}>Log Out</button>
-                </div>
-                
-            </>
-        );
-    }
-// } <--- uncomment this line out when token is defined 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    setUserToken('');
+    localStorage.removeItem('userToken');
+    history.push('/account/login');
+  };
+
+  return (
+    <div className="navbar-container">
+      <button className="logout-button" onClick={handleLogout}>
+        Log Out
+      </button>
+    </div>
+  );
+};
 
 export default Logout;

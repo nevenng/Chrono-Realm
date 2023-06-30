@@ -4,13 +4,12 @@ import { Logout } from '../components'
 
 const Navbar = (props) => {
 
-    const { persistentUserToken } = props;
+    const { persistentUserToken, setUserToken } = props;
     // need to pass in token, or user in order for the conditional 
     // comment in line 21-23 & 27 when token is defined
 
     // const token = true;
     // ^^^^ to test UI change to true
-
     return (
         <nav className="navbar">
             <div className="navbar-container">
@@ -37,13 +36,13 @@ const Navbar = (props) => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        {/* {token ? (
-                            <Logout />
-                        ) : ( */}
-                        <Link to="/account/login" className="nav-link">
-                            Login
-                        </Link>
-                        {/* )} */}
+                        {persistentUserToken ? (
+                            <Logout setUserToken={setUserToken} persistentUserToken={persistentUserToken} />
+                        ) : (
+                            <Link to="/account/login" className="nav-link">
+                                Login
+                            </Link>
+                        )}
                     </li>
                 </ul>
             </div>
