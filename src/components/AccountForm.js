@@ -23,6 +23,7 @@ const AccountForm = (props) => {
                 if (registeredUser) {
                     setEmail('');
                     setPassword('');
+                    setUserToken(registeredUser.token);
                     localStorage.setItem('userToken', JSON.stringify(registerUser.token));
                     alert(`Registration successful. Welcome ${registeredUser.user.username}`)
                     history.push('/products');
