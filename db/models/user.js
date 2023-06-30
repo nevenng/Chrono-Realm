@@ -4,29 +4,26 @@ const bcrypt = require('bcrypt');
 
 
 const createUser = async ({ username, password }) => {
-
   try {
-
     const SALT_COUNT = 10;
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 
     const { rows: [user] } = await client.query(`
-        INSERT INTO users(username, password) 
-        VALUES ($1, $2)
-        ON CONFLICT (username) DO NOTHING
-        RETURNING *;
-        `, [username, hashedPassword]);
+      INSERT INTO users(username, password)
+      VALUES ($1, $2)
+      ON CONFLICT (username) DO NOTHING
+      RETURNING *;
+    `, [username, hashedPassword]);
 
     delete user.password;
 
     return user;
-  }
-  catch (error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
     throw error;
   }
+};
 
-}
 
 const getUserByUsername = async (userName) => {
 
@@ -44,7 +41,7 @@ const getUserByUsername = async (userName) => {
     throw error;
   }
 
-}
+};
 
 const getUser = async ({ username, password }) => {
   try {
@@ -55,12 +52,11 @@ const getUser = async ({ username, password }) => {
       const isValid = await bcrypt.compare(password, hashedPassword);
 
       if (isValid) {
-        delete user.password;
-        return user;
+        return user; 
       }
     }
-    // If the user is not found or the password is not valid, return null or throw an error.
-    return null;
+ // Throws an error if user not found or password is invalid
+    throw new Error("Invalid credentials");
   } catch (error) {
     console.log(error);
     throw error;
@@ -83,7 +79,7 @@ const getUserById = async (userId) => {
     throw error;
   }
 
-}
+};
 
 
 
@@ -101,7 +97,36 @@ const getAllUsers = async () => {
     console.log(error);
     throw error;
   }
-}
+};
+
+const updateUserRole = async (userId, role) => {
+  try {
+    const { rows: [user] } = await client.query(
+      `
+      UPDATE users
+      SET role = $2
+      WHERE id = $1
+      RETURNING *;
+      `,
+      [userId, role]
+    );
+
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const validatePasskey = async (passkey) => {
+  const storedPasskey = "Fullstack Academy";
+
+  const isValidPasskey = passkey === storedPasskey;
+
+  return isValidPasskey;
+};
+
+
 
 
 
@@ -111,5 +136,7 @@ module.exports = {
   getUser,
   createUser,
   getUserById,
-  getUserByUsername
+  getUserByUsername,
+  updateUserRole,
+  validatePasskey
 };
