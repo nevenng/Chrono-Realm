@@ -15,9 +15,13 @@ import {
 
 const App = () => {
 
+  const [userToken, setUserToken] = useState('');
+  localStorage.setItem('userToken', userToken);
+  const persistentUserToken = localStorage.getItem('userToken');
+
   return (
     <>
-      <Navbar />
+      <Navbar persistentUserToken={persistentUserToken}/>
       <Switch>
         <Route
           path='/products'
@@ -46,7 +50,7 @@ const App = () => {
         <Route
           path='/account/:actionType'
           render={() => (
-            <AccountForm />
+            <AccountForm setUserToken={setUserToken}/>
           )}
         />
       </Switch>

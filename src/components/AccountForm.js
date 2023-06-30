@@ -1,23 +1,61 @@
-import React from "react";
-import { useParams, Link, useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { useParams, Link, useHistory } from "react-router-dom"
+import { registerUser, loginUser } from "../axios-services";
 
-const AccountForm = () => {
+const AccountForm = (props) => {
+
+    const { setUserToken } = props;
     const params = useParams();
     const { actionType } = params;
 
-    // Need to create a handleSumbit function
-    // Need a login + register endpoint
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     // Need to redirect users to page with all products
+
+    const history = useHistory();
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        if (actionType === "register") {
+            try {
+                const registeredUser = await registerUser(email, password);
+                if (registeredUser) {
+                    setEmail('');
+                    setPassword('');
+                    setUserToken(registeredUser.token);
+                    alert(`Registration successful. Welcome ${registeredUser.user.username}`)
+                    history.push('/products');
+                }
+            } catch (error) {
+                console.error(error);
+                alert(error)
+            }
+        } else if (actionType === "login") {
+            try {
+                const loggedInUser = await loginUser(email, password);
+                if (loggedInUser) {
+                    setEmail('');
+                    setPassword('');
+                    setUserToken(loggedInUser.token);
+                    alert(`Welcome back ${loggedInUser.user.username}`);
+                    history.push('/products');
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
 
     return (
 
-        <form className="account-form">
+        <form className="account-form" onSubmit={handleSubmit}>
             <h1>{actionType === "login" ? "Login" : "Register Your Account"}</h1>
             <br></br>
             <label htmlFor="email" className="form-label">Email</label>
-            <input type="text" name="email" className="form-input" required></input>
+            <input type="text" name="email" className="form-input" required value={email} onChange={(event) => setEmail(event.target.value)}></input>
             <label htmlFor="password" className="form-label" >Password</label>
-            <input type="password" name="password" className="form-input" required></input>
+            <input type="password" name="password" className="form-input" required value={password} onChange={(event) => setPassword(event.target.value)}></input>
             <button type="submit" className="form-button">Submit</button>
             <div>
                 {actionType === 'login'

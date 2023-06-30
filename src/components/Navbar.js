@@ -2,11 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom"
 import { Logout } from '../components'
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+    const { persistentUserToken } = props;
     // need to pass in token, or user in order for the conditional 
     // comment in line 21-23 & 27 when token is defined
 
-    const token = true;
+    // const token = true;
     // ^^^^ to test UI change to true
 
     return (
@@ -20,7 +22,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                     {/* Fror now we can have an inline navbar, discuss later if implementing modal */}
-                    {token ? (
+                    {persistentUserToken ? (
                         <li className="nav-item">
                             <Link to="/orders" className="nav-link">
                                 My Orders

@@ -1,3 +1,5 @@
+const BASE_URL = "http://localhost:4000"
+
 import axios from 'axios';
 
 // this file holds your frontend network request adapters
@@ -27,3 +29,44 @@ export async function getAPIHealth() {
     return { healthy: false };
   }
 }
+
+export async function registerUser(email, password) {
+  const response = await fetch(`${BASE_URL}/api/users/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: email,
+      password: password,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.json()
+    throw new Error(body.message)
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export async function loginUser(username, password) {
+  try {
+    const response = await fetch(`${BASE_URL}/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
