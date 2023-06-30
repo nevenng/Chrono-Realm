@@ -1,9 +1,10 @@
 /* eslint-disable no-useless-catch */
 const express = require("express");
-const { getUserByUsername, createUser, getUser} = require("../db");
+const { getUserByUsername, createUser, getUser, updateUserRole, validatePasskey, getUserById} = require("../db");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
+
 
 // POST /api/users/register
 
@@ -100,6 +101,60 @@ router.post("/login", async (req, res, next) => {
           status: 401,
         });
       }
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  //PATCH /api/users/:userId to change role to admin
+
+
+  //GET /api/users/:username
+  router.get('/me', async (req, res, next) => {
+    const header = req.headers.authorization
+
+    try {
+        if (!header) {
+            res.status(401)
+            res.send({
+                error: 'Token is missing',
+                message: 'You must be logged in to perform this action',
+                name: 'NoTokenError'
+            })
+
+        } else {
+                const token = header.split(' ')[1];
+                const decodedUser = jwt.verify(token, JWT_SECRET);
+                res.send(decodedUser);
+            }
+
+    } catch ({ name, message }) {
+        next({ name, message })
+    }
+});
+
+
+  router.patch("/roles/update", async (req, res, next) => {
+    
+    const { userId ,passkey } = req.body;
+  
+    try {
+
+      const isValidPasskey = await validatePasskey(passkey);
+  
+      if (!isValidPasskey) {
+        return res.status(401).json({ message: "Invalid passkey" });
+      }
+  
+      const existingUser = await getUserById(userId);
+  
+      if (!existingUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      const updatedUser = await updateUserRole(userId, 'admin');
+  
+      res.json({ message: "User role updated to 'admin'", user: updatedUser });
     } catch (error) {
       next(error);
     }
