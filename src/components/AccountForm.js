@@ -10,7 +10,6 @@ const AccountForm = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // Need to redirect users to page with all products
 
     const history = useHistory();
 
