@@ -7,6 +7,5 @@ export { default as Logout } from './Logout';
 export { default as MyOrders} from './MyOrders';
 export { default as MyItems} from './MyItems';
 export { default as ProductDisplayPage} from './ProductDisplayPage';
-export { default as MyItems} from './MyItems';
 export { default as CartItem } from './CartItem';
 export { default as CartSummary } from './CartSummary';
