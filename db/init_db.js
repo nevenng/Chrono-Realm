@@ -38,8 +38,8 @@ async function createTables() {
       );    
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
-        prodId VARCHAR(255) NULL,
-        brand VARCHAR(255) NULL,
+        prodId VARCHAR(255) NOT NULL,
+        brand VARCHAR(255) NOT NULL,
         prodModelName VARCHAR(255) NOT NULL ,
         prodDescription VARCHAR(255) NOT NULL,
         prodImg TEXT NOT NULL,
@@ -221,7 +221,7 @@ async function createInitialProducts() {
       },
       {
         prodId: "prodId18",
-        brand:" IWC",
+        brand: " IWC",
         prodModelName: "Da Vinci Tourbillon",
         prodDescription: "The IWC Da Vinci collection combines innovative technology with artistic design, creating sophisticated and unique timepieces.",
         prodPrice: 95000.00,
@@ -253,33 +253,33 @@ async function createInitialProducts() {
 
 
       },
-      {       
+      {
         prodId: "prodId22",
-        brand:  "Jaeger-LeCoultre",
+        brand: "Jaeger-LeCoultre",
         prodModelName: "Reverso Mono Face",
         prodDescription: "The Jaeger-LeCoultre Reverso is an iconic watch known for its reversible case, allowing wearers to protect the dial by flipping it.",
         prodPrice: 8100.00,
         prodImg: "https://img.jaeger-lecoultre.com/product-slider-hero-mobile-3/14ae198ca6f6c5af59d50b347a35b3770f4d72b5.jpg"
       },
-      {        
+      {
         prodId: "prodId23",
-        brand:  "Jaeger-LeCoultre",
+        brand: "Jaeger-LeCoultre",
         prodModelName: "Polaris Date",
         prodDescription: "The Jaeger-LeCoultre Polaris collection is inspired by the brand's historical diving watches and offers a blend of sportiness and elegance.",
         prodPrice: 8200.00,
         prodImg: "https://cdn.shopify.com/s/files/1/0551/4906/8368/products/C00006965_1000_160x.jpg?v=1675077253"
       },
-      {        
+      {
         prodId: "prodId24",
-        brand:  "Jaeger-LeCoultre",
+        brand: "Jaeger-LeCoultre",
         prodModelName: "Atmos By Marc Newson",
         prodDescription: "The Jaeger-LeCoultre Atmos is a unique mechanical clock that doesn't require winding, powered by changes in atmospheric pressure.",
         prodPrice: 36000.00,
         prodImg: "https://img.jaeger-lecoultre.com/product-slider-hero-mobile-3/c8fc75cb7e8db9cdd0a4fea62ce59d6fe2717cf9.jpg"
       },
-      {        
+      {
         prodId: "prodId25",
-        brand:  "Jaeger-LeCoultre",
+        brand: "Jaeger-LeCoultre",
         prodModelName: "Rendez-Vous Rose Gold",
         prodDescription: "The Jaeger-LeCoultre Rendez-Vous collection is designed for women, featuring elegant and feminine timepieces with various complications.",
         prodPrice: 30000.00,
@@ -486,7 +486,7 @@ async function createInitialProducts() {
         prodImg: "https://content.rolex.com/v7/dam/2023-06/upright-c/m52508-0006.png?impolicy=v7-main-configurator&imwidth=640"
       }
 
-  ]
+    ]
 
     const products = await Promise.all(productsToCreate.map(createProduct))
 
@@ -549,7 +549,7 @@ async function buildTables() {
   }
 
 }
- client.connect();
+client.connect();
 buildTables()
   .catch(console.error)
   .finally(() => client.end());
