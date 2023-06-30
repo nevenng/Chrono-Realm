@@ -15,13 +15,13 @@ import {
 
 const App = () => {
 
-  const [userToken, setUserToken] = useState('');
-  localStorage.setItem('userToken', userToken);
-  const persistentUserToken = localStorage.getItem('userToken');
+  const [userToken, setUserToken] = useState(() => {
+    return localStorage.getItem('userToken')
+  });
 
   return (
     <>
-      <Navbar persistentUserToken={persistentUserToken}/>
+      <Navbar userToken={userToken} setUserToken={setUserToken}/>
       <Switch>
         <Route
           path='/products'
