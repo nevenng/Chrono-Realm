@@ -20,8 +20,6 @@ const ProductListPage = () => {
         fetchData();
     }, [])
 
-    console.log(products)
-
     return (
         <div className="plp-container">
             {products.map((product) => {

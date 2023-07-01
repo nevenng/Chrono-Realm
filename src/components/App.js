@@ -9,8 +9,8 @@ import {
   Navbar,
   ProductListPage,
   MyOrders,
-  ProductDisplayPage,
-  CartSummary
+  CartSummary,
+  ProductDisplayPage
 } from '../components'
 
 const App = () => {
@@ -21,16 +21,16 @@ const App = () => {
 
   return (
     <>
-      <Navbar userToken={userToken} setUserToken={setUserToken}/>
+      <Navbar userToken={userToken} setUserToken={setUserToken} />
       <Switch>
         <Route
-          path='/products'
+          exact path='/'
           render={() => (
             <ProductListPage />
           )}
         />
         <Route
-          path='/products/:productId'
+          exact path='/products/:prodId'
           render={() => (
             <ProductDisplayPage />
           )}
@@ -50,7 +50,7 @@ const App = () => {
         <Route
           path='/account/:actionType'
           render={() => (
-            <AccountForm setUserToken={setUserToken}/>
+            <AccountForm setUserToken={setUserToken} />
           )}
         />
       </Switch>
