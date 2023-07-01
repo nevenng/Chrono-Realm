@@ -24,7 +24,7 @@ const App = () => {
       <Navbar userToken={userToken} setUserToken={setUserToken} />
       <Switch>
         <Route
-          exact path='/'
+          exact path='/products'
           render={() => (
             <ProductListPage />
           )}
