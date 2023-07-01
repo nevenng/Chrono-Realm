@@ -70,3 +70,13 @@ export async function loginUser(username, password) {
   }
 }
 
+export const fetchProdId = (async (prodId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/products/${prodId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+});
+
