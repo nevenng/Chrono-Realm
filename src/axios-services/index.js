@@ -70,6 +70,16 @@ export async function loginUser(username, password) {
   }
 }
 
+export async function fetchAllProducts() {
+  try {
+    const response = await fetch(`${BASE_URL}/api/products`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export const fetchProdId = (async (prodId) => {
   try {
     const response = await fetch(`${BASE_URL}/api/products/${prodId}`);
@@ -79,4 +89,3 @@ export const fetchProdId = (async (prodId) => {
     throw error;
   }
 });
-

@@ -154,11 +154,14 @@ COMPONENT: ProductListItem
   align-items: center;
   text-align: center;
   max-width: 250px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  margin: 10px;
 }
 
 .plp-item img {
   width: 100%;
-  height: auto;
+  height: auto; 
 }
 
 .plp-item h3 {
@@ -171,7 +174,7 @@ COMPONENT: ProductListItem
 }
 
 .plp-item button {
-  margin-top: 10px;
+  margin-top: auto;
   padding: 8px 16px;
   background-color: black;
   color: white;
@@ -185,13 +188,6 @@ COMPONENT: ProductListItem
   background-color: #007bff;
   border: none;
   color: white;
-}
-
-/* Optional styling for the product list items */
-.plp-item {
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  margin: 10px;
 }
 
 /* Component for Logout */

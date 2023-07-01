@@ -86,12 +86,12 @@ const getUserById = async (userId) => {
 const getAllUsers = async () => {
 
   try {
-    const { rows: [user] } = await client.query(
+    const { rows } = await client.query(
       `
         SELECT * 
         FROM users
       `);
-    return user;
+    return rows;
   }
   catch (error) {
     console.log(error);
