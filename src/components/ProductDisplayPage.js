@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductDetails } from '../components'
+import { ProductDetails, ProductCarousel } from '../components'
 import { fetchProdId } from '../axios-services'
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -17,11 +17,12 @@ const ProductDisplayPage = () => {
         getPdp();
     }, []);
 
-    // console.log(product)
+    console.log(product)
 
     return (
         <div className="pdp-container">
             <ProductDetails product={product} />
+            <ProductCarousel product={product} />
         </div>
     )
 }
