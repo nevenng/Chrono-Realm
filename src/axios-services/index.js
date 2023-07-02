@@ -89,3 +89,23 @@ export const fetchProdId = (async (prodId) => {
     throw error;
   }
 });
+
+// Cart 
+
+export const handleRemoveFromCart = async (userToken, cartProdId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/cart/remove/${cartProdId}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`
+      },
+    });
+    const result = await response.json();
+    alert('Item has beem removed from your cart!');
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
+
