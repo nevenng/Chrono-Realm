@@ -9,4 +9,5 @@ export { default as MyItems} from './MyItems';
 export { default as ProductDetails} from './ProductDetails';
 export { default as CartItem } from './CartItem';
 export { default as CartSummary } from './CartSummary';
-export { default as ProductDisplayPage } from './ProductDisplayPage'
+export { default as ProductDisplayPage } from './ProductDisplayPage';
+export { default as ProductCarousel } from './ProductCarousel';
