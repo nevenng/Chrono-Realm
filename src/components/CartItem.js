@@ -1,7 +1,9 @@
 import React from "react";
+import { RemoveFromCart } from "../components";
 
 const CartItem = () => {
-
+    // Once we get the cart data, pass it into remove from cart
+    
     return (
         <tr>
             <td>Product Name 1</td>
@@ -12,7 +14,7 @@ const CartItem = () => {
                 </form>
             </td>
             <td>${100}</td>
-            <td><button className="cart-item-remove-button">remove</button></td>
+            <td><RemoveFromCart /></td>
         </tr>
     )
 }

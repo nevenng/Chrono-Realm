@@ -317,10 +317,15 @@ COMPONENT: Cart
 }
 
 .cart-item-remove-button {
+  background-color: #ff5050;
+  color: #ffffff;
   border: none;
-  background-color: transparent;
-  color: red;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 /* Component for PDP */ 
@@ -342,14 +347,14 @@ COMPONENT: Cart
 .pdp-details-container {
   display: table-cell;
   vertical-align: top;
-  font-size: 18px; /* Increase font size */
-  width: 350px; /* Adjust the width as desired */
+  font-size: 18px; 
+  width: 350px;
 
 }
 
 .pdp-a2c-button {
-  width: 200px; /* Adjust width as needed */
-  background-color: #3f51b5; /* Custom color */
+  width: 200px;
+  background-color: #3f51b5;
   color: white;
   border: none;
   padding: 10px;
@@ -405,13 +410,13 @@ COMPONENT: Cart
 }
 
 .carousel-item-title {
-  font-size: 18px; /* Increased font size for larger title */
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
 .carousel-item-price {
-  font-size: 16px; /* Increased font size for larger price */
+  font-size: 16px;
   color: #888;
 }
 
@@ -438,13 +443,13 @@ COMPONENT: Cart
 
 @media screen and (max-width: 600px) {
   .carousel-item {
-    flex: 0 0 calc(50% - 20px); /* Adjust flex value for 2 items per row */
+    flex: 0 0 calc(50% - 20px); 
   }
 }
 
 @media screen and (max-width: 400px) {
   .carousel-item {
-    flex: 0 0 calc(100% - 20px); /* Adjust flex value for 1 item per row */
+    flex: 0 0 calc(100% - 20px);
   }
 }
 
