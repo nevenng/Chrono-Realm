@@ -1,5 +1,5 @@
 import React from "react";
-import { RemoveFromCart } from "../components";
+import { RemoveFromCart, UpdateQty } from "../components";
 
 const CartItem = () => {
     // Once we get the cart data, pass it into remove from cart
@@ -9,9 +9,7 @@ const CartItem = () => {
             <td>Product Name 1</td>
             <td>$10</td>
             <td>
-                <form>
-                    <input type="number"></input>
-                </form>
+                <UpdateQty />
             </td>
             <td>${100}</td>
             <td><RemoveFromCart /></td>

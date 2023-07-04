@@ -109,3 +109,25 @@ export const handleRemoveFromCart = async (userToken, cartProdId) => {
   }
 }
 
+export const handleUpdateQty = async (userToken, cartProdId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/cart/update/${cartProdId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+      body: JSON.stringify({
+        cartQuantity: cartQuantity,
+      }),
+    });
+    const result = await response.json();
+    alert('Quantity has been updated!');
+
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
