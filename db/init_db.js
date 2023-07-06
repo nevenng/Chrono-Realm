@@ -50,13 +50,15 @@ async function createTables() {
         inventory INT 
       );
       CREATE TABLE cart (
-        cartProdId INT PRIMARY KEY,
-        cartProdModelName VARCHAR(255) NOT NULL,
+        cartId SERIAL PRIMARY KEY,
+        cartProdId VARCHAR(255) NOT NULL,
+        cartProdName VARCHAR(255) NOT NULL,
         cartProdDescription VARCHAR(255) NOT NULL,
-        cartProdUrl VARCHAR(255) NOT NULL,
+        prodImg TEXT NOT NULL,
         cartQuantity INT NOT NULL, 
         cartTotalPrice DECIMAL(10, 2),
-        cartStatus VARCHAR(255) NOT NULL
+        cartSessionId VARCHAR(255),
+        userId INT
       );  
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
