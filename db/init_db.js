@@ -56,8 +56,8 @@ async function createTables() {
         cartProdDescription VARCHAR(255) NOT NULL,
         prodImg TEXT NOT NULL,
         cartQuantity INT NOT NULL, 
-        cartTotalPrice DECIMAL(10, 2),
-        cartSessionId VARCHAR(255),
+        cartTotalPrice DECIMAL(10, 2) NOT NULL,
+        cartSessionId VARCHAR(255) NOT NULL,
         userId INT
       );  
       CREATE TABLE orders (
