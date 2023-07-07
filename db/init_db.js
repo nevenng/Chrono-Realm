@@ -529,7 +529,6 @@ const createInitialOrders = async () => {
         orderQty: 1,
         orderDate: '2023-07-05 18:56:22',
         orderTotalPrice: '23000.00',
-        userIdOrder: 1,
         orderStatus: "Created"
       },
       {
@@ -538,7 +537,6 @@ const createInitialOrders = async () => {
         orderQty: 1,
         orderDate: '2023-07-05 19:21:18',
         orderTotalPrice: '6250.00',
-        userIdOrder: 2,
         orderStatus: "Processing"
       },
       {
@@ -547,7 +545,6 @@ const createInitialOrders = async () => {
         orderQty: 1,
         orderDate: '2023-07-05 20:20:18',
         orderTotalPrice: '2200000.00',
-        userIdOrder: 3,
         orderStatus: "Canceled"
       },
       {
@@ -556,7 +553,6 @@ const createInitialOrders = async () => {
         orderQty: 1,
         orderDate: '2023-07-06 20:20:18',
         orderTotalPrice: '5400.00',
-        userIdOrder: 4,
         orderStatus: "Created"
       }
     ];
