@@ -45,22 +45,19 @@ const createOrder = async (
     }
 };
 
+const getAllOrders = async (user) => {
 
-
-const getAllOrders = async () => {
     try {
-        const { rows } = await client.query(`
-            SELECT * FROM orders
-            `);
-
-        return rows;
+      const { rows } = await client.query(`
+        SELECT * FROM orders
+      `);
+  
+      return rows;
+    } catch (error) {
+      console.log('Error retrieving orders:', error);
+      throw error;
     }
-    catch (error) {
-        console.log('Error retrieving orders:', error);
-        throw error;
-    }
-};
-
+  };
 const getOrderById = async (orderId) => {
     try {
         const { rows: [order] } = await client.query(
