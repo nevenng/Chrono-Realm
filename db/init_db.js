@@ -1,6 +1,7 @@
 const {
   createUser,
-  createProduct
+  createProduct,
+  createOrder
   // declare your model imports here
   // for example, User
 } = require('./models');
@@ -63,13 +64,14 @@ async function createTables() {
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
         orderId VARCHAR(255) NOT NULL,
-        orderProdId INT NOT NULL,
+        orderProdId VARCHAR(255) NOT NULL,
         orderProdModelName VARCHAR(255) NOT NULL,
         orderQTY INT NOT NULL,
-        orderDate VARCHAR(255) NOT NULL,
-        orderTotalPrice DECIMAL(10, 2) NOT NULL
+        orderDate TIMESTAMP NOT NULL,
+        orderTotalPrice DECIMAL(10, 2) NOT NULL,
+        userIdOrder INT NOT NULL,
+        orderStatus VARCHAR(255) NOT NULL
       );
-
       `);
   }
   catch (error) {
@@ -500,8 +502,6 @@ async function createInitialProducts() {
   }
 }
 
-
-
 async function createInitialUsers() {
   console.log("Starting to create users...")
   try {
@@ -521,23 +521,75 @@ async function createInitialUsers() {
   }
 }
 
-// async function createInitialOrders() {
-//   console.log("Starting to create orders...")
-//   try {
-//     const ordersToCreate = [
-//       {
-//         orderId:"ORD001",
-//         orderProdId:"prodId21",
-//         orderProdModelName:"Master Ultra Thin Moon Rose Gold",
-//         orderQty:1
-//         orderTotalPrice:
-//         orderDate:
-//       }
+const createInitialOrders = async () => {
+  console.log("Starting to create orders...");
+  try {
+    const ordersToCreate = [
+      {
+        orderProdId: "prodId21",
+        orderProdModelName: "Master Ultra Thin Moon Rose Gold",
+        orderQty: 1,
+        orderDate: '2023-07-05 18:56:22',
+        orderTotalPrice: '23000.00',
+        userIdOrder: 1,
+        orderStatus: "Created"
+      },
+      {
+        orderProdId: "prodId19",
+        orderProdModelName: "Portofino Chronograph",
+        orderQty: 1,
+        orderDate: '2023-07-05 19:21:18',
+        orderTotalPrice: '6250.00',
+        userIdOrder: 2,
+        orderStatus: "Processing"
+      },
+      {
+        orderProdId: "prodId36",
+        orderProdModelName: "Nautilus Tiffany & Co. Blue",
+        orderQty: 1,
+        orderDate: '2023-07-05 20:20:18',
+        orderTotalPrice: '2200000.00',
+        userIdOrder: 3,
+        orderStatus: "Canceled"
+      },
+      {
+        orderProdId: "prodId29",
+        orderProdModelName: "De Ville",
+        orderQty: 1,
+        orderDate: '2023-07-06 20:20:18',
+        orderTotalPrice: '5400.00',
+        userIdOrder: 4,
+        orderStatus: "Created"
+      }
+    ];
 
-//     ]
+    let previousOrder = null;
+    for (const order of ordersToCreate) {
+      const createdOrder = await createOrder(
+        order.orderProdId,
+        order.orderProdModelName,
+        order.orderQty,
+        order.orderDate,
+        order.orderTotalPrice,
+        order.userIdOrder,
+        order.orderStatus
+      );
 
-//   }
-// }
+      if (previousOrder) {
+        previousOrder.orderId = createdOrder.orderId;
+      }
+
+      previousOrder = createdOrder;
+      console.log(createdOrder)
+    }
+
+    console.log("Finished creating orders!");
+    
+  } catch (error) {
+    console.error("Error creating orders!");
+    throw error;
+  }
+};
 
 
 async function buildTables() {
@@ -546,6 +598,7 @@ async function buildTables() {
     await createTables()
     await createInitialUsers()
     await createInitialProducts()
+    await createInitialOrders()
   } catch (error) {
     console.log("Error during rebuild!");
     throw error
