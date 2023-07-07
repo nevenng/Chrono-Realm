@@ -16,7 +16,7 @@ ordersRouter.use((req, res, next) => {
 
 // Post /api/orders
 
-ordersRouter.post('/orders', async (req, res) => {
+ordersRouter.post('/', async (req, res) => {
     const {
         orderProdId,
         orderProdModelName,
@@ -46,7 +46,7 @@ ordersRouter.post('/orders', async (req, res) => {
 
 // Get All Orders /api/orders
 
-ordersRouter.get('/orders', async (req, res, next) => {
+ordersRouter.get('/', async (req, res, next) => {
     try {
         const orders = await getAllOrders();
         res.send(orders)
