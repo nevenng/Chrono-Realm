@@ -6,7 +6,7 @@ const createOrder = async (
     orderQTY,
     orderDate,
     orderTotalPrice,
-    userIdOrder,
+    nextUserId,
     orderStatus
 ) => {
     try {
@@ -15,11 +15,14 @@ const createOrder = async (
         const currentOrderIdDigits = parseInt(currentMaxOrderId.substring(3));
         const nextOrderIdDigits = (currentOrderIdDigits + 1).toString().padStart(3, '0');
         const orderId = `ORD${nextOrderIdDigits}`;
-        // Had to look this up to find a way to increment with ORD001 ++ 
+
+        const { rows: [maxUser] } = await client.query('SELECT MAX(userIdOrder) AS maxUserId FROM orders');
+        const currentMaxUserId = maxUser.maxuserid || 0;
+        const nextUserId = currentMaxUserId + 1;
 
         const { rows: [newOrder] } = await client.query(
             `
-            INSERT INTO orders (orderId, orderProdId, orderProdModelName, orderQTY, orderDate, orderTotalPrice, userIdOrder, orderStatus)
+            INSERT INTO orders (orderId, orderProdId, orderProdModelName, orderQTY, orderDate, orderTotalPrice, orderStatus, userIdOrder)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *;
             `,
@@ -30,8 +33,8 @@ const createOrder = async (
                 orderQTY,
                 orderDate,
                 orderTotalPrice,
-                userIdOrder,
-                orderStatus
+                orderStatus,
+                nextUserId
             ]
         );
 
@@ -43,6 +46,7 @@ const createOrder = async (
 };
 
 const getAllOrders = async (user) => {
+
     try {
       const { rows } = await client.query(`
         SELECT * FROM orders
@@ -86,10 +90,29 @@ const updateOrderStatus = async (orderId, newStatus) => {
     }
 };
 
+const getOrdersByUser = async (userToken, userIdOrder) => {
+    try {
+      const { rows } = await client.query(
+        `
+        SELECT o.*
+        FROM orders AS o
+        INNER JOIN users AS u ON o.userIdOrder = u.id
+        WHERE u.userToken = $1;
+        `,
+        [userToken]
+      );
+  
+      return rows;
+    } catch (error) {
+      console.log('Error retrieving orders by user:', error);
+      throw error;
+    }
+  };
 
 module.exports = {
     createOrder,
     getAllOrders,
     getOrderById,
-    updateOrderStatus
+    updateOrderStatus,
+    getOrdersByUser
 };
