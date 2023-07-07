@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 const express = require("express");
-const { getUserByUsername, createUser, getUser, updateUserRole, validatePasskey, getUserById, getAllUsers} = require("../db");
+const { getUserByUsername, createUser, getUser, updateUserRole, validatePasskey, getUserById, getAllUsers, checkUserRole} = require("../db");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -113,20 +113,16 @@ router.post("/login", async (req, res, next) => {
 
 //GET /api/users/all (needs Admin role)
 
-// function checkRole(req, res, next) {
 
-//   const user = req.user;
-//   console.log("role", user);
-
-//   if (user.role === 'admin') {
-//     next();
-//   } else {
-//     res.status(403).json({ message: 'Access denied. You need admin privileges.' });
-//   }
-// }
 
 router.get("/all", async (req, res, next) => {
   try {
+      const user = req.user;
+
+      if (!checkUserRole(user)) {
+        return res.status(401).json({ message: 'You must be an admin to access this' });
+      }
+
     const users = await getAllUsers();
 
     res.json(users);
