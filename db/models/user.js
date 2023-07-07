@@ -3,17 +3,17 @@ const client = require('../client');
 const bcrypt = require('bcrypt');
 
 
-const createUser = async ({ username, password }) => {
+const createUser = async ({ username, password, role }) => {
   try {
     const SALT_COUNT = 10;
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 
     const { rows: [user] } = await client.query(`
-      INSERT INTO users(username, password)
-      VALUES ($1, $2)
+      INSERT INTO users(username, password, role)
+      VALUES ($1, $2, COALESCE($3, 'customer'))
       ON CONFLICT (username) DO NOTHING
       RETURNING *;
-    `, [username, hashedPassword]);
+    `, [username, hashedPassword, role]);
 
     delete user.password;
 
@@ -23,7 +23,6 @@ const createUser = async ({ username, password }) => {
     throw error;
   }
 };
-
 
 const getUserByUsername = async (userName) => {
 
@@ -126,6 +125,13 @@ const validatePasskey = async (passkey) => {
   return isValidPasskey;
 };
 
+const checkUserRole = (user) => {
+  if ( user && user.role === 'admin') {
+    console.log("admin true", user.role);
+    return true; // User has admin role
+  }
+  return false; // User does not have admin role
+};
 
 
 
@@ -138,5 +144,6 @@ module.exports = {
   getUserById,
   getUserByUsername,
   updateUserRole,
-  validatePasskey
+  validatePasskey,
+  checkUserRole
 };

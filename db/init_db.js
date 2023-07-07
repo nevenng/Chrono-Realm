@@ -504,9 +504,10 @@ async function createInitialUsers() {
   console.log("Starting to create users...")
   try {
     const usersToCreate = [
-      { username: "albert", password: "bertie99" },
-      { username: "sandra", password: "sandra123" },
-      { username: "glamgal", password: "glamgal123" },
+      { username: "albert", password: "bertie99" , role:'customer' },
+      { username: "sandra", password: "sandra123", role: 'customer'},
+      { username: "glamgal", password: "glamgal123", role: 'customer' },
+      {username: "hellothere", password: "hellothere", role: "admin"}
     ]
     const users = await Promise.all(usersToCreate.map(createUser))
 
