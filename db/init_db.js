@@ -1,7 +1,8 @@
 const {
   createUser,
   createProduct,
-  createOrder
+  createOrder,
+  createCart
   // declare your model imports here
   // for example, User
 } = require('./models');
@@ -584,12 +585,48 @@ const createInitialOrders = async () => {
     }
 
     console.log("Finished creating orders!");
-    
+
   } catch (error) {
     console.error("Error creating orders!");
     throw error;
   }
 };
+
+const createInitialCart = async () => {
+  console.log("Starting to create carts...");
+
+  // two carts: 1 for registered user, 1 for guest
+  const cartsToCreate = [
+    {
+      prodId: "prodId21",
+      prodModelName: "Master Ultra Thin Moon Rose Gold",
+      prodDescription: "The Jaeger-LeCoultre Master Ultra Thin Moon is a sophisticated and slim timepiece featuring a moon phase complication.",
+      prodImg: "https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=90;h=640,%20https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=55;h=1280%202x",
+      quantity: 1,
+      totalPrice: 6700.00,
+      sessionId: "12345",
+      userId: 1
+    },
+    {
+      prodId: "prodId28",
+      prodModelName: "Constellation",
+      prodDescription: "The Omega Constellation is a symbol of precision and elegance with its distinctive design and meticulous craftsmanship.",
+      prodImg: "https://www.omegawatches.com/media/catalog/product/cache/a5c37fddc1a529a1a44fea55d527b9a116f3738da3a2cc38006fcc613c37c391/o/m/omega-constellation-globemaster-13033412206001-l.png",
+      quantity: 2,
+      totalPrice: 46000.00,
+      sessionId: "23456"
+    }
+  ]
+  try {
+    const createdProducts = await Promise.all(cartsToCreate.map(createCart))
+    console.log('Carts created successfully')
+    console.log(createdProducts)
+
+  } catch (error) {
+    console.error("Error creating initial cart!");
+    throw error;
+  }
+}
 
 
 async function buildTables() {
@@ -599,6 +636,7 @@ async function buildTables() {
     await createInitialUsers()
     await createInitialProducts()
     await createInitialOrders()
+    await createInitialCart();
   } catch (error) {
     console.log("Error during rebuild!");
     throw error

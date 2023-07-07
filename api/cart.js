@@ -1,9 +1,9 @@
-// // api/cartendpoint.js
-// const express = require('express');
-// const { getAllCarts,createCart, updateCart, deleteCart, checkoutCart } = require('../db/cart');
-// const router = express.Router();
+// api/cartendpoint.js
+const express = require('express');
+const { createCart, updateCart, deleteCart, checkoutCart } = require('../db/cart');
+const router = express.Router();
 
-// // Get all carts
+// Get all carts
 // router.get('/cart', async (req, res, next) => {
 //     try {
 //         const carts = await getAllCarts();
@@ -23,15 +23,15 @@
 //     }
 // });
 
-// // Update cart
-// router.put('/cart/update/:cartId', async (req, res, next) => {
-//     try {
-//         const updatedCart = await updateCart(req.params.cartId, req.body);
-//         res.send(updatedCart);
-//     } catch (error) {
-//         next(error);
-//     }
-// });
+// api/cart/update/:cardId
+router.put('/cart/update/:cartId', async (req, res, next) => {
+    try {
+        const updatedCart = await updateCart(req.params.cartId, req.body);
+        res.send(updatedCart);
+    } catch (error) {
+        next(error);
+    }
+});
 
 // // Remove from cart
 // router.delete('/cart/remove/:cartId', async (req, res, next) => {
@@ -53,4 +53,4 @@
 //     }
 // });
 
-// module.exports = router;
+module.exports = router;
