@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { handleRemoveFromCart } from '../axios-services';
 
-const RemoveFromCart = () => {
-    // Need to pass in userToken and cartProdId
+const RemoveFromCart = ({ userToken, cartProdId }) => {
     const [isRemoved, setRemoved] = useState(false);
 
     const removeFromCart = async () => {
@@ -19,7 +18,6 @@ const RemoveFromCart = () => {
     return (
         <button className="cart-item-remove-button" onClick={removeFromCart}>Remove</button>
     );
-
 }
 
 export default RemoveFromCart;
