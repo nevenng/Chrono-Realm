@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 const ProductDisplayPage = () => {
     const { prodId } = useParams()
     const [product, setProduct] = useState(null);
-    console.log(prodId)
 
     useEffect(() => {
         const getPdp = async () => {
@@ -16,8 +15,6 @@ const ProductDisplayPage = () => {
         }
         getPdp();
     }, []);
-
-    console.log(product)
 
     return (
         <div className="pdp-container">

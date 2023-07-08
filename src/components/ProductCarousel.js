@@ -41,7 +41,7 @@ const ProductCarousel = (props) => {
   const visibleProducts = products.slice(currentSlide, currentSlide + 4);
 
   if (!product) {
-    return null; // or render a loading state if desired
+    return null;
   }
 
   return (
@@ -51,12 +51,11 @@ const ProductCarousel = (props) => {
       </div>
       <div className="carousel-content">
         {visibleProducts.map((product, index) => (
-          <div
-            key={index}
-            className={`carousel-item ${index === 0 ? 'active' : ''}`}
-          >
+          <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
             <div className="carousel-item-img">
-              <img src={product.prodimg} alt={product.prodmodelname} />
+              <a href={`/products/${product.prodid}`}>
+                <img src={product.prodimg} alt={product.prodmodelname} />
+              </a>
             </div>
             <div className="carousel-item-details">
               <h3 className="carousel-item-title">{product.prodmodelname}</h3>

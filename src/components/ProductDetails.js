@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 const ProductDetails = (props) => {
   const { product } = props;
 
-  console.log(product)
-
   if (!product) {
     return <div>Loading...</div>;
   }

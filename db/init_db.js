@@ -116,7 +116,7 @@ async function createInitialProducts() {
       {
         prodId: "prodId3",
         brand: "Audemars Piguet",
-        prodModelName: "Royal Oak Chronograph Rose Gold",
+        prodModelName: "Royal Oak Tourbillon Rose Gold",
         prodDescription: "The Audemars Piguet Royal Oak Chronograph is a high-performance timepiece with a chronograph function and a distinctive octagonal case.",
         prodPrice: 132000.00,
         prodImg: "https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009710.00/importer/watch.png.transform.appdpmainmob.png"
