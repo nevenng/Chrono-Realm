@@ -10,8 +10,7 @@ cartRouter.use((req, res, next) => {
 })
 
 cartRouter.get('/my-active-cart', async (req, res, next) => {
-    const { userId } = req.body
-
+    const userId = req.headers['user-id']
     try {
         const checkUserCart = await getUserActiveCart(userId);
         res.send(checkUserCart);

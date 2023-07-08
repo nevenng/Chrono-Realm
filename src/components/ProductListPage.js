@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { ProductListItem } from '../components'
 import { fetchAllProducts } from "../axios-services";
 
-const ProductListPage = () => {
+const ProductListPage = (props) => {
     // Need to map through an array of products 
+
+    const { user } = props;
 
     const [products, setProducts] = useState([]);
 
@@ -23,7 +25,7 @@ const ProductListPage = () => {
     return (
         <div className="plp-container">
             {products.map((product) => {
-                return <ProductListItem key={product.id} product={product} />
+                return <ProductListItem key={product.id} product={product} user={user}/>
             })}
         </div>
     )

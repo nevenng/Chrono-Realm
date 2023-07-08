@@ -91,11 +91,32 @@ export const fetchProdId = (async (prodId) => {
 });
 
 // Cart 
+export const checkUserCartExists = async (userId) => {
+
+  try {
+    const response = await fetch(`${BASE_URL}/api/carts/my-active-cart`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'user-id': userId
+      }
+    })
+
+    if (response.ok) {
+      const result = await response.json();
+      return result;
+    } else {
+      throw new Error('Error retrieving user cart')
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 export const addProductToCart = async ({ product }) => {
 
   try {
-    const response = await fetch(`${BASE_URL}/cart/add`, {
+    const response = await fetch(`${BASE_URL}/api/carts/add`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

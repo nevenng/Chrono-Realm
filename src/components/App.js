@@ -21,7 +21,8 @@ const App = () => {
   });
 
   const [user, setUser] = useState(() => {
-    return localStorage.getItem('user');
+    const storedUser= localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null
   });
   
   return (
@@ -37,7 +38,7 @@ const App = () => {
         <Route
           exact path='/products'
           render={() => (
-            <ProductListPage />
+            <ProductListPage user={user}/>
           )}
         />
         <Route
