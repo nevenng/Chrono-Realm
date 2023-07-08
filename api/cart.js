@@ -10,8 +10,8 @@ cartRouter.use((req, res, next) => {
 })
 
 // Add product to cart
-// api/cart/add-to-cart
-cartRouter.post('/add-to-cart', async (req, res, next) => {
+// api/cart/add
+cartRouter.post('/add', async (req, res, next) => {
     const {
         prodId,
         prodModelName,
@@ -67,7 +67,6 @@ cartRouter.delete('/remove', async (req, res, next) => {
         next(error);
     }
 })
-
 
 
 module.exports = cartRouter;

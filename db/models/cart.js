@@ -90,9 +90,20 @@ const removeProduct = async (cartId, prodId) => {
         await client.query(`
             DELETE FROM cart_item
             WHERE cartid = $1 and cartprodid = $2
-        `,[cartId, prodId])
+        `, [cartId, prodId])
     } catch (error) {
 
+    }
+}
+
+const removeCartProducts = async (cartId) => {
+    try {
+        await client.query(`
+            DELETE FROM cart_item
+            WHERE cartid = $1
+        `,[cartId])
+    } catch (error) {
+        throw error
     }
 }
 
