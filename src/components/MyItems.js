@@ -1,36 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchOrderByOrderUser } from "../axios-services";
 
 const MyItems = () => {
-    // Need to pass in { token, users } 
-    // Need to pass in { prodBrand, prodModelName } 
-
-    // const [myItems, setMyItems] = useState([]);
-
-    // const handleMyItems = (async (user) => {
-    //     try {
-    //         const response = await fetch(`${BASE_URL}/api/users/${user}/orders`, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': `Bearer ${token}`
-    //             },
-    //         });
-    //         const result = await response.json();
-    //         return result;
-    //     } catch (err) {
-    //         console.error(err);
-    //         throw err;
-    //     }
-    // });
-
+    // { token, orderId }
+    const [myOrder, setMyOrder] = useState(true);
+    
     // useEffect(() => {
-    //     const getMyOrders = async () => {
-    //         const results = await handleMyItems();
-    //         setMyOrders(results);
+    //     const getMyOrder = async () => {
+    //         try {
+    //             const order = await fetchOrderByOrderUser(orderId);
+    //             console.log(orderId)
+    //             setMyOrder(order);
+    //         } catch (error) {
+    //             console.error("Error fetching order:", error);
+    //         }
+    //     };
+        
+    //     if (userToken && orderId) {
+    //         getMyOrder();
     //     }
-    //     getMyOrders();
-    // });
-
-    // need to map thru data 
+    // }, [userToken, orderId]);
 
     return (
         <>
@@ -65,13 +54,37 @@ const MyItems = () => {
                                     <p className="align-top">$20.00</p>
                                 </td>
                             </tr>
+                            {/* {myOrder ? (
+                                <tr>
+                                    <td>
+                                        <img className="orders-img" src={myOrder.orderprodid} alt="Product Image" />
+                                    </td>
+                                    <td>
+                                        <div className="order-info">
+                                            <p>Order Date: {myOrder.orderdate}</p>
+                                            <p>Order Number: {myOrder.orderid}</p>
+                                            <p>Model: {myOrder.orderprodmodelname}</p>
+                                            <p>Qty: {myOrder.orderqty}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p className="align-top">{myOrder.orderstatus}</p>
+                                    </td>
+                                    <td>
+                                        <p className="align-top">${myOrder.ordertotalprice}</p>
+                                    </td>
+                                </tr>
+                            ) : (
+                                <tr>
+                                    <td colSpan="4">No order details available</td>
+                                </tr>
+                            )} */}
                         </tbody>
                     </table>
                 </div>
             </div>
         </>
-    )
-}
-
+    );
+};
 
 export default MyItems;

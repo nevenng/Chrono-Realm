@@ -130,4 +130,15 @@ export const handleUpdateQty = async (userToken, cartProdId) => {
   }
 };
 
+// Orders 
+
+// export const fetchOrderByOrderUser = async (user) => {
+//   try {
+//     const response = await fetch(`${BASE_URL}/api/orders/${user}`);
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
