@@ -92,7 +92,7 @@ async function createInitialProducts() {
           "The Audemars Piguet Royal Oak is an iconic luxury sports watch known for its octagonal bezel and integrated bracelet.",
         prodPrice: 110000.00,
         prodImg:
-          "https://images.watchfinder.co.uk/imgv2/stock/231756/AudemarsPiguet-RoyalOak-15450ST.OO.1256ST.03-231756-1-221121-121332.jpg;quality=90;h=640"
+          "https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009673.00/importer/watch.png.transform.approductmain.png"
       },
       {
         prodId: "prodId2",
@@ -100,7 +100,7 @@ async function createInitialProducts() {
         prodModelName: "Royal Oak Offshore",
         prodDescription: "The Audemars Piguet Royal Oak Offshore is a bold and robust variation of the classic Royal Oak, designed for extreme sports and adventures.",
         prodPrice: 42500.00,
-        prodImg: "https://images.watchfinder.co.uk/imgv2/stock/219948/AudemarsPiguet-RoyalOak-26331ST.OO.1220ST.02-219948-1-220726-093028.jpg;quality=90;h=640"
+        prodImg: "https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009454.00/importer/watch.png.transform.appdpmainmob.png"
       },
       {
         prodId: "prodId3",
@@ -108,7 +108,7 @@ async function createInitialProducts() {
         prodModelName: "Royal Oak Chronograph Rose Gold",
         prodDescription: "The Audemars Piguet Royal Oak Chronograph is a high-performance timepiece with a chronograph function and a distinctive octagonal case.",
         prodPrice: 132000.00,
-        prodImg: "https://images.watchfinder.co.uk/imgv2/catalogue/26420/AudemarsPiguet-RoyalOak-26320OR.OO.1220OR.01-26420-190118-162819-.jpg;quality=90;h=640"
+        prodImg: "https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009710.00/importer/watch.png.transform.appdpmainmob.png"
       },
       {
         prodId: "prodId4",
@@ -116,23 +116,23 @@ async function createInitialProducts() {
         prodModelName: "Royal Oak Concept",
         prodDescription: "The Audemars Piguet Royal Oak Concept collection features avant-garde designs and innovative complications, pushing the boundaries of traditional watchmaking.",
         prodPrice: 402000.00,
-        prodImg: "https://cdn.shopify.com/s/files/1/0523/4275/1395/products/audemars-piguet-royal-oak-concept-tourbillon-chronograph-openworked-selfwinding-ref-707_540x.jpg?v=1645745482"
+        prodImg: "https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009585.00/importer/watch.png.transform.appdpmainmob.png"
       },
       {
         prodId: "prodId5",
         brand: "Audemars Piguet",
-        prodModelName: "Millenary",
+        prodModelName: "Grande Sonnerie",
         prodDescription: "The Audemars Piguet Millenary collection showcases artistic craftsmanship and unconventional design with its oval-shaped case and off-center dial.",
-        prodPrice: 20000.00,
-        prodImg: "https://cdn.shopify.com/s/files/1/0523/4275/1395/products/audemars-piguet-millenary-4101-ref-15350st-oo-d002cr-01-luxury-swiss-watches-816_540x.jpg?v=1645750974"
+        prodPrice: 775000.00,
+        prodImg: "https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR010565AA/importer/watch.png.transform.appdpmainmob.png"
       },
       {
         prodId: "prodId6",
         brand: "Breguet",
-        prodModelName: "Classique Rose Gold Chronograph",
+        prodModelName: "Classique Rose Gold ",
         prodDescription: "The Breguet Classique collection represents the epitome of traditional watchmaking with its elegant designs and exquisite craftsmanship.",
-        prodPrice: 26000.00,
-        prodImg: "https://prod-images.fashionphile.com/large/59fcbfa45727d8abad4b096549ffb06a/e506475e37490c3be48bf55db7720d45.jpg"
+        prodPrice: 42100.00,
+        prodImg: "https://www.breguet.com/sites/default/files/styles/page_modele_preview/public/gardetemps/variante/soldat/7727br_12_9wu_face_0.jpg?itok=OTdZ-PpJ"
       },
       {
         prodId: "prodId7",
@@ -140,7 +140,7 @@ async function createInitialProducts() {
         prodModelName: "Marine",
         prodDescription: "The Breguet Marine collection combines nautical inspiration with technical innovation, offering sporty yet sophisticated timepieces.",
         prodPrice: 11000.00,
-        prodImg: "https://d2j6dbq0eux0bg.cloudfront.net/images/16115183/1031105045.jpg"
+        prodImg: "https://www.breguet.com/sites/default/files/styles/page_modele_preview/public/gardetemps/variante/soldat/5517BB_Y2_BZ0.jpg?itok=BQy88dCq"
       },
       {
         prodId: "prodId8",
@@ -148,7 +148,7 @@ async function createInitialProducts() {
         prodModelName: "Tradition",
         prodDescription: "The Breguet Tradition collection pays homage to the brand's rich heritage, showcasing timepieces with exposed movements and iconic design elements.",
         prodPrice: 19000.00,
-        prodImg: "https://images.watchfinder.co.uk/imgv2/stock/161503/Breguet-Tradition-7047BRG99ZU-161503-1-200610-140406.jpg;quality=90;h=640"
+        prodImg: "https://www.breguet.com/sites/default/files/styles/page_modele_preview/public/gardetemps/variante/soldat/7047pt119zu_soldat_face_maps.jpg?itok=jedttFf9"
       },
       {
         prodId: "prodId9",
@@ -156,7 +156,7 @@ async function createInitialProducts() {
         prodModelName: "Reine de Naples",
         prodDescription: "The Breguet Reine de Naples collection is a tribute to the original watch created for Queen Marie Antoinette, featuring elegant and feminine designs.",
         prodPrice: 26000.00,
-        prodImg: "https://cdn.shopify.com/s/files/1/0416/5874/4986/products/breguet-reine-de-naples-8928-rose-gold-8928br5w944dd0d3l-817337_1024x1024.jpg?v=1644969710"
+        prodImg: "https://www.breguet.com/sites/default/files/styles/page_modele_preview/public/gardetemps/variante/soldat/8928BR_5W_944DD0D_face.jpg?itok=qTqNjCnF"
       },
       {
         prodId: "prodId10",
@@ -164,47 +164,47 @@ async function createInitialProducts() {
         prodModelName: "Type XX / Type XXI",
         prodDescription: "The Breguet Type XX and Type XXI are aviation-inspired chronographs with a vintage charm and modern functionalities.",
         prodPrice: 13000.00,
-        prodImg: "https://prod-images.fashionphile.com/large/e3c5328…56aa74a201f7/7f63b681ad6e06a4674352279916bc00.jpg"
+        prodImg: "https://www.breguet.com/sites/default/files/styles/page_modele_preview/public/gardetemps/variante/soldat/2057ST923WU.jpg?itok=aDxuEdsy"
       },
       {
         prodId: 'prodId11',
-        brand: 'Grand Seiko',
-        prodModelName: 'Grand Seiko SBGA211',
-        prodDescription: 'The Grand Seiko SBGA211 is a classic timepiece from Grand Seiko\'s Heritage Collection, known for its high-precision Spring Drive movement and clean dial design.',
-        prodPrice: 6200.00,
-        prodImg: 'https://cdn2.chrono24.com/images/uhren/29109307-rrsbcosu22bjssgxk312i9d1-ExtraLarge.jpg'
+        brand: 'A. Lange & Söhne',
+        prodModelName: 'A. Lange & Söhne Lange 1',
+        prodDescription: 'The A. Lange & Söhne Lange 1 is an iconic timepiece with asymmetric dial layout and patented big date display.',
+        prodPrice: 33900.00,
+        prodImg: 'https://img.alange-soehne.com/product-light-box-2/bcf8fe0b2b193dc12f285472418c057caf77979c.jpg'
       },
       {
         prodId: 'prodId12',
-        brand: 'Grand Seiko',
-        prodModelName: 'Grand Seiko SBGJ201',
-        prodDescription: 'The Grand Seiko SBGJ201 is a GMT watch with a mechanical movement, featuring Grand Seiko\'s renowned precision and craftsmanship.',
-        prodPrice: 5500.00,
-        prodImg: 'https://cdn.shopify.com/s/files/1/1889/5061/products/Grand-Seiko-Heritage-Hi-Beat-36000-SBGJ201-10-10-GRS-EMFZ34-3fbcb56ed1fa_1000x.jpg?v=1683316856'
+        brand: 'A. Lange & Söhne',
+        prodModelName: 'A. Lange & Söhne Saxonia Thin',
+        prodDescription: 'The A. Lange & Söhne Saxonia Thin is a classic dress watch with ultra-slim profile and timeless elegance.',
+        prodPrice: 19900.00,
+        prodImg: 'https://img.alange-soehne.com/product-light-box-2/75a1af1a01eefa19f5f08e6cecf7ec4847404957.jpg'
       },
       {
         prodId: 'prodId13',
-        brand: 'Grand Seiko',
-        prodModelName: 'Grand Seiko SBGA373',
-        prodDescription: 'The Grand Seiko SBGA373 is a limited edition watch with a titanium case and a blue dial, offering exceptional accuracy and legibility.',
-        prodPrice: '3750.00',
-        prodImg: 'https://cdn.shopify.com/s/files/1/0355/9843/4435/products/1133b6cf5637ab13438c2e5af9c7ca86_1024x.jpg?v=1679604299'
+        brand: 'A. Lange & Söhne',
+        prodModelName: 'A. Lange & Söhne Richard Lange',
+        prodDescription: 'The A. Lange & Söhne Richard Lange is dedicated to precision timekeeping with platinum case and refined aesthetics.',
+        prodPrice: 53500.00,
+        prodImg: 'https://img.alange-soehne.com/product-light-box-2/6a3ad53af4afced1f8fba3ede3faa381afef2179.jpg'
       },
       {
         prodId: 'prodId14',
-        brand: 'Grand Seiko',
-        prodModelName: 'Grand Seiko SBGR311',
-        prodDescription: 'The Grand Seiko SBGR311 is a dress watch with a stainless steel case and a silver dial, showcasing Grand Seiko\'s dedication to refinement.',
-        prodPrice: 5000.00,
-        prodImg: 'https://cdn.shopify.com/s/files/1/1889/5061/products/Grand-Seiko-Heritage-Hi-Beat-36000-SBGR311-10-10-GRS-R5S7CP-e41acbe58698_1000x.jpg?v=1671480132'
+        brand: 'A. Lange & Söhne',
+        prodModelName: 'A. Lange & Söhne 1815 Chronograph',
+        prodDescription: 'The A. Lange & Söhne 1815 Chronograph is inspired by traditional pocket watches with rose gold case and exquisite craftsmanship.',
+        prodPrice: 47000.00,
+        prodImg: 'https://img.alange-soehne.com/product-light-box-2/149cf0966b5a87777bfb33e05b1693d85d10a5da.jpg'
       },
       {
         prodId: 'prodId15',
-        brand: 'Grand Seiko',
-        prodModelName: 'Grand Seiko SBGH271',
-        prodDescription: 'The Grand Seiko SBGH271 is a high-beat mechanical watch with a gold case and a black dial, exemplifying Grand Seiko\'s craftsmanship and precision.',
-        prodPrice: 5200.00,
-        prodImg: 'https://cdn.shopify.com/s/files/1/0416/5874/4986/products/grand-seiko-heritage-sbgh271-sbgh271-100854'
+        brand: 'A. Lange & Söhne',
+        prodModelName: 'A. Lange & Söhne Datograph Up/Down',
+        prodDescription: 'The A. Lange & Söhne Datograph Up/Down is a highly regarded chronograph with platinum case and the pinnacle of watchmaking expertise.',
+        prodPrice: 94500.00,
+        prodImg: 'https://img.alange-soehne.com/product-light-box-2/5abb63732cf5876aea7fc2634eb3cbd883579424.jpg'
       },
       {
         prodId: "prodId16",
@@ -212,7 +212,7 @@ async function createInitialProducts() {
         prodModelName: "Portugieser",
         prodDescription: "The IWC Portugieser is a classic and elegant watch with a timeless design. It features a large dial, Arabic numerals, and a clean, uncluttered look.",
         prodPrice: 8400.00,
-        prodImg: "https://images.watchfinder.co.uk/imgv3/stock/223527/IWC-Portugieser%20Chrono-IW371491-223527-230130-103805.jpg;quality=90;h=640,%20https://images.watchfinder.co.uk/imgv3/stock/223527/IWC-Portugieser%20Chrono-IW371491-223527-230130-103805.jpg;quality=55;h=1280%202x"
+        prodImg: "https://www.iwc.com/content/dam/rcq/iwc/20/15/88/5/2015885.png.transform.global_image_480_2x.png"
       },
       {
         prodId: "prodId17",
@@ -220,15 +220,15 @@ async function createInitialProducts() {
         prodModelName: "Pilot's Watch",
         prodDescription: "The IWC Pilot's Watch collection pays tribute to aviation history with its instrument-inspired designs and precise timekeeping.",
         prodPrice: 9950.00,
-        prodImg: "https://res.cloudinary.com/dp9dnliwc/image/upload/c_mfit,h_1200,w_1200/f_auto/q_auto/wmmedia/watch_images/large/iw377709_1512143173.jpg"
+        prodImg: "https://www.iwc.com/content/dam/rcq/iwc/21/49/88/2/2149882.png.transform.global_image_940_2x.png"
       },
       {
         prodId: "prodId18",
-        brand: " IWC",
+        brand: "IWC",
         prodModelName: "Da Vinci Tourbillon",
         prodDescription: "The IWC Da Vinci collection combines innovative technology with artistic design, creating sophisticated and unique timepieces.",
         prodPrice: 95000.00,
-        prodImg: "https://cdn.swisswatchexpo.com/productphotos/10/28/iwc-da-vinci-tourbillon-flyback-retrograde-rose-gold-watch-iw393101-box-papers-37989_6357b_md.jpg"
+        prodImg: "https://www.iwc.com/content/dam/rcq/iwc/16/48/96/2/1648962.png.transform.global_image_480_2x.png"
       },
       {
         prodId: "prodId19",
@@ -236,7 +236,7 @@ async function createInitialProducts() {
         prodModelName: "Portofino Chronograph",
         prodDescription: "The IWC Portofino is a collection of elegant and understated watches suitable for any occasion.",
         prodPrice: 6250.00,
-        prodImg: "https://prod-images.fashionphile.com/thumb/b7b2fc1b432240fb3df5a5ccac636233/e47a7aee0551977b4bf92f71fde869e6.jpg"
+        prodImg: "https://www.iwc.com/content/dam/rcq/iwc/19/08/65/8/1908658.png.transform.global_image_940_2x.png"
       },
       {
         prodId: "prodId20",
@@ -244,7 +244,7 @@ async function createInitialProducts() {
         prodModelName: "Aquatimer",
         prodDescription: "The IWC Aquatimer is IWC's diver's watch, known for its water resistance and rugged durability.",
         prodPrice: 6100.00,
-        prodImg: "https://cdn2.jomashop.com/media/catalog/product/cache/fde19e4197824625333be074956e7640/i/w/iwc-aquatimer-automatic-blue-dial-mens-watch-iw328801.jpg?width=546&height=546"
+        prodImg: "https://www.iwc.com/content/dam/rcq/iwc/89/Hk/HI/UA/zU/qP/HK/Jo/cs/-d/JA/89HkHIUAzUqPHKJocs-dJA.png.transform.global_image_480_2x.png"
       },
       {
         prodId: "prodId21",
@@ -252,9 +252,7 @@ async function createInitialProducts() {
         prodModelName: "Master Ultra Thin Moon Rose Gold",
         prodDescription: "The Jaeger-LeCoultre Master Ultra Thin Moon is a sophisticated and slim timepiece featuring a moon phase complication.",
         prodPrice: 23000.00,
-        prodImg: "https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=90;h=640,%20https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=55;h=1280%202x"
-
-
+        prodImg: "https://img.jaeger-lecoultre.com/product-light-box-1/2be9ce76e56723b5e6417ec385056b362d268507.jpg"
       },
       {
         prodId: "prodId22",
@@ -262,7 +260,7 @@ async function createInitialProducts() {
         prodModelName: "Reverso Mono Face",
         prodDescription: "The Jaeger-LeCoultre Reverso is an iconic watch known for its reversible case, allowing wearers to protect the dial by flipping it.",
         prodPrice: 8100.00,
-        prodImg: "https://img.jaeger-lecoultre.com/product-slider-hero-mobile-3/14ae198ca6f6c5af59d50b347a35b3770f4d72b5.jpg"
+        prodImg: "https://img.jaeger-lecoultre.com/product-light-box-1/3db64b2b5e02e18a394fad413d068bff55c1f244.jpg"
       },
       {
         prodId: "prodId23",
@@ -270,7 +268,7 @@ async function createInitialProducts() {
         prodModelName: "Polaris Date",
         prodDescription: "The Jaeger-LeCoultre Polaris collection is inspired by the brand's historical diving watches and offers a blend of sportiness and elegance.",
         prodPrice: 8200.00,
-        prodImg: "https://cdn.shopify.com/s/files/1/0551/4906/8368/products/C00006965_1000_160x.jpg?v=1675077253"
+        prodImg: "https://img.jaeger-lecoultre.com/product-light-box-1/2ec95c87d352e1bdf7d6e48c00b7549cae3f5876.jpg"
       },
       {
         prodId: "prodId24",
@@ -278,7 +276,7 @@ async function createInitialProducts() {
         prodModelName: "Atmos By Marc Newson",
         prodDescription: "The Jaeger-LeCoultre Atmos is a unique mechanical clock that doesn't require winding, powered by changes in atmospheric pressure.",
         prodPrice: 36000.00,
-        prodImg: "https://img.jaeger-lecoultre.com/product-slider-hero-mobile-3/c8fc75cb7e8db9cdd0a4fea62ce59d6fe2717cf9.jpg"
+        prodImg: "https://img.jaeger-lecoultre.com/product-light-box-1/c8fc75cb7e8db9cdd0a4fea62ce59d6fe2717cf9.jpg"
       },
       {
         prodId: "prodId25",
@@ -286,7 +284,7 @@ async function createInitialProducts() {
         prodModelName: "Rendez-Vous Rose Gold",
         prodDescription: "The Jaeger-LeCoultre Rendez-Vous collection is designed for women, featuring elegant and feminine timepieces with various complications.",
         prodPrice: 30000.00,
-        prodImg: "https://www.net-a-porter.com/variants/images/9679066508384460/in/w2000_q60.jpg"
+        prodImg: "https://img.jaeger-lecoultre.com/product-light-box-1/cfe2132557c20ec946746f5cc1a04c4600f51ea4.jpg"
       },
       {
         prodId: "prodId26",
@@ -370,43 +368,43 @@ async function createInitialProducts() {
       },
       {
         prodId: "prodId36",
-        brand: "Patek Philippe",
-        prodModelName: "Nautilus Tiffany & Co. Blue",
-        prodDescription: "The Patek Philippe Nautilus is a highly coveted and iconic sports watch with a distinctive porthole design.",
-        prodPrice: 2200000.00,
-        prodImg: "https://cdn2.chrono24.com/images/uhren/26224860-6p7b3uo8vmyuap6a3b3zhb3i-ExtraLarge.jpg"
+        brand: "Vacheron Constantin",
+        prodModelName: "Traditionnelle",
+        prodDescription: "The Vacheron Constantin Traditionnelle is a highly coveted and iconic watch known for its traditional craftsmanship.",
+        prodPrice: 45000.00,
+        prodImg: "https://www.vacheron-constantin.com/dam/rcq/vac/16/23/89/3/1623893.png.transform.vacproddetails.png"
       },
       {
         prodId: "prodId37",
-        brand: "Patek Philippe",
-        prodModelName: "Aquanaut Olive",
-        prodDescription: "The Patek Philippe Aquanaut is a sporty and contemporary watch designed for active lifestyles, featuring a tropical strap and a rounded octagonal case.",
-        prodPrice: 142000.00,
-        prodImg: "https://static.patek.com/images/articles/face_white/350/5168G_010_1.jpg"
+        brand: "Vacheron Constantin",
+        prodModelName: "Overseas",
+        prodDescription: "The Vacheron Constantin Overseas is a sporty and contemporary watch that combines elegance with rugged durability.",
+        prodPrice: 21500.00,
+        prodImg: "https://www.vacheron-constantin.com/dam/rcq/vac/10/87/63/3/1087633.png.transform.vacproddetailstab.png"
       },
       {
         prodId: "prodId38",
-        brand: "Patek Philippe",
-        prodModelName: "Calatrava",
-        prodDescription: "The Patek Philippe Calatrava is a timeless and elegant dress watch, known for its clean lines and understated sophistication.",
-        prodPrice: 20000.00,
-        prodImg: "https://static.patek.com/images/articles/face_white/350/5227R_001_1.jpg"
+        brand: "Vacheron Constantin",
+        prodModelName: "Patrimony",
+        prodDescription: "The Vacheron Constantin Patrimony is a timeless and elegant dress watch, admired for its classic and refined design.",
+        prodPrice: 30000.00,
+        prodImg: "https://www.vacheron-constantin.com/dam/rcq/vac/16/19/63/0/1619630.png.transform.vacproddetails.png"
       },
       {
         prodId: "prodId39",
-        brand: "Patek Philippe",
-        prodModelName: "Grand Complications",
-        prodDescription: "The Patek Philippe Grand Complications collection showcases the brand's mastery in watchmaking with complex complications such as perpetual calendars, minute repeaters, and tourbillons.",
-        prodPrice: 234000.00,
-        prodImg: "https://static.patek.com/images/articles/face_white/350/5327R_001_1.jpg"
+        brand: "Vacheron Constantin",
+        prodModelName: "Harmony",
+        prodDescription: "The Vacheron Constantin Harmony is a collection of watches known for their harmonious blend of aesthetics and precision.",
+        prodPrice: 20000.00,
+        prodImg: "https://www.vacheron-constantin.com/dam/rcq/vac/67/93/71/679371.png.transform.vacproddetailstab.png"
       },
       {
         prodId: "prodId40",
-        brand: "Patek Philippe",
-        prodModelName: "Twenty-4",
-        prodDescription: "The Patek Philippe Twenty-4 is a ladies' watch collection known for its elegant and feminine design, offering both quartz and mechanical movements.",
-        prodPrice: 26000.00,
-        prodImg: "https://static.patek.com/images/articles/face_white/350/7300_1200A_001_1.jpg"
+        brand: "Vacheron Constantin",
+        prodModelName: "Traditionnelle for Women",
+        prodDescription: "The Vacheron Constantin Traditionnelle for Women is an exquisite watch collection with a perfect blend of femininity and sophistication.",
+        prodPrice: 18500.00,
+        prodImg: "https://www.vacheron-constantin.com/dam/rcq/vac/22/60/52/1/2260521.png.transform.vacproddetailstab.png"
       },
       {
         prodId: "prodId41",
@@ -430,7 +428,7 @@ async function createInitialProducts() {
         prodModelName: "Submariner",
         prodDescription: "The Rolex Submariner is a legendary diver's watch known for its water resistance and iconic design.",
         prodPrice: 16000.00,
-        prodImg: "https://content.rolex.com/v7/dam/2023-06/upright-c/m126610lv-0002.png?impolicy=v7-main-configurator&imwidth=640"
+        prodImg: "https://content.rolex.com/v7/dam/2023-06/upright-c/m126610lv-0002.png?impolicy=v7-main-configurator&imwidth=800"
       },
       {
         prodId: "prodId44",
@@ -578,7 +576,7 @@ const createInitialOrders = async () => {
     }
 
     console.log("Finished creating orders!");
-    
+
   } catch (error) {
     console.error("Error creating orders!");
     throw error;

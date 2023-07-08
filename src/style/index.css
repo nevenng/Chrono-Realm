@@ -161,7 +161,8 @@ COMPONENT: ProductListItem
 
 .plp-item img {
   width: 100%;
-  height: auto; 
+  height: 300px;
+  object-fit: cover;
 }
 
 .plp-item h3 {
@@ -189,6 +190,7 @@ COMPONENT: ProductListItem
   border: none;
   color: white;
 }
+
 
 /* Component for Logout */
 
@@ -478,12 +480,6 @@ COMPONENT: Cart
   margin-bottom: 10px;
 }
 
-.no-order-details-message {
-  font-size: 16px;
-  color: #888;
-  text-align: center;
-  margin-top: 20px;
-}
 
 
 
