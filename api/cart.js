@@ -1,6 +1,6 @@
 // api/cartendpoint.js
 const express = require('express');
-const { getAllCart, getProductCart, addProductToCart, updateProductCart } = require('../db/models/cart');
+const { getProductCart, addProductToCart, updateProductCart } = require('../db/models/cart');
 const cartRouter = express.Router();
 
 cartRouter.use((req, res, next) => {
@@ -8,18 +8,6 @@ cartRouter.use((req, res, next) => {
 
     next();
 })
-
-// Get all user cart
-// api/carts/cart
-cartRouter.get('/cart', async (req, res, next) => {
-
-    try {
-        const cart = await getAllCart();
-        res.send(cart);
-    } catch (error) {
-        next(error);
-    }
-});
 
 // Add product to cart
 // api/cart/add-to-cart
@@ -35,18 +23,14 @@ cartRouter.post('/add-to-cart', async (req, res, next) => {
         cartId
     } = req.body;
 
-    const parsedQuantity = parseInt(quantity);
-    const parsedPrice = parseInt(prodPrice);
-    const parsedTotalPrice = parseInt(totalPrice);
-
     const productData = {
         prodId,
         prodModelName,
         prodDescription,
         prodImg,
-        prodPrice: parsedPrice,
-        quantity: parsedQuantity,
-        totalPrice: parsedTotalPrice,
+        prodPrice,
+        quantity,
+        totalPrice,
         cartId
     };
 
