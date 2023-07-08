@@ -480,6 +480,15 @@ COMPONENT: Cart
   margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
+=======
+.no-order-details-message {
+  font-size: 16px;
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}
+>>>>>>> a77c5189712061de16067df2f6a48e2e3d8fdb94
 
 
 
