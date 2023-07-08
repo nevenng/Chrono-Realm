@@ -18,11 +18,11 @@ router.use((req, res, next) => {
 
 router.get("/", async (req, res, next) => {
     try{
-        const user = req.user;
+    //     const user = req.user;
 
-      if (!checkUserRole(user)) {
-        return res.status(401).json({ message: 'You must be an admin to access this' });
-      }
+    //   if (!checkUserRole(user)) {
+    //     return res.status(401).json({ message: 'You must be an admin to access this' });
+    //   }
         const products = await getAllProducts();
 
         res.send(products)
