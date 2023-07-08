@@ -10,7 +10,8 @@ import {
   ProductListPage,
   MyOrders,
   CartSummary,
-  ProductDisplayPage
+  ProductDisplayPage,
+  ConfirmationPage
 } from '../components'
 
 const App = () => {
@@ -23,6 +24,12 @@ const App = () => {
     <>
       <Navbar userToken={userToken} setUserToken={setUserToken} />
       <Switch>
+        <Route
+          path='/confirmation'
+          render={() => (
+            <ConfirmationPage />
+          )}
+        />
         <Route
           exact path='/products'
           render={() => (
@@ -53,6 +60,7 @@ const App = () => {
             <AccountForm setUserToken={setUserToken} />
           )}
         />
+        
       </Switch>
     </>
   );
