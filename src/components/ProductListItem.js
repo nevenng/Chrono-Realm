@@ -1,9 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import { addProductToCart } from "../axios-services/index"
 
 const ProductListItem = (props) => {
     // Will need to access productIds from props and dynamically set the :productId 
     const { product } = props;
+
+    const addToCartHandler = async () => {
+        try {   
+            console.log(product)
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <div className="plp-item">
@@ -12,7 +21,7 @@ const ProductListItem = (props) => {
             </Link>
             <h3>{product.prodmodelname}</h3>
             <p>${product.prodprice}</p>
-            <button className="add-to-cart">Add to Cart</button>
+            <button className="add-to-cart" onClick={addToCartHandler}>Add to Cart</button>
         </div>
     )
 }

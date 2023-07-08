@@ -61,7 +61,7 @@ const getUserActiveCart = async (userId, sessionId) => {
             SELECT *
             FROM cart
             WHERE userid = $1 OR (userid is null and cartsessionid = $2)
-            AND carstatus = "In Progress";
+            AND cartstatus = "pending";
         `, [userId, sessionId])
 
         return userCart

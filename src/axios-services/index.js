@@ -92,6 +92,24 @@ export const fetchProdId = (async (prodId) => {
 
 // Cart 
 
+export const addProductToCart = async ({ product }) => {
+
+  try {
+    const response = await fetch(`${BASE_URL}/cart/add`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(product)
+    })
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const handleRemoveFromCart = async (userToken, cartProdId) => {
   try {
     const response = await fetch(`${BASE_URL}/cart/remove/${cartProdId}`, {

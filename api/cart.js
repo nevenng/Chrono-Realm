@@ -1,12 +1,29 @@
 // api/cartendpoint.js
 const express = require('express');
-const { getProductCart, addProductToCart, updateProductCart, removeProduct } = require('../db/models/cart');
+const { createCart, getProductCart, addProductToCart, updateProductCart, removeProduct } = require('../db/models/cart');
 const cartRouter = express.Router();
 
 cartRouter.use((req, res, next) => {
     console.log('A request has been made to /cart');
 
     next();
+})
+
+cartRouter.post('/new-cart', async (req, res, next) => {
+    const { userId, sessionId, cartStatus} = req.body
+
+    const payload = {
+        userId: userId || null,
+        sessionId: sessionId,
+        cartStatus: cartStatus
+    }
+
+    try {
+        const newCart = await createCart(payload)
+        res.send(newCart);
+    } catch (error) {
+        next(error)
+    }
 })
 
 // Add product to cart
