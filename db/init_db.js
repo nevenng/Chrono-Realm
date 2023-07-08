@@ -56,8 +56,8 @@ async function createTables() {
       CREATE TABLE cart (
         cartId SERIAL PRIMARY KEY,
         cartSessionId VARCHAR(255) NOT NULL,
-        cartStatus VARCHAR(255) DEFAULT 'In Progress' NOT NULL,
-        userId INT
+        userId INT,
+        cartStatus VARCHAR(255) DEFAULT 'pending' NOT NULL
       ); 
       CREATE TABLE cart_item (
         cartProdId VARCHAR(255) NOT NULL,
@@ -607,11 +607,11 @@ const createInitialCart = async () => {
     {
       sessionId: "12345",
       userId: 1,
-      cartStatus: "Completed"
+      cartStatus: "completed"
     },
     {
       sessionId: "23456",
-      cartStatus: "In Progress"
+      cartStatus: "pending"
     }
   ]
   try {

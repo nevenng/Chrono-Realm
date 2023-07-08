@@ -1,6 +1,6 @@
 // api/cartendpoint.js
 const express = require('express');
-const { getAllCart, createCart } = require('../db/models/cart');
+const { getAllCart, createCart, addProductToCart } = require('../db/models/cart');
 const cartRouter = express.Router();
 
 cartRouter.use((req, res, next) => {
@@ -21,7 +21,9 @@ cartRouter.get('/cart', async (req, res, next) => {
     }
 });
 
-cartRouter.post('/add', async (req, res, next) => {
+// Add product to cart
+// api/cart/add-to-cart
+cartRouter.patch('/add-to-cart', async (req, res, next) => {
     const {
         prodId,
         prodModelName,
@@ -29,25 +31,23 @@ cartRouter.post('/add', async (req, res, next) => {
         prodImg,
         quantity,
         totalPrice,
-        sessionId,
-        userId
+        cartId
     } = req.body;
 
-    const cartData = {}
+    const productData = {}
 
     try {   
-        cartData.prodId = prodId;
-        cartData.prodModelName = prodModelName;
-        cartData.prodDescription = prodDescription;
-        cartData.prodImg = prodImg;
-        cartData.quantity = quantity;
-        cartData.totalPrice = totalPrice;
-        cartData.sessionId = sessionId;
-        cartData.userId = userId;
+        productData.prodId = prodId;
+        productData.prodModelName = prodModelName;
+        productData.prodDescription = prodDescription;
+        productData.prodImg = prodImg;
+        productData.quantity = quantity;
+        productData.totalPrice = totalPrice;
+        productData.cartId = cartId;
 
-        const cart = await createCart(cartData);
+        const addedProduct = await addProductToCart(productData);
 
-        res.send(cart)
+        res.send(addedProduct)
     } catch (error) {
         next(error);
     }

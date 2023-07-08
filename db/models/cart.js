@@ -50,12 +50,13 @@ const getAllCart = async () => {
     }
 }
 
-const getUserCart = async (userId, sessionId) => {
+const getUserActiveCart = async (userId, sessionId) => {
     try {
         const { rows: [userCart] } = await client.query(`
             SELECT *
             FROM cart
-            WHERE userid = $1 OR (userid is null and cartsessionid = $2);
+            WHERE userid = $1 OR (userid is null and cartsessionid = $2)
+            AND carstatus = "In Progress";
         `, [userId, sessionId])
 
         return userCart
@@ -90,7 +91,7 @@ const updateCart = async (cartId, fields = {}) => {
 module.exports = {
     createCart,
     getAllCart,
-    getUserCart,
+    getUserActiveCart,
     updateCart,
     addProductToCart
 }
