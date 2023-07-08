@@ -65,6 +65,7 @@ async function createTables() {
         cartProdDescription VARCHAR(255) NOT NULL,
         prodImg TEXT NOT NULL,
         cartQuantity INT NOT NULL, 
+        cartProdPrice DECIMAL(10,2) NOT NULL,
         cartTotalPrice DECIMAL(10, 2) NOT NULL,
         cartId INT NOT NULL,
         FOREIGN KEY (cartId) REFERENCES cart(cartId)
@@ -636,6 +637,7 @@ const createInitialCartItems = async () => {
       prodDescription: "The Jaeger-LeCoultre Master Ultra Thin Moon is a sophisticated and slim timepiece featuring a moon phase complication.",
       prodImg: "https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=90;h=640,%20https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=55;h=1280%202x",
       quantity: 1,
+      prodPrice: 6700.00,
       totalPrice: 6700.00,
       cartId: 1
     },
@@ -645,6 +647,7 @@ const createInitialCartItems = async () => {
       prodDescription: "The Omega Constellation is a symbol of precision and elegance with its distinctive design and meticulous craftsmanship.",
       prodImg: "https://www.omegawatches.com/media/catalog/product/cache/a5c37fddc1a529a1a44fea55d527b9a116f3738da3a2cc38006fcc613c37c391/o/m/omega-constellation-globemaster-13033412206001-l.png",
       quantity: 2,
+      prodPrice: 23000.00,
       totalPrice: 46000.00,
       cartId: 1
     }

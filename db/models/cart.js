@@ -20,6 +20,7 @@ const addProductToCart = async ({
     prodModelName,
     prodDescription,
     prodImg,
+    prodPrice,
     quantity,
     totalPrice,
     cartId
@@ -27,16 +28,55 @@ const addProductToCart = async ({
 
     try {
         const { rows: [cart] } = await client.query(`
-            INSERT INTO cart_item(cartProdId, cartProdName, cartProdDescription, prodImg, cartQuantity, cartTotalPrice, cartId)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            INSERT INTO cart_item(cartProdId, cartProdName, cartProdDescription, prodImg, cartProdPrice, cartQuantity, cartTotalPrice, cartId)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *;
-        `, [prodId, prodModelName, prodDescription, prodImg, quantity, totalPrice, cartId])
+        `, [prodId, prodModelName, prodDescription, prodImg, prodPrice, quantity, totalPrice, cartId])
 
         return cart;
     } catch (error) {
         console.error(error)
     }
 };
+
+const updateProductCart = async (cartId, prodId, quantity, totalprice) => {
+
+    try {
+        const { rows: [product] } = await client.query(`
+            UPDATE cart_item
+            SET cartquantity = $1, carttotalprice = $2
+            WHERE cartid = $3 and cartProdId = $4
+            RETURNING *;
+        `, [quantity, totalprice, cartId, prodId]);
+
+        return product;
+    } catch (error) {
+        throw error;
+    }
+}
+// const updateProductCart = async (cartId, prodId, fields = {}) => {
+//     // build set string
+//     const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`).join(', ');
+
+//     if (setString.length === 0) {
+//         return;
+//     }
+
+//     try {
+//         const { rows: [product] } = await client.query(`
+//             UPDATE cart_item
+//             SET ${setString}
+//             WHERE cartid = $${setString.length + 1} and cartProdId = $${setString.length + 2}
+//             RETURNING *;
+//         `, [...Object.values(fields), cartId, prodId]);
+
+//         return product;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
+
+
 
 const getAllCart = async () => {
     try {
@@ -65,33 +105,27 @@ const getUserActiveCart = async (userId, sessionId) => {
     }
 }
 
-
-const updateCart = async (cartId, fields = {}) => {
-    // build set string
-    const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`).join(', ');
-
-    if (setString.length === 0) {
-        return;
-    }
-
+const getProductCart = async (cartId, prodId) => {
     try {
-        const { rows: [cart] } = await client.query(`
-            UPDATE cart
-            SET ${setString}
-            WHERE cartid = ${cartId}
-            RETURNING *;
-        `, Object.values(fields));
+        const { rows: [product] } = await client.query(`
+            SELECT *
+            FROM cart_item
+            WHERE cartId = $1
+            AND cartProdId = $2;
+        `, [cartId, prodId])
 
-        return cart;
+        return product;
     } catch (error) {
         throw error;
     }
 }
 
+
 module.exports = {
     createCart,
     getAllCart,
     getUserActiveCart,
-    updateCart,
-    addProductToCart
+    addProductToCart,
+    updateProductCart,
+    getProductCart
 }
