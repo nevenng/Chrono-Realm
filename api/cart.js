@@ -1,6 +1,6 @@
 // api/cartendpoint.js
 const express = require('express');
-const { createCart, getProductCart, addProductToCart, updateProductCart, removeProduct } = require('../db/models/cart');
+const { createCart, getProductCart, addProductToCart, updateProductCart, removeProduct, getUserActiveCart } = require('../db/models/cart');
 const cartRouter = express.Router();
 
 cartRouter.use((req, res, next) => {
@@ -9,8 +9,19 @@ cartRouter.use((req, res, next) => {
     next();
 })
 
+cartRouter.get('/my-active-cart', async (req, res, next) => {
+    const { userId } = req.body
+
+    try {
+        const checkUserCart = await getUserActiveCart(userId);
+        res.send(checkUserCart);
+    } catch (error) {
+        next(error);
+    }
+})
+
 cartRouter.post('/new-cart', async (req, res, next) => {
-    const { userId, sessionId, cartStatus} = req.body
+    const { userId, sessionId, cartStatus } = req.body
 
     const payload = {
         userId: userId || null,
@@ -67,7 +78,6 @@ cartRouter.post('/add', async (req, res, next) => {
             res.send(addedProduct);
         }
 
-        // res.send(existingProduct);
     } catch (error) {
         next(error);
     }
