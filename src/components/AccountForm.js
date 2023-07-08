@@ -4,7 +4,7 @@ import { registerUser, loginUser } from "../axios-services";
 
 const AccountForm = (props) => {
 
-    const { setUserToken } = props;
+    const { setUserToken, setUser } = props;
     const params = useParams();
     const { actionType } = params;
 
@@ -23,8 +23,10 @@ const AccountForm = (props) => {
                     setEmail('');
                     setPassword('');
                     setUserToken(registeredUser.token);
-                    localStorage.setItem('userToken', JSON.stringify(registerUser.token));
-                    alert(`Registration successful. Welcome ${registeredUser.user.username}`)
+                    localStorage.setItem('userToken', JSON.stringify(registeredUser.token));
+                    setUser(registeredUser.user);
+                    localStorage.setItem('user', JSON.stringify(registeredUser.user));
+                    alert(`Registration successful. Welcome ${registeredUser.user.username}`);
                     history.push('/products');
                 }
             } catch (error) {
@@ -39,6 +41,8 @@ const AccountForm = (props) => {
                     setPassword('');
                     setUserToken(loggedInUser.token);
                     localStorage.setItem('userToken', JSON.stringify(loggedInUser.token));
+                    setUser(loggedInUser.user);
+                    localStorage.setItem('user', JSON.stringify(loggedInUser.user));
                     alert(`Welcome back ${loggedInUser.user.username}`);
                     history.push('/products');
                 }

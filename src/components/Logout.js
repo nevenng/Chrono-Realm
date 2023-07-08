@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Logout = (props) => {
-  const { setUserToken } = props;
+  const { setUserToken, setUser } = props;
 
   const history = useHistory();
 
@@ -10,6 +10,8 @@ const Logout = (props) => {
     event.preventDefault();
     setUserToken('');
     localStorage.removeItem('userToken');
+    setUser(null);
+    localStorage.removeItem('user');
     history.push('/account/login');
   };
 

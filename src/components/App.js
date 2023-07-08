@@ -20,9 +20,13 @@ const App = () => {
     return localStorage.getItem('userToken')
   });
 
+  const [user, setUser] = useState(() => {
+    return localStorage.getItem('user');
+  });
+  
   return (
     <>
-      <Navbar userToken={userToken} setUserToken={setUserToken} />
+      <Navbar userToken={userToken} setUserToken={setUserToken} user={user} setUser={setUser} />
       <Switch>
         <Route
           path='/confirmation'
@@ -57,10 +61,10 @@ const App = () => {
         <Route
           path='/account/:actionType'
           render={() => (
-            <AccountForm setUserToken={setUserToken} />
+            <AccountForm setUserToken={setUserToken} setUser={setUser} />
           )}
         />
-        
+
       </Switch>
     </>
   );
