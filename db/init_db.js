@@ -2,7 +2,8 @@ const {
   createUser,
   createProduct,
   createOrder,
-  createCart
+  createCart,
+  addProductToCart
   // declare your model imports here
   // for example, User
 } = require('./models');
@@ -14,6 +15,7 @@ async function dropTables() {
   try {
     await client.query(`    
       DROP TABLE IF EXISTS orders;    
+      DROP TABLE IF EXISTS cart_item;
       DROP TABLE IF EXISTS cart;
       DROP TABLE IF EXISTS products;          
       DROP TABLE IF EXISTS users;
@@ -53,15 +55,20 @@ async function createTables() {
       );
       CREATE TABLE cart (
         cartId SERIAL PRIMARY KEY,
+        cartSessionId VARCHAR(255) NOT NULL,
+        cartStatus VARCHAR(255) DEFAULT 'In Progress' NOT NULL,
+        userId INT
+      ); 
+      CREATE TABLE cart_item (
         cartProdId VARCHAR(255) NOT NULL,
         cartProdName VARCHAR(255) NOT NULL,
         cartProdDescription VARCHAR(255) NOT NULL,
         prodImg TEXT NOT NULL,
         cartQuantity INT NOT NULL, 
         cartTotalPrice DECIMAL(10, 2) NOT NULL,
-        cartSessionId VARCHAR(255) NOT NULL,
-        userId INT
-      );  
+        cartId INT NOT NULL,
+        FOREIGN KEY (cartId) REFERENCES cart(cartId)
+      );
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
         orderId VARCHAR(255) NOT NULL,
@@ -598,14 +605,39 @@ const createInitialCart = async () => {
   // two carts: 1 for registered user, 1 for guest
   const cartsToCreate = [
     {
+      sessionId: "12345",
+      userId: 1,
+      cartStatus: "Completed"
+    },
+    {
+      sessionId: "23456",
+      cartStatus: "In Progress"
+    }
+  ]
+  try {
+    const createdCarts = await Promise.all(cartsToCreate.map(createCart))
+    console.log('Carts created successfully')
+    console.log(createdCarts)
+
+  } catch (error) {
+    console.error("Error creating initial cart!");
+    throw error;
+  }
+}
+
+const createInitialCartItems = async () => {
+  console.log("Starting to create carts...");
+
+  // two carts: 1 for registered user, 1 for guest
+  const cartItemsToCreate = [
+    {
       prodId: "prodId21",
       prodModelName: "Master Ultra Thin Moon Rose Gold",
       prodDescription: "The Jaeger-LeCoultre Master Ultra Thin Moon is a sophisticated and slim timepiece featuring a moon phase complication.",
       prodImg: "https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=90;h=640,%20https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=55;h=1280%202x",
       quantity: 1,
       totalPrice: 6700.00,
-      sessionId: "12345",
-      userId: 1
+      cartId: 1
     },
     {
       prodId: "prodId28",
@@ -614,16 +646,16 @@ const createInitialCart = async () => {
       prodImg: "https://www.omegawatches.com/media/catalog/product/cache/a5c37fddc1a529a1a44fea55d527b9a116f3738da3a2cc38006fcc613c37c391/o/m/omega-constellation-globemaster-13033412206001-l.png",
       quantity: 2,
       totalPrice: 46000.00,
-      sessionId: "23456"
+      cartId: 1
     }
   ]
   try {
-    const createdProducts = await Promise.all(cartsToCreate.map(createCart))
-    console.log('Carts created successfully')
+    const createdProducts = await Promise.all(cartItemsToCreate.map(addProductToCart))
+    console.log('Products added to carts successfully')
     console.log(createdProducts)
 
   } catch (error) {
-    console.error("Error creating initial cart!");
+    console.error("Error creating initial products!");
     throw error;
   }
 }
@@ -636,7 +668,8 @@ async function buildTables() {
     await createInitialUsers()
     await createInitialProducts()
     await createInitialOrders()
-    await createInitialCart();
+    await createInitialCart()
+    await createInitialCartItems()
   } catch (error) {
     console.log("Error during rebuild!");
     throw error
