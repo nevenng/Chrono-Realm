@@ -73,10 +73,13 @@ export async function loginUser(username, password) {
 export async function fetchAllProducts() {
   try {
     const response = await fetch(`${BASE_URL}/api/products`);
-    const data = await response.json();
-    return data;
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -115,8 +118,8 @@ export const checkUserCartExists = async (userId) => {
 
 export const createNewCart = async (userId, sessionId) => {
   const payload = {
-    userId:userId,
-    sessionId:sessionId,
+    userId: userId,
+    sessionId: sessionId,
     cartStatus: 'pending'
   }
 
@@ -126,7 +129,7 @@ export const createNewCart = async (userId, sessionId) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body:JSON.stringify(payload)
+      body: JSON.stringify(payload)
     })
 
     if (response.ok) {
@@ -138,8 +141,7 @@ export const createNewCart = async (userId, sessionId) => {
   }
 }
 
-export const addProductToCart = async ({ product }) => {
-
+export const addProductToCart = async (product) => {
   try {
     const response = await fetch(`${BASE_URL}/api/carts/add`, {
       method: "POST",
@@ -149,8 +151,12 @@ export const addProductToCart = async ({ product }) => {
       body: JSON.stringify(product)
     })
 
-    const result = await response.json();
-    return result;
+    if (response.ok) {
+      const result = await response.json()
+      return result
+    }
+    // const result = response.json();
+    // return result;
   } catch (error) {
     console.error(error);
   }

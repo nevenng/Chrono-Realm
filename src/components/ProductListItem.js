@@ -12,20 +12,30 @@ const ProductListItem = (props) => {
 
             const _userCartExists = await checkUserCartExists(user.id);
 
-            const payload = {
-                ...product,
+            const productData = {
+                prodId: product.prodid,
+                prodModelName: product.prodmodelname,
+                prodDescription: product.proddescription,
+                prodImg: product.prodimg,
+                quantity: 1,
+                prodPrice: product.prodprice,
+                totalPrice: product.prodprice * 1,
                 cartId: _userCartExists.cartid
             }
 
-            console.log(payload)
+            // console.log(payload)
 
             if (!_userCartExists) {
                 const createdCart = await createNewCart(user.id)
                 console.log(createdCart);
             } else {
-                // console.log(_userCartExists)
+                const product = await addProductToCart(productData)
+                
+                if (product) {
+                    alert('Product added!')
+                }
             }
-            
+
         } catch (error) {
             console.error(error)
         }
