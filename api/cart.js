@@ -1,6 +1,6 @@
 // api/cartendpoint.js
 const express = require('express');
-const { getProductCart, addProductToCart, updateProductCart } = require('../db/models/cart');
+const { getProductCart, addProductToCart, updateProductCart, removeProduct } = require('../db/models/cart');
 const cartRouter = express.Router();
 
 cartRouter.use((req, res, next) => {
@@ -55,6 +55,18 @@ cartRouter.post('/add-to-cart', async (req, res, next) => {
         next(error);
     }
 });
+
+cartRouter.delete('/remove', async (req, res, next) => {
+    const { prodId, cartId } = req.body
+
+    try {
+        const product = await removeProduct(cartId, prodId)
+
+        res.send(`Removed ${prodId} successful`)
+    } catch (error) {
+        next(error);
+    }
+})
 
 
 
