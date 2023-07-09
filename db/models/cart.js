@@ -89,6 +89,7 @@ const getUserPendingProductCart = async (userId, sessionId) => {
         where 1=1
         and (c.userid = $1 OR c.cartsessionid = $2)
         and c.cartstatus = 'pending'
+        and ci.cartprodid is not null
         `,[userId, sessionId])
 
         return userCart;

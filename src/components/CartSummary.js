@@ -25,6 +25,8 @@ const CartSummary = (props) => {
         return () => clearTimeout(timer);
     }, [user, sessionId]);
 
+    console.log(products.length, products)
+
     return (
         <div className="cart-container">
             <h3>Your Cart</h3>
