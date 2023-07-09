@@ -67,7 +67,7 @@ const App = () => {
         <Route
           path='/cart'
           render={() => (
-            <CartSummary />
+            <CartSummary user={user} sessionId={sessionId}/>
           )}
         />
         <Route

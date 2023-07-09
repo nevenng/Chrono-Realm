@@ -41,12 +41,12 @@ cartRouter.post('/new-cart', async (req, res, next) => {
 })
 
 
-// Get all products in cart for user
-cartRouter.get('/my-active-cart-product', async (req, res, next) => {
-    const userId = req.headers['user-id']
+// Get all products in cart for user or guest
+cartRouter.post('/my-active-cart-product', async (req, res, next) => {
+    const { userId, sessionId } = req.body
 
     try {
-        const productsCart = await getUserPendingProductCart(userId);
+        const productsCart = await getUserPendingProductCart(userId, sessionId);
         res.send(productsCart);
     } catch (error) {
         next(error);

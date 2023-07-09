@@ -69,7 +69,7 @@ const getUserActiveCart = async (userId, sessionId) => {
     }
 }
 
-const getUserPendingProductCart = async (userId) => {
+const getUserPendingProductCart = async (userId, sessionId) => {
     try {
         const { rows: userCart } = await client.query(`
         select 
@@ -87,9 +87,9 @@ const getUserPendingProductCart = async (userId) => {
         from cart c
         left join cart_item ci on ci.cartid = c.cartid
         where 1=1
-        and c.userid = $1
+        and (c.userid = $1 OR c.cartsessionid = $2)
         and c.cartstatus = 'pending'
-        `,[userId])
+        `,[userId, sessionId])
 
         return userCart;
     } catch (error) {
