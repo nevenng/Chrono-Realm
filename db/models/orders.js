@@ -1,49 +1,117 @@
 const client = require('../client');
 
-const createOrder = async (
-    orderProdId,
-    orderProdModelName,
-    orderQTY,
-    orderDate,
-    orderTotalPrice,
-    nextUserId,
-    orderStatus
-) => {
-    try {
-        const { rows: [maxOrder] } = await client.query('SELECT MAX(orderId) AS maxOrderId FROM orders');
-        const currentMaxOrderId = maxOrder.maxorderid || 'ORD000';
-        const currentOrderIdDigits = parseInt(currentMaxOrderId.substring(3));
-        const nextOrderIdDigits = (currentOrderIdDigits + 1).toString().padStart(3, '0');
-        const orderId = `ORD${nextOrderIdDigits}`;
+// const createOrder = async (
+//     orderProdId,
+//     orderProdModelName,
+//     orderQty,
+//     orderDate,
+//     orderTotalPrice,
+//     userIdOrder,
+//     orderStatus
+//   ) => {
+//     try {
+//       const { rows: [maxOrder] } = await client.query('SELECT MAX(orderId) AS maxOrderId FROM orders');
+//       const currentMaxOrderId = maxOrder.maxorderid || 'ORD000';
+//       const currentOrderIdDigits = parseInt(currentMaxOrderId.substring(3));
+//       const nextOrderIdDigits = (currentOrderIdDigits + 1).toString().padStart(3, '0');
+//       const orderId = `ORD${nextOrderIdDigits}`;
+  
+//       const { rows: [maxUser] } = await client.query('SELECT MAX(userIdOrder) AS maxUserId FROM orders');
+//       const currentMaxUserId = maxUser.maxuserid || 0;
+//       const nextUserId = currentMaxUserId + 1;
+  
+//       const { rows: [newOrder] } = await client.query(
+//         `
+//         INSERT INTO orders (orderId, orderProdId, orderProdModelName, orderQty, orderDate, orderTotalPrice, userIdOrder, orderStatus)
+//         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+//         RETURNING *;
+//         `,
+//         [
+//           orderId,
+//           orderProdId,
+//           orderProdModelName,
+//           orderQty,
+//           orderDate,
+//           orderTotalPrice,
+//           orderStatus,
+//           nextUserId
+//         ]
+//       );
+  
+//       return newOrder;
+//     } catch (error) {
+//       console.error("Error creating order:", error);
+//       throw error;
+//     }
+//   };
 
-        const { rows: [maxUser] } = await client.query('SELECT MAX(userIdOrder) AS maxUserId FROM orders');
-        const currentMaxUserId = maxUser.maxuserid || 0;
-        const nextUserId = currentMaxUserId + 1;
+const createOrder = async ({ userId, orderDate, orderStatus, orderId }) => {
+  try {
+    const { rows: [order] } = await client.query(`
+      INSERT INTO orders (orderId, userId, orderDate, orderStatus)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `, [orderId, userId, orderDate, orderStatus]);
 
-        const { rows: [newOrder] } = await client.query(
-            `
-            INSERT INTO orders (orderId, orderProdId, orderProdModelName, orderQTY, orderDate, orderTotalPrice, orderStatus, userIdOrder)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-            RETURNING *;
-            `,
-            [
-                orderId,
-                orderProdId,
-                orderProdModelName,
-                orderQTY,
-                orderDate,
-                orderTotalPrice,
-                orderStatus,
-                nextUserId
-            ]
-        );
-
-        return newOrder;
-    } catch (error) {
-        console.log('Error creating order:', error);
-        throw error;
-    }
+    return order;
+  } catch (error) {
+    console.error("Error creating order:", error);
+    throw error;
+  }
 };
+  
+const addProductToOrder = async ({
+  orderProdId,
+  orderProdModelName,
+  orderProdImg,
+  orderProdPrice,
+  orderQty,
+  orderId
+}) => {
+  try {
+    const orderProdPriceNumeric = parseFloat(orderProdPrice);
+    const orderQtyNumeric = parseInt(orderQty);
+
+    // Insert the new order item
+    const { rows: [order] } = await client.query(`
+      INSERT INTO order_items (orderProdId, orderProdModelName, orderProdImg, orderQty, orderProdPrice, orderId)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;
+    `, [orderProdId, orderProdModelName, orderProdImg, orderQtyNumeric, orderProdPriceNumeric, orderId]);
+
+    // Retrieve all order items for the given orderId
+    const { rows: orderItems } = await client.query(`
+      SELECT orderProdPrice, orderQty
+      FROM order_items
+      WHERE orderId = $1;
+    `, [orderId]);
+
+    console.log("orderItems:", orderItems);
+
+    const newTotal = orderItems.reduce((total, item) => {
+      const itemPrice = parseFloat(item.orderprodprice);
+      const itemQty = parseInt(item.orderqty);
+      return total + itemPrice * itemQty;
+    }, 0).toFixed(2);
+    
+    console.log("newTotal:", newTotal);
+       
+    // Update the order's total price
+    await client.query(`
+      UPDATE orders
+      SET orderTotalPrice = $1
+      WHERE orderId = $2
+    `, [newTotal, orderId]);
+
+    return order;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
+
 
 const getAllOrders = async (user) => {
 
@@ -108,10 +176,16 @@ const getOrdersByUser = async (userId) => {
     }
   };
 
+
+
+
+
+
 module.exports = {
     createOrder,
     getAllOrders,
     getOrderById,
     updateOrderStatus,
-    getOrdersByUser
+    getOrdersByUser,
+    addProductToOrder
 };
