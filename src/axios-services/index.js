@@ -73,10 +73,13 @@ export async function loginUser(username, password) {
 export async function fetchAllProducts() {
   try {
     const response = await fetch(`${BASE_URL}/api/products`);
-    const data = await response.json();
-    return data;
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -91,6 +94,81 @@ export const fetchProdId = (async (prodId) => {
 });
 
 // Cart 
+export const checkUserCartExists = async (userId, sessionId) => {
+  const body = {
+    userId,
+    sessionId
+  }
+
+  try {
+    const response = await fetch(`${BASE_URL}/api/carts/my-active-cart`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+      const result = await response.text();
+      if (result === "") {
+        return null
+      }
+      const jsonResult = JSON.parse(result)
+      return jsonResult;
+    } else {
+      throw new Error('Error retrieving user cart')
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
+// Creates a new cart
+export const createNewCart = async (userId, sessionId) => {
+  const payload = {
+    userId: userId,
+    sessionId: sessionId,
+    cartStatus: 'pending'
+  }
+
+  try {
+    const response = await fetch(`${BASE_URL}/api/carts/new-cart`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+      const result = response.json();
+      return result;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const addProductToCart = async (product) => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/carts/add`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(product)
+    })
+
+    if (response.ok) {
+      const result = await response.json()
+      return result
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const handleRemoveFromCart = async (userToken, cartProdId) => {
   try {

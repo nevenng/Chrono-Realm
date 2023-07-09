@@ -4,7 +4,7 @@ import { Logout } from '../components'
 
 const Navbar = (props) => {
 
-    const { userToken, setUserToken } = props;
+    const { userToken, setUserToken, user, setUser} = props;
     // need to pass in token, or user in order for the conditional 
     // comment in line 21-23 & 27 when token is defined
 
@@ -37,7 +37,7 @@ const Navbar = (props) => {
                     </li>
                     <li className="nav-item">
                         {userToken ? (
-                            <Logout setUserToken={setUserToken} userToken={userToken} />
+                            <Logout setUserToken={setUserToken} userToken={userToken} setUser={setUser} user={user}/>
                         ) : (
                             <Link to="/account/login" className="nav-link">
                                 Login

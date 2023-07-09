@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
+import { uid } from 'uid';
 
 /* 
 IMPORT REACT COMPONENTS BELOW
@@ -20,9 +21,24 @@ const App = () => {
     return localStorage.getItem('userToken')
   });
 
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null
+  });
+
+  useEffect(() => {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = uid(10);
+      localStorage.setItem('sessionId', sessionId)
+    }
+  })
+
+  const sessionId = localStorage.getItem('sessionId');
+
   return (
     <>
-      <Navbar userToken={userToken} setUserToken={setUserToken} />
+      <Navbar userToken={userToken} setUserToken={setUserToken} user={user} setUser={setUser} />
       <Switch>
         <Route
           path='/confirmation'
@@ -33,7 +49,7 @@ const App = () => {
         <Route
           exact path='/products'
           render={() => (
-            <ProductListPage />
+            <ProductListPage user={user} sessionId={sessionId} />
           )}
         />
         <Route
@@ -57,10 +73,10 @@ const App = () => {
         <Route
           path='/account/:actionType'
           render={() => (
-            <AccountForm setUserToken={setUserToken} />
+            <AccountForm setUserToken={setUserToken} setUser={setUser} />
           )}
         />
-        
+
       </Switch>
     </>
   );

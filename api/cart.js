@@ -1,12 +1,56 @@
 // api/cartendpoint.js
 const express = require('express');
-const { getProductCart, addProductToCart, updateProductCart, removeProduct } = require('../db/models/cart');
+const { createCart, _checkProductCart, addProductToCart, updateProductCart, removeProduct, getUserActiveCart, getUserPendingProductCart } = require('../db/models/cart');
 const cartRouter = express.Router();
 
 cartRouter.use((req, res, next) => {
     console.log('A request has been made to /cart');
 
     next();
+})
+
+// Check if cart exists for user
+// Using POST so i can pass in a body which contains sensitive information
+cartRouter.post('/my-active-cart', async (req, res, next) => {
+    const { userId, sessionId } = req.body
+    
+    try {
+        const checkUserCart = await getUserActiveCart(userId, sessionId);
+        res.send(checkUserCart);
+    } catch (error) {
+        next(error);
+    }
+})
+
+// Create new cart
+cartRouter.post('/new-cart', async (req, res, next) => {
+    const { userId, sessionId, cartStatus } = req.body
+
+    const payload = {
+        userId: userId || null,
+        sessionId: sessionId,
+        cartStatus: cartStatus
+    }
+
+    try {
+        const newCart = await createCart(payload)
+        res.send(newCart);
+    } catch (error) {
+        next(error)
+    }
+})
+
+
+// Get all products in cart for user
+cartRouter.get('/my-active-cart-product', async (req, res, next) => {
+    const userId = req.headers['user-id']
+
+    try {
+        const productsCart = await getUserPendingProductCart(userId);
+        res.send(productsCart);
+    } catch (error) {
+        next(error);
+    }
 })
 
 // Add product to cart
@@ -36,7 +80,7 @@ cartRouter.post('/add', async (req, res, next) => {
 
     try {
         // this code will update the qty and total price rather than create a new record of the product
-        const existingProduct = await getProductCart(cartId, prodId);
+        const existingProduct = await _checkProductCart(cartId, prodId);
 
         if (existingProduct) {
             existingProduct.cartquantity = existingProduct.cartquantity + 1;
@@ -50,7 +94,6 @@ cartRouter.post('/add', async (req, res, next) => {
             res.send(addedProduct);
         }
 
-        // res.send(existingProduct);
     } catch (error) {
         next(error);
     }
