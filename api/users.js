@@ -1,6 +1,8 @@
 /* eslint-disable no-useless-catch */
 const express = require("express");
-const { getUserByUsername, createUser, getUser, updateUserRole, validatePasskey, getUserById, getAllUsers, checkUserRole} = require("../db");
+const { getUserByUsername, createUser, getUser, updateUserRole, validatePasskey,
+ getUserById, getAllUsers, checkUserRole, getOrdersByUser, getUserActiveCart
+} = require("../db");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -135,27 +137,32 @@ router.get("/all", async (req, res, next) => {
 
   //GET /api/users/me
   router.get('/me', async (req, res, next) => {
-    const header = req.headers.authorization
-
+    const header = req.headers.authorization;
+  
     try {
-        if (!header) {
-            res.status(401)
-            res.send({
-                error: 'Token is missing',
-                message: 'You must be logged in to perform this action',
-                name: 'NoTokenError'
-            })
+      if (!header) {
+        res.status(401);
+        res.send({
+          error: 'Token is missing',
+          message: 'You must be logged in to perform this action',
+          name: 'NoTokenError',
+        });
+      } else {
+        const token = header.split(' ')[1];
+        const decodedUser = jwt.verify(token, JWT_SECRET);
 
-        } else {
-                const token = header.split(' ')[1];
-                const decodedUser = jwt.verify(token, JWT_SECRET);
-                res.send(decodedUser);
-            }
 
+        const orders = await getOrdersByUser(decodedUser.id);
+  
+        const response = {
+          orders:orders
+        }
+        res.send(response);
+      }
     } catch ({ name, message }) {
-        next({ name, message })
+      next({ name, message });
     }
-});
+  });
 
   //PATCH /api/users/roles/update to change role to admin
 
