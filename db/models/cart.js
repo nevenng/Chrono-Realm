@@ -58,10 +58,9 @@ const updateProductCart = async (cartId, prodId, quantity, totalprice) => {
 const getUserActiveCart = async (userId, sessionId) => {
     try {
         const { rows: [userCart] } = await client.query(`
-            SELECT *
-            FROM cart
-            WHERE userid = $1 OR (userid is null and cartsessionid = $2)
-            AND cartstatus = 'pending';
+        select *
+        from cart
+        where (userid = $1 and cartstatus = 'pending') or (userid is null and cartsessionid = $2 and cartstatus = 'pending')
         `, [userId, sessionId])
 
         return userCart

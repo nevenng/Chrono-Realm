@@ -10,10 +10,13 @@ cartRouter.use((req, res, next) => {
 })
 
 // Check if cart exists for user
-cartRouter.get('/my-active-cart', async (req, res, next) => {
-    const userId = req.headers['user-id']
+// Using POST so i can pass in a body which contains sensitive information
+cartRouter.post('/my-active-cart', async (req, res, next) => {
+    const { userId, sessionId } = req.body
+
+    console.log(userId, sessionId)
     try {
-        const checkUserCart = await getUserActiveCart(userId);
+        const checkUserCart = await getUserActiveCart(userId, sessionId);
         res.send(checkUserCart);
     } catch (error) {
         next(error);

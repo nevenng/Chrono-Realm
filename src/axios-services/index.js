@@ -94,15 +94,20 @@ export const fetchProdId = (async (prodId) => {
 });
 
 // Cart 
-export const checkUserCartExists = async (userId) => {
+export const checkUserCartExists = async (userId, sessionId) => {
+  console.log('A request has been made to checkUserCartExists')
+  const body = {
+    userId,
+    sessionId
+  }
 
   try {
     const response = await fetch(`${BASE_URL}/api/carts/my-active-cart`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
-        'user-id': userId
-      }
+      },
+      body: JSON.stringify(body)
     })
 
     if (response.ok) {
