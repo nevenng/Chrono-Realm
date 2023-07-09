@@ -4,9 +4,7 @@ import { checkUserCartExists, createNewCart, addProductToCart } from "../axios-s
 
 
 const ProductListItem = (props) => {
-    // Will need to access productIds from props and dynamically set the :productId 
     const { product, user, sessionId } = props;
-    console.log(product);
 
     const addToCartHandler = async () => {
         try {
