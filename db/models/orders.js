@@ -90,16 +90,15 @@ const updateOrderStatus = async (orderId, newStatus) => {
     }
 };
 
-const getOrdersByUser = async (userToken, userIdOrder) => {
+const getOrdersByUser = async (userId) => {
     try {
       const { rows } = await client.query(
         `
         SELECT o.*
         FROM orders AS o
-        INNER JOIN users AS u ON o.userIdOrder = u.id
-        WHERE u.userToken = $1;
+        WHERE o.userIdOrder = $1;
         `,
-        [userToken]
+        [userId]
       );
   
       return rows;
