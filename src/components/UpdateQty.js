@@ -12,30 +12,7 @@ const UpdateQty = (props) => {
     setCartQuantity(product.cartquantity);
   }, [product.cartquantity]);
 
-  const handleQuantityDecrease = async (quantity) => {
-    const updatedQuantity = product.cartquantity + quantity;
-    const updatedTotalPrice = product.cartprodprice * product.cartquantity;
-    try {
-      await updatedProductCart(product.cartid, product.cartprodid, updatedQuantity, updatedTotalPrice);
-      const products = await fetchProductsCart(user?.id || null, sessionId);
-      setProducts(products);
-      // setCartQuantity(updatedQuantity);
-
-    } catch (error) {
-      console.error(error);
-    }
-    // const updatedQuantity = cartQuantity + amount;
-
-    // if (updatedQuantity < 1) {
-    //   removeProductFromCart();
-    // } else {
-    //   setErrorMessage("");
-    //   setCartQuantity(updatedQuantity);
-    //   updateQty(updatedQuantity);
-    // }
-  };
-
-  const handleQuantityIncrease = async (quantity) => {
+  const handleQuantity = async (quantity) => {
     const updatedQuantity = product.cartquantity + quantity;
     const updatedTotalPrice = product.cartprodprice * updatedQuantity;
     try {
@@ -45,6 +22,14 @@ const UpdateQty = (props) => {
     } catch (error) {
       console.error(error);
     }
+
+    // if (updatedQuantity < 1) {
+    //   removeProductFromCart();
+    // } else {
+    //   setErrorMessage("");
+    //   setCartQuantity(updatedQuantity);
+    //   updateQty(updatedQuantity);
+    // }
   }
 
   // const removeProductFromCart = async () => {
@@ -56,20 +41,13 @@ const UpdateQty = (props) => {
   //   }
   // };
 
-  // const updateQty = async (updatedQuantity) => {
-  //   try {
-  //     await handleUpdateQty(userToken, cartProdId, updatedQuantity);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   return (
     <>
       <div className="quantity-container">
-        <button className="quantity-button" onClick={() => handleQuantityDecrease(-1)}>-</button>
+        <button className="quantity-button" onClick={() => handleQuantity(-1)}>-</button>
         <span className="quantity-display">Qty: {cartQuantity}</span>
-        <button className="quantity-button" onClick={() => handleQuantityIncrease(1)}>+</button>
+        <button className="quantity-button" onClick={() => handleQuantity(1)}>+</button>
       </div>
       {errorMessage && <p>{errorMessage}</p>}
     </>
