@@ -95,21 +95,4 @@ ordersRouter.put('/:orderId/status', async (req, res) => {
     }
 });
 
-ordersRouter.get('/me', async (req, res) => {
-    try {
-        const { userToken, userIdOrder } = req.query;
-
-        if (!userToken) {
-            return res.status(400).json({ error: 'User token is required.' });
-        }
-
-        const orders = await getOrdersByUser(userToken, userIdOrder);
-
-        res.json(orders);
-    } catch (error) {
-        console.error('Error retrieving orders:', error);
-        res.status(500).json({ error: 'An error occurred while retrieving orders.' });
-    }
-});
-
 module.exports = ordersRouter;

@@ -3,7 +3,8 @@ const {
   createProduct,
   createOrder,
   createCart,
-  addProductToCart
+  addProductToCart,
+  addProductToOrder
   // declare your model imports here
   // for example, User
 } = require('./models');
@@ -13,12 +14,14 @@ const client = require("./client");
 async function dropTables() {
   console.log("Dropping All Tables...")
   try {
-    await client.query(`    
-      DROP TABLE IF EXISTS orders;    
+    await client.query(`      
+     DROP TABLE IF EXISTS order_items;    
+      DROP TABLE IF EXISTS orders;       
       DROP TABLE IF EXISTS cart_item;
       DROP TABLE IF EXISTS cart;
       DROP TABLE IF EXISTS products;          
       DROP TABLE IF EXISTS users;
+      
       `);
 
   }
@@ -70,17 +73,26 @@ async function createTables() {
         cartId INT NOT NULL,
         FOREIGN KEY (cartId) REFERENCES cart(cartId)
       );
+
+
       CREATE TABLE orders (
+        orderId SERIAL PRIMARY KEY,
+        orderDate TIMESTAMP NOT NULL,
+        orderStatus VARCHAR(255) NOT NULL,
+        userId INT NOT NULL,
+        orderTotalPrice Decimal(10, 2) NOT NULL DEFAULT 0.00
+      );
+      
+      CREATE TABLE order_items (
         id SERIAL PRIMARY KEY,
-        orderId VARCHAR(255) NOT NULL,
         orderProdId VARCHAR(255) NOT NULL,
         orderProdModelName VARCHAR(255) NOT NULL,
-        orderQTY INT NOT NULL,
-        orderDate TIMESTAMP NOT NULL,
-        orderTotalPrice DECIMAL(10, 2) NOT NULL,
-        userIdOrder INT NOT NULL,
-        orderStatus VARCHAR(255) NOT NULL
+        orderProdImg TEXT NOT NULL,
+        orderQty INT NOT NULL, 
+        orderProdPrice DECIMAL(10, 2) NOT NULL,
+        orderId SERIAL REFERENCES orders (orderId)
       );
+      
       `);
   }
   catch (error) {
@@ -513,10 +525,10 @@ async function createInitialUsers() {
   console.log("Starting to create users...")
   try {
     const usersToCreate = [
-      { username: "albert", password: "bertie99" , role:'customer' },
-      { username: "sandra", password: "sandra123", role: 'customer'},
+      { username: "albert", password: "bertie99", role: 'customer' },
+      { username: "sandra", password: "sandra123", role: 'customer' },
       { username: "glamgal", password: "glamgal123", role: 'customer' },
-      {username: "hellothere", password: "hellothere", role: "admin"}
+      { username: "hellothere", password: "hellothere", role: "admin" }
     ]
     const users = await Promise.all(usersToCreate.map(createUser))
 
@@ -529,68 +541,142 @@ async function createInitialUsers() {
   }
 }
 
+
+
+// const createInitialOrders = async () => {
+//   console.log("Starting to create orders...");
+//   try {
+
+//     const ordersToCreate = [
+//       {
+//         orderProdId: "prodId21",
+//         orderProdModelName: "Master Ultra Thin Moon Rose Gold",
+//         orderQty: 1,
+//         orderDate: '2023-07-05 18:56:22',
+//         orderTotalPrice: "23000.00",
+//         orderStatus: "Created"
+//       },
+//       {
+//         orderProdId: "prodId19",
+//         orderProdModelName: "Portofino Chronograph",
+//         orderQty: 1,
+//         orderDate: '2023-07-05 19:21:18',
+//         orderTotalPrice: "6250.00",
+//         orderStatus: "Processing"
+//       },
+//       {
+//         orderProdId: "prodId36",
+//         orderProdModelName: "Nautilus Tiffany & Co. Blue",
+//         orderQty: 1,
+//         orderDate: '2023-07-05 20:20:18',
+//         orderTotalPrice: "2200000.00",
+//         orderStatus: "Canceled"
+//       },
+//       {
+//         orderProdId: "prodId29",
+//         orderProdModelName: "De Ville",
+//         orderQty: 1,
+//         orderDate: '2023-07-06 20:20:18',
+//         orderTotalPrice: "5400.00",
+//         orderStatus: "Created"
+//       }
+//     ];
+
+//     let previousOrder = null;
+//     for (const order of ordersToCreate) {
+//       const createdOrder = await createOrder(
+//         order.orderProdId,
+//         order.orderProdModelName,
+//         order.orderQty,
+//         order.orderDate,
+//         order.orderTotalPrice,
+//         order.userIdOrder,
+//         order.orderStatus
+//       );
+
+//       if (previousOrder) {
+//         previousOrder.orderId = createdOrder.orderId;
+//       }
+
+//       previousOrder = createdOrder;
+//       console.log(createdOrder)
+//     }
+//     // const orders = await Promise.all(ordersToCreate.map(createOrder));
+//     console.log("Finished creating orders!", orders);
+
+//   } catch (error) {
+//     console.error("Error creating orders!");
+//     throw error;
+//   }
+// };
+
+
 const createInitialOrders = async () => {
   console.log("Starting to create orders...");
-  try {
-    const ordersToCreate = [
-      {
-        orderProdId: "prodId21",
-        orderProdModelName: "Master Ultra Thin Moon Rose Gold",
-        orderQty: 1,
-        orderDate: '2023-07-05 18:56:22',
-        orderTotalPrice: '23000.00',
-        orderStatus: "Created"
-      },
-      {
-        orderProdId: "prodId19",
-        orderProdModelName: "Portofino Chronograph",
-        orderQty: 1,
-        orderDate: '2023-07-05 19:21:18',
-        orderTotalPrice: '6250.00',
-        orderStatus: "Processing"
-      },
-      {
-        orderProdId: "prodId36",
-        orderProdModelName: "Nautilus Tiffany & Co. Blue",
-        orderQty: 1,
-        orderDate: '2023-07-05 20:20:18',
-        orderTotalPrice: '2200000.00',
-        orderStatus: "Canceled"
-      },
-      {
-        orderProdId: "prodId29",
-        orderProdModelName: "De Ville",
-        orderQty: 1,
-        orderDate: '2023-07-06 20:20:18',
-        orderTotalPrice: '5400.00',
-        orderStatus: "Created"
-      }
-    ];
 
-    let previousOrder = null;
-    for (const order of ordersToCreate) {
-      const createdOrder = await createOrder(
-        order.orderProdId,
-        order.orderProdModelName,
-        order.orderQty,
-        order.orderDate,
-        order.orderTotalPrice,
-        order.userIdOrder,
-        order.orderStatus
-      );
-
-      if (previousOrder) {
-        previousOrder.orderId = createdOrder.orderId;
-      }
-
-      previousOrder = createdOrder;
-      console.log(createdOrder)
+  const ordersToCreate = [
+    {
+      orderId: 1,
+      userId: 1,
+      orderDate: '2023-07-06 20:20:18',
+      orderStatus: "pending"
+    },
+    {
+      orderId: 2,
+      userId: 2,
+      orderDate: '2023-07-06 20:20:18',
+      orderStatus: "created"
     }
+  ];
 
-    console.log("Finished creating orders!");
+  try {
+    const createdOrders = await Promise.all(ordersToCreate.map(createOrder));
+    console.log('Orders created successfully');
+    console.log(createdOrders);
 
   } catch (error) {
-    console.error("Error creating orders!");
+    console.error("Error creating initial Orders!");
+    throw error;
+  }
+};
+const createInitialOrderItems = async () => {
+  console.log("Starting to create order items...");
+
+  const orderItemsToCreate = [
+    {
+      orderProdId: "prodId21",
+      orderProdModelName: "Master Ultra Thin Moon Rose Gold",
+      orderProdImg: "https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=90;h=640,%20https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=55;h=1280%202x",
+      orderQty: 1,
+      orderId:1,
+      orderProdPrice: 6700.00
+    },
+    {
+      orderProdId: "prodId48",
+      orderProdModelName: "Rolex",
+      orderProdImg: "https://content.rolex.com/v7/dam/2023-06/upright-c/m336935-0004.png?impolicy=v7-main-configurator&imwidth=640",
+      orderQty: 1,
+      orderId:1,
+      orderProdPrice: 42450.00
+    },
+
+    {
+      orderProdId: "prodId28",
+      orderProdModelName: "Constellation",
+      orderProdImg: "https://www.omegawatches.com/media/catalog/product/cache/a5c37fddc1a529a1a44fea55d527b9a116f3738da3a2cc38006fcc613c37c391/o/m/omega-constellation-globemaster-13033412206001-l.png",
+      orderQty: 2,
+      orderId: 2,
+      orderProdPrice: 23000.00
+    }
+  ];
+
+  try {
+    const createdOrderItems = await Promise.all(orderItemsToCreate.map(addProductToOrder));
+    console.log('Order items created successfully');
+    console.log(createdOrderItems);
+
+  } catch (error) {
+    console.error("Error creating initial order items!");
     throw error;
   }
 };
@@ -666,6 +752,7 @@ async function buildTables() {
     await createInitialUsers()
     await createInitialProducts()
     await createInitialOrders()
+    await createInitialOrderItems()
     await createInitialCart()
     await createInitialCartItems()
   } catch (error) {
