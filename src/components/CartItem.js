@@ -8,11 +8,11 @@ const CartItem = (props) => {
     return (
         <tr>
             <td>{product.cartprodname}</td>
-            <td>{product.cartprodprice}</td>
+            <td>${product.cartprodprice}</td>
             <td>
-                <UpdateQty />
+                <UpdateQty product={product} />
             </td>
-            <td>{product.carttotalprice}</td>
+            <td>${product.carttotalprice}</td>
             <td><RemoveFromCart /></td>
         </tr>
     )

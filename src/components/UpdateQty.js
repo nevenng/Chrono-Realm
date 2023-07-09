@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { handleUpdateQty, handleRemoveFromCart } from '../axios-services';
 
-const UpdateQty = () => {
+const UpdateQty = (props) => {
+
+  const { product } = props;
   // { userToken, cartProdId, cartQuantity }
-  const [ cartQuantity, setCartQuantity ] = useState(1);
-  const userToken = true; 
-  const cartProdId = 1;
-  // Used ^^^ to test 
+  const [cartQuantity, setCartQuantity] = useState(product.cartquantity);
+  const userToken = true;
+  
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
