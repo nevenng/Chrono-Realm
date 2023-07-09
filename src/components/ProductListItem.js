@@ -8,7 +8,7 @@ const ProductListItem = (props) => {
 
     const addToCartHandler = async () => {
         try {
-            if (sessionId) {
+            if (!user) {
               const _userCartExists = await checkUserCartExists(null, sessionId);
         
               if (!_userCartExists) {

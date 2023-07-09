@@ -12,6 +12,7 @@ const Logout = (props) => {
     localStorage.removeItem('userToken');
     setUser(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('sessionId')
     history.push('/account/login');
   };
 

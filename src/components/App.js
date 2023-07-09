@@ -26,6 +26,8 @@ const App = () => {
     return storedUser ? JSON.parse(storedUser) : null
   });
 
+  console.log(user)
+
   useEffect(() => {
     let sessionId = localStorage.getItem('sessionId');
     if (!sessionId) {
