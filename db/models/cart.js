@@ -70,7 +70,35 @@ const getUserActiveCart = async (userId, sessionId) => {
     }
 }
 
-const getProductCart = async (cartId, prodId) => {
+const getUserPendingProductCart = async (userId) => {
+    try {
+        const { rows: userCart } = await client.query(`
+        select 
+        c.cartid
+        , c.cartsessionid
+        , c.userid
+        , c.cartstatus
+        , ci.cartprodid
+        , ci.cartprodname
+        , ci.cartproddescription
+        , ci.prodimg
+        , ci.cartquantity
+        , ci.cartprodprice
+        , ci.carttotalprice 
+        from cart c
+        left join cart_item ci on ci.cartid = c.cartid
+        where 1=1
+        and c.userid = $1
+        and c.cartstatus = 'pending'
+        `,[userId])
+
+        return userCart;
+    } catch (error) {
+        throw error;
+    }
+}
+
+const _checkProductCart = async (cartId, prodId) => {
     try {
         const { rows: [product] } = await client.query(`
             SELECT *
@@ -110,8 +138,9 @@ const removeCartProducts = async (cartId) => {
 module.exports = {
     createCart,
     getUserActiveCart,
+    getUserPendingProductCart,
     addProductToCart,
     updateProductCart,
-    getProductCart,
+    _checkProductCart,
     removeProduct
 }

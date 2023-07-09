@@ -1,6 +1,6 @@
 // api/cartendpoint.js
 const express = require('express');
-const { createCart, getProductCart, addProductToCart, updateProductCart, removeProduct, getUserActiveCart } = require('../db/models/cart');
+const { createCart, _checkProductCart, addProductToCart, updateProductCart, removeProduct, getUserActiveCart, getUserPendingProductCart } = require('../db/models/cart');
 const cartRouter = express.Router();
 
 cartRouter.use((req, res, next) => {
@@ -9,6 +9,7 @@ cartRouter.use((req, res, next) => {
     next();
 })
 
+// Check if cart exists for user
 cartRouter.get('/my-active-cart', async (req, res, next) => {
     const userId = req.headers['user-id']
     try {
@@ -19,6 +20,7 @@ cartRouter.get('/my-active-cart', async (req, res, next) => {
     }
 })
 
+// Create new cart
 cartRouter.post('/new-cart', async (req, res, next) => {
     const { userId, sessionId, cartStatus } = req.body
 
@@ -33,6 +35,19 @@ cartRouter.post('/new-cart', async (req, res, next) => {
         res.send(newCart);
     } catch (error) {
         next(error)
+    }
+})
+
+
+// Get all products in cart for user
+cartRouter.get('/my-active-cart-product', async (req, res, next) => {
+    const userId = req.headers['user-id']
+
+    try {
+        const productsCart = await getUserPendingProductCart(userId);
+        res.send(productsCart);
+    } catch (error) {
+        next(error);
     }
 })
 
@@ -63,7 +78,7 @@ cartRouter.post('/add', async (req, res, next) => {
 
     try {
         // this code will update the qty and total price rather than create a new record of the product
-        const existingProduct = await getProductCart(cartId, prodId);
+        const existingProduct = await _checkProductCart(cartId, prodId);
 
         if (existingProduct) {
             existingProduct.cartquantity = existingProduct.cartquantity + 1;

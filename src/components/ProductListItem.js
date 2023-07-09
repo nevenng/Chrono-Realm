@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"
 import { checkUserCartExists, createNewCart, addProductToCart } from "../axios-services/index"
+// import UID module
 
 const ProductListItem = (props) => {
     // Will need to access productIds from props and dynamically set the :productId 
@@ -9,6 +10,8 @@ const ProductListItem = (props) => {
     const addToCartHandler = async () => {
         try {
             // console.log(product, user.id)
+            // Function to generate sessionId on any product clicked
+            // only 1 sessionId per guest 
 
             const _userCartExists = await checkUserCartExists(user.id);
 

@@ -106,8 +106,12 @@ export const checkUserCartExists = async (userId) => {
     })
 
     if (response.ok) {
-      const result = await response.json();
-      return result;
+      const result = await response.text();
+      if (result === "") {
+        return null
+      }
+      const jsonResult = JSON.parse(result)
+      return jsonResult;
     } else {
       throw new Error('Error retrieving user cart')
     }
@@ -116,6 +120,8 @@ export const checkUserCartExists = async (userId) => {
   }
 }
 
+
+// Creates a new cart
 export const createNewCart = async (userId, sessionId) => {
   const payload = {
     userId: userId,
@@ -155,8 +161,6 @@ export const addProductToCart = async (product) => {
       const result = await response.json()
       return result
     }
-    // const result = response.json();
-    // return result;
   } catch (error) {
     console.error(error);
   }
