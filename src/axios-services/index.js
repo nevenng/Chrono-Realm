@@ -195,6 +195,31 @@ export const fetchProductsCart = async (userId, sessionId) => {
   }
 }
 
+export const updatedProductCart = async (cartId, prodId, quantity, totalprice) => {
+  const body = {
+    cartId,
+    prodId,
+    quantity,
+    totalprice
+  }
+  try {
+    const response = await fetch(`${BASE_URL}/api/carts/update`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+      const result = await response.json();
+      return result
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
 export const handleRemoveFromCart = async (userToken, cartProdId) => {
   try {
     const response = await fetch(`${BASE_URL}/cart/remove/${cartProdId}`, {

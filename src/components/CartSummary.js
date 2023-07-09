@@ -10,22 +10,21 @@ const CartSummary = (props) => {
 
     useEffect(() => {
         async function fetchCartData() {
-          try {
-            const response = await fetchProductsCart(user?.id || null, sessionId);
-            setProducts(response);
-          } catch (error) {
-            console.error(error);
-          }
+            try {
+                const response = await fetchProductsCart(user?.id || null, sessionId);
+                setProducts(response);
+            } catch (error) {
+                console.error(error);
+            }
         }
-      
-        const timer = setTimeout(() => {
-          fetchCartData();
-        }, 250);
-      
-        return () => clearTimeout(timer);
-      }, [user, sessionId]);
 
-      console.log(products)
+        const timer = setTimeout(() => {
+            fetchCartData();
+        }, 100);
+
+        return () => clearTimeout(timer);
+    }, [user, sessionId]);
+
     return (
         <div className="cart-container">
             <h3>Your Cart</h3>
@@ -41,7 +40,7 @@ const CartSummary = (props) => {
                 </thead>
                 <tbody>
                     {products ? products.map(product => {
-                        return <CartItem key={product.cartprodid} product={product} />
+                        return <CartItem key={product.cartprodid} product={product} user={user} sessionId={sessionId} fetchProductsCart={fetchProductsCart} setProducts={setProducts}/>
                     }) : <tr></tr>}
                     {/* <CartItem />
                     <CartItem /> */}
