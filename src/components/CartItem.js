@@ -1,17 +1,18 @@
 import React from "react";
 import { RemoveFromCart, UpdateQty } from "../components";
 
-const CartItem = () => {
+const CartItem = (props) => {
     // Once we get the cart data, pass it into remove from cart
-    
+    const { product, user, sessionId, fetchProductsCart, setProducts } = props;
+
     return (
         <tr>
-            <td>Product Name 1</td>
-            <td>$10</td>
+            <td>{product.cartprodname}</td>
+            <td>${product.cartprodprice}</td>
             <td>
-                <UpdateQty />
+                <UpdateQty product={product} user={user} sessionId={sessionId} fetchProductsCart={fetchProductsCart} setProducts={setProducts}/>
             </td>
-            <td>${100}</td>
+            <td>${product.carttotalprice}</td>
             <td><RemoveFromCart /></td>
         </tr>
     )

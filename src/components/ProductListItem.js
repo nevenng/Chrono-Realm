@@ -9,59 +9,56 @@ const ProductListItem = (props) => {
     const addToCartHandler = async () => {
         try {
             if (sessionId) {
-                const _userCartExists = await checkUserCartExists(null, sessionId);
-
-                if (!_userCartExists) {
-                    const createdGuestCart = await createNewCart(null, sessionId);
-                    console.log(createdGuestCart)
-                } else {
-                    const productData = {
-                        prodId: product.prodid,
-                        prodModelName: product.prodmodelname,
-                        prodDescription: product.proddescription,
-                        prodImg: product.prodimg,
-                        quantity: 1,
-                        prodPrice: product.prodprice,
-                        totalPrice: product.prodprice * 1,
-                        cartId: _userCartExists.cartid
-                    }
-
-                    const addedUserProduct = await addProductToCart(productData)
-
-                    if (addedUserProduct) {
-                        alert('Product added!')
-                    }
+              const _userCartExists = await checkUserCartExists(null, sessionId);
+        
+              if (!_userCartExists) {
+                const createdGuestCart = await createNewCart(null, sessionId);
+                console.log(createdGuestCart);
+              } else {
+                const productData = {
+                  prodId: product.prodid,
+                  prodModelName: product.prodmodelname,
+                  prodDescription: product.proddescription,
+                  prodImg: product.prodimg,
+                  quantity: 1,
+                  prodPrice: product.prodprice,
+                  totalPrice: product.prodprice * 1,
+                  cartId: _userCartExists.cartid
+                };
+        
+                const addedUserProduct = await addProductToCart(productData);
+        
+                if (addedUserProduct) {
+                  alert('Product added!');
                 }
-
+              }
+            } else if (user) {
+              const _userCartExists = await checkUserCartExists(user.id, sessionId);
+        
+              if (!_userCartExists) {
+                await createNewCart(user.id || null, sessionId);
+              } else {
+                const productData = {
+                  prodId: product.prodid,
+                  prodModelName: product.prodmodelname,
+                  prodDescription: product.proddescription,
+                  prodImg: product.prodimg,
+                  quantity: 1,
+                  prodPrice: product.prodprice,
+                  totalPrice: product.prodprice * 1,
+                  cartId: _userCartExists.cartid
+                };
+        
+                const addedUserProduct = await addProductToCart(productData);
+        
+                if (addedUserProduct) {
+                  alert('Product added!');
+                }
+              }
             }
-
-            if (user) {
-                const _userCartExists = await checkUserCartExists(user.id, sessionId);
-
-                if (!_userCartExists) {
-                    await createNewCart(user.id || null, sessionId);
-                } else {
-                    const productData = {
-                        prodId: product.prodid,
-                        prodModelName: product.prodmodelname,
-                        prodDescription: product.proddescription,
-                        prodImg: product.prodimg,
-                        quantity: 1,
-                        prodPrice: product.prodprice,
-                        totalPrice: product.prodprice * 1,
-                        cartId: _userCartExists.cartid
-                    }
-
-                    const addedUserProduct = await addProductToCart(productData)
-
-                    if (addedUserProduct) {
-                        alert('Product added!')
-                    }
-                }
-            } 
-        } catch (error) {
-            console.error(error)
-        }
+          } catch (error) {
+            console.error(error);
+          }
     }
 
     return (

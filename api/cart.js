@@ -13,7 +13,7 @@ cartRouter.use((req, res, next) => {
 // Using POST so i can pass in a body which contains sensitive information
 cartRouter.post('/my-active-cart', async (req, res, next) => {
     const { userId, sessionId } = req.body
-    
+
     try {
         const checkUserCart = await getUserActiveCart(userId, sessionId);
         res.send(checkUserCart);
@@ -41,12 +41,12 @@ cartRouter.post('/new-cart', async (req, res, next) => {
 })
 
 
-// Get all products in cart for user
-cartRouter.get('/my-active-cart-product', async (req, res, next) => {
-    const userId = req.headers['user-id']
+// Get all products in cart for user or guest
+cartRouter.post('/my-active-cart-product', async (req, res, next) => {
+    const { userId, sessionId } = req.body
 
     try {
-        const productsCart = await getUserPendingProductCart(userId);
+        const productsCart = await getUserPendingProductCart(userId, sessionId);
         res.send(productsCart);
     } catch (error) {
         next(error);
@@ -98,6 +98,19 @@ cartRouter.post('/add', async (req, res, next) => {
         next(error);
     }
 });
+
+// Updates product quantity
+cartRouter.patch('/update', async (req, res, next) => {
+    const { cartId, prodId, quantity, totalprice } = req.body;
+
+    try {
+        const updatedProduct = await updateProductCart(cartId, prodId, quantity, totalprice)
+        res.send(updatedProduct)
+    } catch (error) {
+        throw error;
+    }
+
+})
 
 cartRouter.delete('/remove', async (req, res, next) => {
     const { prodId, cartId } = req.body

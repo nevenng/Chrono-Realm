@@ -151,6 +151,7 @@ export const createNewCart = async (userId, sessionId) => {
   }
 }
 
+// Add product to cart
 export const addProductToCart = async (product) => {
   try {
     const response = await fetch(`${BASE_URL}/api/carts/add`, {
@@ -167,6 +168,55 @@ export const addProductToCart = async (product) => {
     }
   } catch (error) {
     console.error(error);
+  }
+}
+
+export const fetchProductsCart = async (userId, sessionId) => {
+  const body = {
+    userId,
+    sessionId
+  }
+
+  try {
+    const response = await fetch(`${BASE_URL}/api/carts/my-active-cart-product`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+      const result = await response.json()
+      return result
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const updatedProductCart = async (cartId, prodId, quantity, totalprice) => {
+  const body = {
+    cartId,
+    prodId,
+    quantity,
+    totalprice
+  }
+  try {
+    const response = await fetch(`${BASE_URL}/api/carts/update`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+      const result = await response.json();
+      return result
+    }
+  } catch (error) {
+    throw error;
   }
 }
 
