@@ -22,6 +22,20 @@ server.use(express.static(path.join(__dirname, 'build')));
 // here's our API
 server.use('/api', require('./api'));
 
+
+server.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+server.use((err, req, res, next) => {
+  console.error(err);
+  const status = err.status || 500;
+  const message = err.message || 'Internal Server Error';
+  res.status(status).json({ error: message });
+});
+
 // by default serve up the react app if we don't recognize the route
 // server.use((req, res, next) => {
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
