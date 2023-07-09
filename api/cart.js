@@ -13,8 +13,7 @@ cartRouter.use((req, res, next) => {
 // Using POST so i can pass in a body which contains sensitive information
 cartRouter.post('/my-active-cart', async (req, res, next) => {
     const { userId, sessionId } = req.body
-
-    console.log(userId, sessionId)
+    
     try {
         const checkUserCart = await getUserActiveCart(userId, sessionId);
         res.send(checkUserCart);

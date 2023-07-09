@@ -95,7 +95,6 @@ export const fetchProdId = (async (prodId) => {
 
 // Cart 
 export const checkUserCartExists = async (userId, sessionId) => {
-  console.log('A request has been made to checkUserCartExists')
   const body = {
     userId,
     sessionId
@@ -103,7 +102,7 @@ export const checkUserCartExists = async (userId, sessionId) => {
 
   try {
     const response = await fetch(`${BASE_URL}/api/carts/my-active-cart`, {
-      method: "GET",
+      method: "POST",
       headers: {
         'Content-Type': 'application/json',
       },

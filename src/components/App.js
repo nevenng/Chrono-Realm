@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
+import { uid } from 'uid';
 
 /* 
 IMPORT REACT COMPONENTS BELOW
@@ -21,10 +22,20 @@ const App = () => {
   });
 
   const [user, setUser] = useState(() => {
-    const storedUser= localStorage.getItem('user');
+    const storedUser = localStorage.getItem('user');
     return storedUser ? JSON.parse(storedUser) : null
   });
-  
+
+  useEffect(() => {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = uid(10);
+      localStorage.setItem('sessionId', sessionId)
+    }
+  })
+
+  const sessionId = localStorage.getItem('sessionId');
+
   return (
     <>
       <Navbar userToken={userToken} setUserToken={setUserToken} user={user} setUser={setUser} />
@@ -38,7 +49,7 @@ const App = () => {
         <Route
           exact path='/products'
           render={() => (
-            <ProductListPage user={user}/>
+            <ProductListPage user={user} sessionId={sessionId} />
           )}
         />
         <Route

@@ -5,7 +5,7 @@ import { fetchAllProducts } from "../axios-services";
 const ProductListPage = (props) => {
     // Need to map through an array of products 
 
-    const { user } = props;
+    const { user, sessionId } = props;
 
     const [products, setProducts] = useState([]);
 
@@ -25,7 +25,7 @@ const ProductListPage = (props) => {
     return (
         <div className="plp-container">
             {products.map((product) => {
-                return <ProductListItem key={product.id} product={product} user={user}/>
+                return <ProductListItem key={product.id} product={product} user={user} sessionId={sessionId} />
             })}
         </div>
     )
