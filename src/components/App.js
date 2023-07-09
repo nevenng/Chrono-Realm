@@ -23,8 +23,10 @@ const App = () => {
 
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
-    return storedUser ? storedUser : null
+    return storedUser ? JSON.parse(storedUser) : null
   });
+
+  console.log(user)
 
   useEffect(() => {
     let sessionId = localStorage.getItem('sessionId');

@@ -6,6 +6,8 @@ const CartSummary = (props) => {
     // Need API endpoint to show all items in the user's cart 
     const { user, sessionId } = props;
 
+    console.log(user)
+
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -24,8 +26,6 @@ const CartSummary = (props) => {
 
         return () => clearTimeout(timer);
     }, [user, sessionId]);
-
-    console.log(products.length, products)
 
     return (
         <div className="cart-container">
