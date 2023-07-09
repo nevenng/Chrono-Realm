@@ -220,17 +220,23 @@ export const updatedProductCart = async (cartId, prodId, quantity, totalprice) =
   }
 }
 
-export const handleRemoveFromCart = async (userToken, cartProdId) => {
+
+export const handleRemoveFromCart = async (cartId, prodId) => {
+  const body = {
+    cartId,
+    prodId
+  }
+
   try {
-    const response = await fetch(`${BASE_URL}/cart/remove/${cartProdId}`, {
+    const response = await fetch(`${BASE_URL}/api/carts/remove`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${userToken}`
       },
+      body: JSON.stringify(body)
     });
-    const result = await response.json();
-    alert('Item has beem removed from your cart!');
+
+    const result = await response.text();
     return result
   } catch (err) {
     console.error(err);

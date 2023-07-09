@@ -117,7 +117,6 @@ cartRouter.delete('/remove', async (req, res, next) => {
 
     try {
         const product = await removeProduct(cartId, prodId)
-
         res.send(`Removed ${prodId} successful`)
     } catch (error) {
         next(error);

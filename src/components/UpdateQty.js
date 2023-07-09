@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { handleUpdateQty, handleRemoveFromCart } from '../axios-services';
-import { updatedProductCart } from '../axios-services'
+import { updatedProductCart, handleRemoveFromCart } from '../axios-services'
 
 const UpdateQty = (props) => {
   const { product, user, sessionId, fetchProductsCart, setProducts } = props;
@@ -23,24 +22,12 @@ const UpdateQty = (props) => {
       console.error(error);
     }
 
-    // if (updatedQuantity < 1) {
-    //   removeProductFromCart();
-    // } else {
-    //   setErrorMessage("");
-    //   setCartQuantity(updatedQuantity);
-    //   updateQty(updatedQuantity);
-    // }
+    if (updatedQuantity < 1) {
+      await handleRemoveFromCart(product.cartid, product.cartprodid);
+      const products = await fetchProductsCart(user?.id || null, sessionId);
+      setProducts(products);
+    } 
   }
-
-  // const removeProductFromCart = async () => {
-  //   try {
-  //     await handleRemoveFromCart(userToken, cartProdId);
-  //     alert('Product has been removed from your cart!');
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
 
   return (
     <>
