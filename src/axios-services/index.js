@@ -143,7 +143,7 @@ export const createNewCart = async (userId, sessionId) => {
     })
 
     if (response.ok) {
-      const result = response.json();
+      const result = response.text();
       return result;
     }
   } catch (error) {
