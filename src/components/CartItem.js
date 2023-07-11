@@ -10,10 +10,10 @@ const CartItem = (props) => {
             <td>{product.cartprodname}</td>
             <td>${product.cartprodprice}</td>
             <td>
-                <UpdateQty product={product} user={user} sessionId={sessionId} fetchProductsCart={fetchProductsCart} setProducts={setProducts}/>
+                <UpdateQty product={product} user={user} sessionId={sessionId} fetchProductsCart={fetchProductsCart} setProducts={setProducts} />
             </td>
             <td>${product.carttotalprice}</td>
-            <td><RemoveFromCart /></td>
+            <td><RemoveFromCart product={product} user={user} sessionId={sessionId} fetchProductsCart={fetchProductsCart} setProducts={setProducts} /></td>
         </tr>
     )
 }
