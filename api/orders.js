@@ -6,7 +6,9 @@ const {
     getAllOrders,
     getOrderById,
     updateOrderStatus,
-    getOrdersByUser
+    getOrdersByUser,
+    getUsersOrder,
+    addProductToOrder
 } = require('../db');
 
 ordersRouter.use((req, res, next) => {
@@ -19,31 +21,41 @@ ordersRouter.use((req, res, next) => {
 
 ordersRouter.post('/', async (req, res) => {
     const {
-        orderProdId,
-        orderProdModelName,
-        orderQTY,
-        orderDate,
-        orderTotalPrice,
-        userIdOrder,
-        orderStatus
+      orderProdId,
+      orderProdModelName,
+      orderQty,
+      orderDate,
+      userIdOrder,
+      orderStatus,
+      orderProdImg,
+      orderProdPrice
     } = req.body;
-
+  
+    const orderData = {
+      orderProdId: orderProdId,
+      orderProdModelName: orderProdModelName,
+      orderProdImg: orderProdImg,
+      orderQty: orderQty,
+      orderDate: orderDate,
+      userId: userIdOrder,
+      orderStatus: orderStatus,
+      orderProdPrice: orderProdPrice
+    };
+  
     try {
-        const newOrder = await createOrder(
-            orderProdId,
-            orderProdModelName,
-            orderQTY,
-            orderDate,
-            orderTotalPrice,
-            userIdOrder,
-            orderStatus
-        );
-
-        return res.json(newOrder);
+      const newOrder = await createOrder(orderData);
+      console.log("new Order", newOrder);
+      const newOrderItems = await addProductToOrder({
+        ...orderData,
+        orderId: newOrder.orderid
+      });
+  
+      return res.json({ newOrder, newOrderItems });
     } catch (error) {
-        res.status(500).json({ error: 'Error creating order' });
+      res.status(500).json({ error: 'Error creating order' });
     }
-});
+  });
+  
 
 // Get All Orders /api/orders
 
@@ -58,7 +70,22 @@ ordersRouter.get('/', async (req, res, next) => {
     }
 });
 
-// Get /api/orders/:oderId
+ordersRouter.get('/userOrderId', async(req, res, next) => {
+    const user = req.user;
+
+    try {
+        const order = await getUsersOrder(user.id);
+        if (order) {
+            res.send(order);
+        } else {
+            res.status(404).json({ error: 'Order not found' });
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+});
+// Get /api/orders/:orderId
 
 ordersRouter.get('/:orderId', async (req, res, next) => {
     const { orderId } = req.params;
