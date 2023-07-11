@@ -24,9 +24,7 @@ ordersRouter.post('/', async (req, res) => {
       orderProdId,
       orderProdModelName,
       orderQty,
-      orderDate,
       userIdOrder,
-      orderStatus,
       orderProdImg,
       orderProdPrice
     } = req.body;
@@ -36,9 +34,7 @@ ordersRouter.post('/', async (req, res) => {
       orderProdModelName: orderProdModelName,
       orderProdImg: orderProdImg,
       orderQty: orderQty,
-      orderDate: orderDate,
       userId: userIdOrder,
-      orderStatus: orderStatus,
       orderProdPrice: orderProdPrice
     };
   

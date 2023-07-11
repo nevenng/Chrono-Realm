@@ -78,7 +78,7 @@ async function createTables() {
       CREATE TABLE orders (
         orderId SERIAL PRIMARY KEY,
         orderDate TIMESTAMP NOT NULL,
-        orderStatus VARCHAR(255) NOT NULL,
+        orderStatus VARCHAR(255) DEFAULT 'created' NOT NULL,
         userId INT NOT NULL,
         orderTotalPrice Decimal(10, 2) NOT NULL DEFAULT 0.00
       );
