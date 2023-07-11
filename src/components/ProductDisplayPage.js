@@ -4,7 +4,8 @@ import { fetchProdId } from '../axios-services'
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-const ProductDisplayPage = () => {
+const ProductDisplayPage = (props) => {
+    const { user, sessionId } = props;
     const { prodId } = useParams()
     const [product, setProduct] = useState(null);
 
@@ -18,7 +19,7 @@ const ProductDisplayPage = () => {
 
     return (
         <div className="pdp-container">
-            <ProductDetails product={product} />
+            <ProductDetails product={product} user={user} sessionId={sessionId} />
             <ProductCarousel product={product} />
         </div>
     )
