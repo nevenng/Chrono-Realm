@@ -13,4 +13,5 @@ export { default as ProductDisplayPage } from './ProductDisplayPage';
 export { default as ProductCarousel } from './ProductCarousel';
 export { default as RemoveFromCart } from './RemoveFromCart';
 export { default as UpdateQty } from './UpdateQty';
-export { default as ConfirmationPage } from './ConfirmationPage'
+export { default as ConfirmationPage } from './ConfirmationPage';
+export { default as CheckoutButton } from './CheckoutButton';
