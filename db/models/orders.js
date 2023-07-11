@@ -46,14 +46,14 @@ const client = require('../client');
 //     }
 //   };
 
-const createOrder = async ({ userId, orderDate, orderStatus }) => {
+const createOrder = async ({ userId }) => {
   try {
     
     const { rows: [order] } = await client.query(`
       INSERT INTO orders ( userId, orderDate, orderStatus)
-      VALUES ($1, $2, $3)
+      VALUES ($1, CURRENT_TIMESTAMP, DEFAULT )
       RETURNING *;
-    `, [userId, orderDate, orderStatus]);
+    `, [userId]);
 
     return order;
   } catch (error) {
