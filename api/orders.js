@@ -21,36 +21,34 @@ ordersRouter.use((req, res, next) => {
 
 ordersRouter.post('/', async (req, res) => {
     const {
-      orderProdId,
-      orderProdModelName,
-      orderQty,
-      userIdOrder,
-      orderProdImg,
-      orderProdPrice
+      orderItems,
+      userIdOrder
     } = req.body;
   
-    const orderData = {
-      orderProdId: orderProdId,
-      orderProdModelName: orderProdModelName,
-      orderProdImg: orderProdImg,
-      orderQty: orderQty,
-      userId: userIdOrder,
-      orderProdPrice: orderProdPrice
-    };
-  
     try {
-      const newOrder = await createOrder(orderData);
-      console.log("new Order", newOrder);
-      const newOrderItems = await addProductToOrder({
-        ...orderData,
-        orderId: newOrder.orderid
-      });
+      const newOrder = await createOrder({ userId: userIdOrder });
+  
+      const newOrderItems = await Promise.all(orderItems.map(async (item) => {
+        const { orderProdId, orderProdModelName, orderProdImg, orderQty, orderProdPrice } = item;
+        
+        const orderItem = await addProductToOrder({
+          orderProdId,
+          orderProdModelName,
+          orderProdImg,
+          orderQty,
+          orderProdPrice,
+          orderId: newOrder.orderid // Use the same orderId for all items
+        });
+  
+        return orderItem;
+      }));
   
       return res.json({ newOrder, newOrderItems });
     } catch (error) {
       res.status(500).json({ error: 'Error creating order' });
     }
   });
+  
   
 
 // Get All Orders /api/orders
