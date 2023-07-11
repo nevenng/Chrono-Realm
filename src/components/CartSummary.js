@@ -50,7 +50,11 @@ const CartSummary = (props) => {
                     </tbody>
                 </table>
             </div>
-            {products.length > 0 && <CheckoutButton />}
+            {products.length > 0 && (
+                <div>
+                       {products.length > 0 && <CheckoutButton product={products} user={user} />}
+                </div>
+            )}
         </>
     )
 }

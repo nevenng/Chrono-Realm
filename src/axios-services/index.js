@@ -276,4 +276,29 @@ export const handleUpdateQty = async (userToken, cartProdId) => {
 //   }
 // };
 
+export const createNewOrder = async (payload) => {
+  console.log(payload)
+  try {
+    const response = await fetch(`${BASE_URL}/api/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      const { newOrder } = await response.json();
+      return newOrder;
+    } else {
+      throw new Error("Failed to create order.");
+    }
+  } catch (error) {
+    console.error("Error creating order:", error);
+    throw error;
+  }
+};
+
+
+
 
