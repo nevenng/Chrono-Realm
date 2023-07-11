@@ -46,11 +46,27 @@ const client = require('../client');
 //     }
 //   };
 
+// const createOrder = async ({ userId }) => {
+//   try {
+    
+//     const { rows: [order] } = await client.query(`
+//       INSERT INTO orders ( userId, orderDate, orderStatus)
+//       VALUES ($1, CURRENT_TIMESTAMP, 'DEFAULT' )
+//       RETURNING *;
+//     `, [userId]);
+
+//     return order;
+//   } catch (error) {
+//     console.error("Error creating order:", error);
+//     throw error;
+//   }
+// };
+
 const createOrder = async ({ userId }) => {
   try {
     
     const { rows: [order] } = await client.query(`
-      INSERT INTO orders ( userId, orderDate, orderStatus)
+      INSERT INTO orders ( userId, orderDate, orderstatus)
       VALUES ($1, CURRENT_TIMESTAMP, DEFAULT )
       RETURNING *;
     `, [userId]);
