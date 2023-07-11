@@ -13,7 +13,10 @@ const Navbar = (props) => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                <div className="navbar-logo">Add Logo Here</div>
+                    <Link to="/home" className = "nav-link">              
+                     <div className="navbar-logo">Add Logo Here</div>
+                     </Link>
+
                 <ul className="nav-menu">
                     <li className="nav-item">
                         <Link to="/products" className="nav-link">

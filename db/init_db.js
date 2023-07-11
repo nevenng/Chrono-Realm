@@ -21,7 +21,6 @@ async function dropTables() {
       DROP TABLE IF EXISTS cart;
       DROP TABLE IF EXISTS products;          
       DROP TABLE IF EXISTS users;
-      
       `);
 
   }
@@ -82,15 +81,16 @@ async function createTables() {
         userId INT NOT NULL,
         orderTotalPrice Decimal(10, 2) NOT NULL DEFAULT 0.00
       );
-      
+
       CREATE TABLE order_items (
-        id SERIAL PRIMARY KEY,
+        orderId INT REFERENCES orders (orderId),
+        id SERIAL,
         orderProdId VARCHAR(255) NOT NULL,
         orderProdModelName VARCHAR(255) NOT NULL,
         orderProdImg TEXT NOT NULL,
         orderQty INT NOT NULL, 
         orderProdPrice DECIMAL(10, 2) NOT NULL,
-        orderId SERIAL REFERENCES orders (orderId)
+        PRIMARY KEY (orderId, id)
       );
       
       `);

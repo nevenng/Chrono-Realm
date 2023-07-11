@@ -12,7 +12,8 @@ import {
   MyOrders,
   CartSummary,
   ProductDisplayPage,
-  ConfirmationPage
+  ConfirmationPage,
+  Home
 } from '../components'
 
 const App = () => {
@@ -46,6 +47,14 @@ const App = () => {
             <ConfirmationPage />
           )}
         />
+        <Route
+        path = '/home'
+        render = {() => (
+          <Home />
+        )}
+        
+        />
+
         <Route
           exact path='/products'
           render={() => (
