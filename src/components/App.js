@@ -26,8 +26,6 @@ const App = () => {
     return storedUser ? JSON.parse(storedUser) : null
   });
 
-  console.log(user)
-
   useEffect(() => {
     let sessionId = localStorage.getItem('sessionId');
     if (!sessionId) {
@@ -57,7 +55,7 @@ const App = () => {
         <Route
           exact path='/products/:prodId'
           render={() => (
-            <ProductDisplayPage />
+            <ProductDisplayPage user={user} sessionId={sessionId}/>
           )}
         />
         <Route
