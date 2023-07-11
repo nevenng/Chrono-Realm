@@ -1,5 +1,6 @@
 const client = require('../client');
 
+
 // const createOrder = async (
 //     orderProdId,
 //     orderProdModelName,
@@ -45,13 +46,14 @@ const client = require('../client');
 //     }
 //   };
 
-const createOrder = async ({ userId, orderDate, orderStatus, orderId }) => {
+const createOrder = async ({ userId, orderDate, orderStatus }) => {
   try {
+    
     const { rows: [order] } = await client.query(`
-      INSERT INTO orders (orderId, userId, orderDate, orderStatus)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO orders ( userId, orderDate, orderStatus)
+      VALUES ($1, $2, $3)
       RETURNING *;
-    `, [orderId, userId, orderDate, orderStatus]);
+    `, [userId, orderDate, orderStatus]);
 
     return order;
   } catch (error) {
@@ -59,7 +61,8 @@ const createOrder = async ({ userId, orderDate, orderStatus, orderId }) => {
     throw error;
   }
 };
-  
+
+
 const addProductToOrder = async ({
   orderProdId,
   orderProdModelName,
@@ -79,29 +82,22 @@ const addProductToOrder = async ({
       RETURNING *;
     `, [orderProdId, orderProdModelName, orderProdImg, orderQtyNumeric, orderProdPriceNumeric, orderId]);
 
-    // Retrieve all order items for the given orderId
-    const { rows: orderItems } = await client.query(`
-      SELECT orderProdPrice, orderQty
+    // Calculate the new total price using SQL query
+    const { rows: [newTotal] } = await client.query(`
+      SELECT SUM(orderProdPrice * orderQty) AS newTotal
       FROM order_items
       WHERE orderId = $1;
     `, [orderId]);
 
-    console.log("orderItems:", orderItems);
+    console.log("newTotal:", newTotal.newtotal);
+    const newOrderTotal = newTotal.newtotal;
 
-    const newTotal = orderItems.reduce((total, item) => {
-      const itemPrice = parseFloat(item.orderprodprice);
-      const itemQty = parseInt(item.orderqty);
-      return total + itemPrice * itemQty;
-    }, 0).toFixed(2);
-    
-    console.log("newTotal:", newTotal);
-       
     // Update the order's total price
     await client.query(`
       UPDATE orders
       SET orderTotalPrice = $1
       WHERE orderId = $2
-    `, [newTotal, orderId]);
+    `, [newOrderTotal, orderId]);
 
     return order;
   } catch (error) {
@@ -109,6 +105,24 @@ const addProductToOrder = async ({
     throw error;
   }
 };
+
+
+
+
+const getUsersOrder = async (userId) => {
+  try {
+    const {rows:[userOrder]} = await client.query(
+      `
+      SELECT * FROM orders
+      WHERE userId = $1;
+      `
+    ,[userId]);
+    return userOrder;
+
+  }catch(error){
+    throw error
+  }
+}
 
 
 
@@ -187,5 +201,6 @@ module.exports = {
     getOrderById,
     updateOrderStatus,
     getOrdersByUser,
-    addProductToOrder
+    addProductToOrder,
+    getUsersOrder
 };

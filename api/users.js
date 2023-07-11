@@ -120,6 +120,7 @@ router.post("/login", async (req, res, next) => {
 router.get("/all", async (req, res, next) => {
   try {
       const user = req.user;
+      console.log(user);
 
       if (!checkUserRole(user)) {
         return res.status(401).json({ message: 'You must be an admin to access this' });

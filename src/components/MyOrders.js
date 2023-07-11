@@ -34,8 +34,7 @@ const MyOrders = () => {
             <div className="myOrders-container">
                 <h3>Your Orders</h3>
                 <MyItems />
-                <MyItems />
-                <MyItems />
+               
             </div>
         </>
     )

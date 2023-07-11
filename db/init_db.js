@@ -649,6 +649,7 @@ const createInitialOrderItems = async () => {
       orderProdImg: "https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=90;h=640,%20https://images.watchfinder.co.uk/imgv3/stock/232796/Jaeger-LeCoultre-Master%20Ultra%20Thin%20Moon-1362520-232796-230130-124228.jpg;quality=55;h=1280%202x",
       orderQty: 1,
       orderId:1,
+      userId: 1,
       orderProdPrice: 6700.00
     },
     {
@@ -657,6 +658,7 @@ const createInitialOrderItems = async () => {
       orderProdImg: "https://content.rolex.com/v7/dam/2023-06/upright-c/m336935-0004.png?impolicy=v7-main-configurator&imwidth=640",
       orderQty: 1,
       orderId:1,
+      userId:1,
       orderProdPrice: 42450.00
     },
 
@@ -666,6 +668,7 @@ const createInitialOrderItems = async () => {
       orderProdImg: "https://www.omegawatches.com/media/catalog/product/cache/a5c37fddc1a529a1a44fea55d527b9a116f3738da3a2cc38006fcc613c37c391/o/m/omega-constellation-globemaster-13033412206001-l.png",
       orderQty: 2,
       orderId: 2,
+      userId:2,
       orderProdPrice: 23000.00
     }
   ];
