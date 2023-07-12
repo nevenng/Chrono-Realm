@@ -16,4 +16,6 @@ export { default as UpdateQty } from './UpdateQty';
 export { default as ConfirmationPage } from './ConfirmationPage';
 export { default as CheckoutButton } from './CheckoutButton';
 export { default as Home } from './Home';
-export { default as Footer } from './Footer'
+export { default as Footer } from './Footer';
+export { default as AdminDashboard } from './AdminDashboard';
+export { default as CreateProduct } from './CreateProduct'

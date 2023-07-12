@@ -631,6 +631,80 @@ COMPONENT: Cart
   height: 60px;
 }
 
+/* Create Product dashboard */
+
+.larger-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 100px;
+
+}
+
+.create-prod-container {
+  background: #f2f2f2;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.preview-container {
+  background: #f2f2f2;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+}
+
+.create-prod-title {
+  text-align: center;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-create {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.preview-section {
+  margin-top: 20px;
+}
+
+.preview-section img {
+  width: 400px;
+  height: auto; 
+}
+
+
+
+
 
 
 

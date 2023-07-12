@@ -29,7 +29,7 @@ const Footer = () => {
                 <div className="footer-container">
                     <Link to="/home" className="footer-link">
                         <div className="footer-logo">
-                            <img src="../assets/footer_logo.png" alt="Chrono Realm Logo" />
+                            <p>Chrono Realm</p>
                         </div>
                     </Link>
                 </div>

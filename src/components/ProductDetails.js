@@ -3,6 +3,7 @@ import { checkUserCartExists, createNewCart, addProductToCart } from "../axios-s
 
 const ProductDetails = (props) => {
   const { product, user, sessionId } = props;
+  console.log(product)
 
   if (!product) {
     return <div>Loading...</div>;

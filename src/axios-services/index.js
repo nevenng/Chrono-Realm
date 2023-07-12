@@ -83,15 +83,15 @@ export async function fetchAllProducts() {
   }
 }
 
-export const fetchProdId = (async (prodId) => {
+export const fetchProdId = async (prodId) => {
   try {
-    const response = await fetch(`${BASE_URL}/api/products/${prodId}`);
-    const data = await response.json();
-    return data;
+    const response = await fetch(`/api/products/${prodId}`);
+    return response.data;
   } catch (error) {
+    console.error("Error fetching product data:", error);
     throw error;
   }
-});
+};
 
 // Cart 
 export const checkUserCartExists = async (userId, sessionId) => {
@@ -267,7 +267,7 @@ export const handleUpdateQty = async (userToken, cartProdId) => {
 // Orders 
 
 export const createNewOrder = async (orderItems, userIdOrder) => {
-  console.log("orderItems:", orderItems , "UserId: ", userIdOrder);
+  console.log("orderItems:", orderItems, "UserId: ", userIdOrder);
   try {
 
     const payload = {
@@ -295,6 +295,29 @@ export const createNewOrder = async (orderItems, userIdOrder) => {
   }
 };
 
+// Product 
+
+export const createProduct = async (productData) => {
+  try {
+    const response = await fetch('/api/products/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (response.ok) {
+      const createdProduct = await response.json();
+      return createdProduct;
+    } else {
+      throw new Error('Failed to create product');
+    }
+  } catch (error) {
+    console.error('Error creating product:', error);
+    throw error;
+  }
+};
 
 
 
