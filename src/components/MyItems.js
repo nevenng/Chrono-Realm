@@ -39,7 +39,7 @@ const MyItems = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <td>
                                     <img className="orders-img" src="https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw3b08217b/images/products/28000088_fr.jpg?sw=512&sh=640&q=85" alt="Product Image" />
                                 </td>
@@ -57,8 +57,10 @@ const MyItems = (props) => {
                                 <td>
                                     <p className="align-top">$20.00</p>
                                 </td>
-                            </tr>
-                            {myOrder ? (
+
+                            </tr> */}
+                            {/* {myOrder ? (
+
                                 <tr>
                                     <td>
                                         <img className="orders-img" src={myOrder.orderprodid} alt="Product Image" />

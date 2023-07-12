@@ -12,7 +12,7 @@ const CartSummary = (props) => {
     async function fetchCartData() {
       try {
         const response = await fetchProductsCart(user?.id || null, sessionId);
-        setProducts(response.map((product, index) => ({ ...product, order: index })));
+        setProducts(response);
       } catch (error) {
         console.error(error);
       }
@@ -27,10 +27,6 @@ const CartSummary = (props) => {
 
   const handleViewProducts = () => {
     history.push("/products");
-  };
-
-  const handleClearCart = () => {
-    setProducts([]);
   };
 
   return (
@@ -71,7 +67,7 @@ const CartSummary = (props) => {
         </button>
         {products.length > 0 && (
           <div>
-            <CheckoutButton product={products} setProducts={handleClearCart} user={user} sessionId={sessionId} />
+            <CheckoutButton product={products} setProducts={setProducts} user={user} sessionId={sessionId} />
           </div>
         )}
       </div>

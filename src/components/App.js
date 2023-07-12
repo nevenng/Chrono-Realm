@@ -13,7 +13,8 @@ import {
   CartSummary,
   ProductDisplayPage,
   ConfirmationPage,
-  Home
+  Home, 
+  Footer,
 } from '../components'
 
 const App = () => {
@@ -50,7 +51,7 @@ const App = () => {
         <Route
           path='/confirmation'
           render={() => (
-            <ConfirmationPage />
+            <ConfirmationPage user={user} sessionId={sessionId} />
           )}
         />
         <Route
@@ -91,8 +92,8 @@ const App = () => {
             <AccountForm setUserToken={setUserToken} setUser={setUser} />
           )}
         />
-
       </Switch>
+      <Footer />
     </>
   );
 }
