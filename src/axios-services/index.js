@@ -266,25 +266,21 @@ export const handleUpdateQty = async (userToken, cartProdId) => {
 
 // Orders 
 
-// export const fetchOrderByOrderUser = async (user) => {
-//   try {
-//     const response = await fetch(`${BASE_URL}/api/orders/${user}`);
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
 export const createNewOrder = async (orderItems, userIdOrder) => {
   console.log("orderItems:", orderItems , "UserId: ", userIdOrder);
   try {
+
+    const payload = {
+      orderItems: orderItems,
+      userIdOrder: userIdOrder,
+    };
+
     const response = await fetch(`${BASE_URL}/api/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(orderItems, userIdOrder),
+      body: JSON.stringify(payload),
     });
 
     if (response.ok) {

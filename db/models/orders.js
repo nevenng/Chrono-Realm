@@ -63,6 +63,8 @@ const client = require('../client');
 // };
 
 const createOrder = async ({ userId }) => {
+
+  console.log("createOrderFunc:", userId)
   try {
     
     const { rows: [order] } = await client.query(`
