@@ -44,7 +44,7 @@ const App = () => {
         <Route
           path='/confirmation'
           render={() => (
-            <ConfirmationPage />
+            <ConfirmationPage user={user} sessionId={sessionId} />
           )}
         />
         <Route

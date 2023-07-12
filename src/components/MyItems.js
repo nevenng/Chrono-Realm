@@ -35,7 +35,7 @@ const MyItems = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <td>
                                     <img className="orders-img" src="https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw3b08217b/images/products/28000088_fr.jpg?sw=512&sh=640&q=85" alt="Product Image" />
                                 </td>
@@ -53,7 +53,7 @@ const MyItems = () => {
                                 <td>
                                     <p className="align-top">$20.00</p>
                                 </td>
-                            </tr>
+                            </tr> */}
                             {/* {myOrder ? (
                                 <tr>
                                     <td>

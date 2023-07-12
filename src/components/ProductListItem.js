@@ -68,7 +68,7 @@ const ProductListItem = (props) => {
             </Link>
             <h3>{product.prodmodelname}</h3>
             <p>${product.prodprice}</p>
-            <button className="add-to-cart" onClick={addToCartHandler}>Add to Cart</button>
+            {/* <button className="add-to-cart" onClick={addToCartHandler}>Add to Cart</button> */}
         </div>
     )
 }
