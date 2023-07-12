@@ -1,7 +1,7 @@
 import React from "react";
 import { MyItems } from "../components"
 
-const MyOrders = () => {
+const MyOrders = ({user, userToken}) => {
 
     // const handleMyOrders = (async (user) => {
     //     try {
@@ -33,7 +33,7 @@ const MyOrders = () => {
         <>
             <div className="myOrders-container">
                 <h3>Your Orders</h3>
-                <MyItems />
+                <MyItems user = {user} userToken = {userToken} />
                
             </div>
         </>

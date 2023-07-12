@@ -353,4 +353,21 @@ export const removeProductFromDB = async (prodId) => {
 
 
 
+export const fetchMyOrders = async (userId, userToken) => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/users/${userId}/orders`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
+     console.log(response);
+    if (response.ok) {
+      const data = await response.json();
+      return data.orders;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 

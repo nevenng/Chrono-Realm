@@ -136,10 +136,11 @@ router.get("/all", async (req, res, next) => {
 });
 
 
-  //GET /api/users/me
-  router.get('/me', async (req, res, next) => {
+  //GET /api/users:userId/orders
+  router.get('/:userId/orders', async (req, res, next) => {
     const header = req.headers.authorization;
-  
+    const userId = req.params.userId; 
+    
     try {
       if (!header) {
         res.status(401);
@@ -150,20 +151,19 @@ router.get("/all", async (req, res, next) => {
         });
       } else {
         const token = header.split(' ')[1];
-        const decodedUser = jwt.verify(token, JWT_SECRET);
-
-
-        const orders = await getOrdersByUser(decodedUser.id);
   
+        const orders = await getOrdersByUser(userId);
         const response = {
-          orders:orders
-        }
+          orders: orders,
+        };
         res.send(response);
+
       }
     } catch ({ name, message }) {
       next({ name, message });
     }
   });
+  
 
   //PATCH /api/users/roles/update to change role to admin
 
