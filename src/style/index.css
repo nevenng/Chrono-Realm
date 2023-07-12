@@ -17,7 +17,6 @@ html {
 
 body {
   margin: 0;
-  padding: 0;
   height: 100vh;
   width: 100vw;
 }
@@ -137,7 +136,7 @@ COMPONENT: ProductListPage
   flex-wrap: wrap;
   justify-content: center;
   align-content: flex-start;
-  height: 100vh;
+  padding-bottom: 100px;
 }
 
 
@@ -157,6 +156,16 @@ COMPONENT: ProductListItem
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   margin: 10px;
+  transition: transform 0.9s ease; /* Updated transition duration to 0.6s */
+  cursor: pointer;
+  border-radius: 8px; /* Added border-radius */
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+
+.plp-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .plp-item img {
@@ -201,7 +210,7 @@ COMPONENT: ProductListItem
 .cart-action-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px; 
+  gap: 10px;
   margin-top: 20px;
 }
 
@@ -221,10 +230,6 @@ COMPONENT: ProductListItem
 .checkout-button:hover {
   background-color: #333;
 }
-
-
-
-
 
 
 
@@ -554,6 +559,82 @@ COMPONENT: Cart
   text-align: center;
   margin-top: 20px;
 }
+
+/* Footer */ 
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 60px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.footer.visible {
+  opacity: 1;
+}
+
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.footer-menu {
+  display: flex;
+  list-style: none;
+}
+
+.footer-item {
+  margin-right: 20px;
+}
+
+.footer-link {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #007bff;
+}
+
+.footer-bottom {
+  background-color: #f8f8f8;
+  padding: 10px;
+  text-align: right;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 60px;
+}
+
+
+
+
+
 
 
 

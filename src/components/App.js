@@ -13,7 +13,8 @@ import {
   CartSummary,
   ProductDisplayPage,
   ConfirmationPage,
-  Home
+  Home, 
+  Footer,
 } from '../components'
 
 const App = () => {
@@ -85,8 +86,8 @@ const App = () => {
             <AccountForm setUserToken={setUserToken} setUser={setUser} />
           )}
         />
-
       </Switch>
+      <Footer />
     </>
   );
 }
