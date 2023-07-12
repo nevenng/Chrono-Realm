@@ -62,10 +62,27 @@ async function getProductById(prodId) {
     }
   }
   
+  async function deleteProductById(prodId) {
+    try {
+      const { rows: [deletedProduct] } = await client.query(
+        `
+        DELETE FROM products
+        WHERE prodId = $1
+        RETURNING *
+        `,
+        [prodId]
+      );
+      return deletedProduct;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 
 
 module.exports = {
     createProduct,
     getAllProducts,
-    getProductById
+    getProductById,
+    deleteProductById
 };

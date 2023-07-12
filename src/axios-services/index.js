@@ -93,6 +93,17 @@ export const fetchProdId = (async (prodId) => {
   }
 });
 
+export const fetchProdIdToCreate = async (prodId) => {
+  try {
+
+    const response = await fetch(`/api/products/${prodId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching product data:", error);
+    throw error;
+  }
+};
+
 // Cart 
 export const checkUserCartExists = async (userId, sessionId) => {
   const body = {
@@ -267,7 +278,7 @@ export const handleUpdateQty = async (userToken, cartProdId) => {
 // Orders 
 
 export const createNewOrder = async (orderItems, userIdOrder) => {
-  console.log("orderItems:", orderItems , "UserId: ", userIdOrder);
+  console.log("orderItems:", orderItems, "UserId: ", userIdOrder);
   try {
 
     const payload = {
@@ -291,6 +302,51 @@ export const createNewOrder = async (orderItems, userIdOrder) => {
     }
   } catch (error) {
     console.error("Error creating order:", error);
+    throw error;
+  }
+};
+
+// Product 
+
+export const createProduct = async (productData) => {
+  try {
+    const response = await fetch('/api/products/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (response.ok) {
+      const createdProduct = await response.json();
+      return createdProduct;
+    } else {
+      throw new Error('Failed to create product');
+    }
+  } catch (error) {
+    console.error('Error creating product:', error);
+    throw error;
+  }
+};
+
+export const removeProductFromDB = async (prodId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/products/remove/${prodId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const result = await response.text();
+      return result;
+    } else {
+      throw new Error('Failed to remove product from database');
+    }
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 };

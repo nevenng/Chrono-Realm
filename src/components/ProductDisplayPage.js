@@ -12,6 +12,7 @@ const ProductDisplayPage = (props) => {
     useEffect(() => {
         const getPdp = async () => {
             const results = await fetchProdId(prodId);
+            console.log(results)
             setProduct(results);
         }
         getPdp();

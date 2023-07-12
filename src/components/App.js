@@ -15,6 +15,7 @@ import {
   ConfirmationPage,
   Home, 
   Footer,
+  AdminDashboard
 } from '../components'
 
 const App = () => {
@@ -59,9 +60,7 @@ const App = () => {
         render = {() => (
           <Home />
         )}
-        
         />
-
         <Route
           exact path='/products'
           render={() => (
@@ -90,6 +89,12 @@ const App = () => {
           path='/account/:actionType'
           render={() => (
             <AccountForm setUserToken={setUserToken} setUser={setUser} />
+          )}
+        />
+        <Route
+          path='/admin/dashboard'
+          render={() => (
+            <AdminDashboard user={user} />
           )}
         />
       </Switch>
