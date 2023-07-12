@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { CartItem, CheckoutButton } from "../components";
 import { fetchProductsCart } from "../axios-services";
+import { useHistory } from "react-router-dom";
 
 const CartSummary = (props) => {
-    // Need API endpoint to show all items in the user's cart 
     const { user, sessionId } = props;
-
-    console.log(user)
-
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         async function fetchCartData() {
@@ -27,36 +25,54 @@ const CartSummary = (props) => {
         return () => clearTimeout(timer);
     }, [user, sessionId]);
 
+    const handleViewProducts = () => {
+        history.push("/products");
+    };
+
     return (
         <>
             <div className="cart-container">
                 <h3>Your Cart</h3>
-                <table className="cart-table">
-                    <thead>
-                        <tr className="cart-table-header">
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products ? products.map(product => {
-                            return <CartItem key={product.cartprodid} product={product} user={user} sessionId={sessionId} fetchProductsCart={fetchProductsCart} setProducts={setProducts} />
-                        }) : <tr></tr>}
-                        {/* <CartItem />
-                    <CartItem /> */}
-                    </tbody>
-                </table>
+                {products.length > 0 ? (
+                    <table className="cart-table">
+                        <thead>
+                            <tr className="cart-table-header">
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {products.map((product) => (
+                                <CartItem
+                                    key={product.cartprodid}
+                                    product={product}
+                                    user={user}
+                                    sessionId={sessionId}
+                                    fetchProductsCart={fetchProductsCart}
+                                    setProducts={setProducts}
+                                />
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p className="empty-cart-message">Your cart is empty.</p>
+                )}
             </div>
-            {products.length > 0 && (
-                <div>
-                       {products.length > 0 && <CheckoutButton product={products} user={user} />}
-                </div>
-            )}
+            <div className="cart-action-buttons">
+                <button className="view-products-button" onClick={handleViewProducts}>
+                    {products.length > 0 ? "Continue Shopping" : "Shop All Products"}
+                </button>
+                {products.length > 0 && (
+                    <div>
+                        <CheckoutButton product={products} user={user} />
+                    </div>
+                )}
+            </div>
         </>
-    )
-}
+    );
+};
 
 export default CartSummary;

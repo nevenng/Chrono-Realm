@@ -191,6 +191,43 @@ COMPONENT: ProductListItem
   color: white;
 }
 
+.empty-cart-message {
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cart-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+  margin-top: 20px;
+}
+
+.view-products-button,
+.checkout-button {
+  width: 200px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.view-products-button:hover,
+.checkout-button:hover {
+  background-color: #333;
+}
+
+
+
+
+
+
+
 
 /* Component for Logout */
 
