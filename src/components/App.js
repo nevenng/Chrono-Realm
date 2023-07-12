@@ -70,7 +70,7 @@ const App = () => {
         <Route
           path='/orders'
           render={() => (
-            <MyOrders />
+            <MyOrders user = {user} userToken = {userToken}/>
           )}
         />
         <Route

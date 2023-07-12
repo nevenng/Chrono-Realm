@@ -22,35 +22,34 @@ apiRouter.use(async (req, res, next) => {
   const prefix = "Bearer ";
   const auth = req.header("Authorization");
 
-  try {
+  
     if (!auth) {
       next()
     } else if (auth.startsWith(prefix)) {
       const token = auth.slice(prefix.length);
 
       try {
-        const { id } = jwt.verify(token, JWT_SECRET);
-
+        const parsedToken = jwt.verify(token, JWT_SECRET);
+          console.log(parsedToken);
+          const id = parsedToken && parsedToken.id;
         if (id) {
           req.user = await getUserById(id);
           next();
-        }
+        } 
       }
-      catch ({ name, message }) {
-        next({
-          name: 'AuthorizationHeaderError',
-          message: `Authorization token must start with ${prefix}`
-        });
+      catch (error) {
+        next(error);
       }
     }
+    else {
+      next({
+          name: 'AuthorizationHeaderError',
+          message: `Authorization token must start with ${prefix}`
+        })
+    }
   }
-  catch ({ name, message }) {
-    next({
-      name: 'AuthorizationHeaderError',
-      message: `Authorization token must start with ${prefix}`
-    });
-  }
-})
+  
+)
 
 
 

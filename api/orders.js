@@ -64,21 +64,6 @@ ordersRouter.get('/', async (req, res, next) => {
     }
 });
 
-ordersRouter.get('/userOrderId', async(req, res, next) => {
-    const user = req.user;
-
-    try {
-        const order = await getUsersOrder(user.id);
-        if (order) {
-            res.send(order);
-        } else {
-            res.status(404).json({ error: 'Order not found' });
-        }
-    } catch (error) {
-        console.log(error);
-        next(error);
-    }
-});
 // Get /api/orders/:orderId
 
 ordersRouter.get('/:orderId', async (req, res, next) => {
