@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { handleRemoveFromCart, fetchProductsCart } from '../axios-services';
+import { handleRemoveFromCart } from '../axios-services';
 
 const RemoveFromCart = (props) => {
     const { product, user, sessionId, fetchProductsCart, setProducts } = props;
@@ -7,7 +7,7 @@ const RemoveFromCart = (props) => {
     const removeFromCart = async () => {
         try {
             const result = await handleRemoveFromCart(product.cartid, product.cartprodid);
-            // alert('Item has been removed from your cart!');
+            // alert('Item has been removed from your cart!'); Need to style this
             const products = await fetchProductsCart(user?.id || null, sessionId);
             setProducts(products);
             return result;
