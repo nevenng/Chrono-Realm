@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createProduct, fetchProdId } from "../axios-services";
+import { createProduct, fetchProdIdToCreate } from "../axios-services";
 
 const CreateProduct = () => {
     const [productData, setProductData] = useState({
@@ -24,7 +24,7 @@ const CreateProduct = () => {
 
     const checkExistingProduct = async (prodId) => {
         try {
-            const product = await fetchProdId(prodId);
+            const product = await fetchProdIdToCreate(prodId);
             return product || null;
         } catch (error) {
             console.error("Error checking existing product:", error);

@@ -64,6 +64,11 @@ const ProductDetails = (props) => {
     }
   }
 
+  const formatPriceWithCommas = (price) => {
+    const formattedPrice = parseFloat(price).toFixed(2);
+    return formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <>
       <div className="pdp-display-container">
@@ -74,7 +79,7 @@ const ProductDetails = (props) => {
           <h3>{product.prodmodelname}</h3>
           <hr></hr>
           <p> {product.brand}</p>
-          <p>${product.prodprice}</p>
+          <p>${formatPriceWithCommas(product.prodprice)}</p>
           <button className="pdp-a2c-button" onClick={addToCartHandler}>Add To Cart</button>
         </div>
         <div className="pdp-description-container">

@@ -5,18 +5,12 @@ import { Logout, AdminDashboard } from '../components'
 const Navbar = (props) => {
 
     const { userToken, setUserToken, user, setUser } = props;
-    // need to pass in token, or user in order for the conditional 
-    // comment in line 21-23 & 27 when token is defined
-
-    // const token = true;
-    // ^^^^ to test UI change to true
-
-    // console.log(user)
+   
     return (
         <nav className="navbar">
             <div className="navbar-container">
                 <Link to="/home" className="nav-link">
-                    <div className="navbar-logo">Add Logo Here</div>
+                    <div className="navbar-logo">Chrono Realm</div>
                 </Link>
 
                 <ul className="nav-menu">
@@ -25,7 +19,6 @@ const Navbar = (props) => {
                             All Products
                         </Link>
                     </li>
-                    {/* Fror now we can have an inline navbar, discuss later if implementing modal */}
                     {userToken ? (
                         <li className="nav-item">
                             <Link to="/orders" className="nav-link">

@@ -44,43 +44,48 @@ const ProductCarousel = (props) => {
     return null;
   }
 
+  const formatPriceWithCommas = (price) => {
+    const formattedPrice = parseFloat(price).toFixed(2);
+    return formattedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <div className="product-carousel">
-  <div className="product-more-to-explore">
-    <h3>More from {product.brand}</h3>
-  </div>
-  <div className="carousel-content">
-    {visibleProducts.map((product, index) => (
-      <div key={index} className="carousel-item">
-        <div className="carousel-item-img">
-          <a href={`/products/${product.prodid}`}>
-            <img src={product.prodimg} alt={product.prodmodelname} />
-          </a>
-        </div>
-        <div className="carousel-item-details">
-          <h3 className="carousel-item-title">{product.prodmodelname}</h3>
-          <p className="carousel-item-price">{product.prodprice}</p>
-        </div>
+      <div className="product-more-to-explore">
+        <h3>More from {product.brand}</h3>
       </div>
-    ))}
-  </div>
-  <div className="carousel-controls">
-    <button
-      className="carousel-control-btn left-arrow"
-      onClick={prevSlide}
-      disabled={currentSlide === 0}
-    >
-      &lt;
-    </button>
-    <button
-      className="carousel-control-btn right-arrow"
-      onClick={nextSlide}
-      disabled={currentSlide >= products.length - 1}
-    >
-      &gt;
-    </button>
-  </div>
-</div>
+      <div className="carousel-content">
+        {visibleProducts.map((product, index) => (
+          <div key={index} className="carousel-item">
+            <div className="carousel-item-img">
+              <a href={`/products/${product.prodid}`}>
+                <img src={product.prodimg} alt={product.prodmodelname} />
+              </a>
+            </div>
+            <div className="carousel-item-details">
+              <h3 className="carousel-item-title">{product.prodmodelname}</h3>
+              <p className="carousel-item-price">${formatPriceWithCommas(product.prodprice)}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="carousel-controls">
+        <button
+          className="carousel-control-btn left-arrow"
+          onClick={prevSlide}
+          disabled={currentSlide === 0}
+        >
+          &lt;
+        </button>
+        <button
+          className="carousel-control-btn right-arrow"
+          onClick={nextSlide}
+          disabled={currentSlide >= products.length - 1}
+        >
+          &gt;
+        </button>
+      </div>
+    </div>
 
   );
 };

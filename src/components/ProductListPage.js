@@ -3,8 +3,6 @@ import { ProductListItem } from '../components'
 import { fetchAllProducts } from "../axios-services";
 
 const ProductListPage = (props) => {
-    // Need to map through an array of products 
-
     const { user, sessionId } = props;
 
     const [products, setProducts] = useState([]);

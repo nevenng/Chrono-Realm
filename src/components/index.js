@@ -18,4 +18,4 @@ export { default as CheckoutButton } from './CheckoutButton';
 export { default as Home } from './Home';
 export { default as Footer } from './Footer';
 export { default as AdminDashboard } from './AdminDashboard';
-export { default as CreateProduct } from './CreateProduct'
+export { default as CreateProduct } from './CreateProduct';

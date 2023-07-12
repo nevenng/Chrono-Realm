@@ -9,7 +9,6 @@ const ProductDisplayPage = (props) => {
     const { prodId } = useParams()
     const [product, setProduct] = useState(null);
 
-
     useEffect(() => {
         const getPdp = async () => {
             const results = await fetchProdId(prodId);
@@ -18,8 +17,6 @@ const ProductDisplayPage = (props) => {
         }
         getPdp();
     }, []);
-
-
 
     return (
         <div className="pdp-container">

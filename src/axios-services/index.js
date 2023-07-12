@@ -83,8 +83,19 @@ export async function fetchAllProducts() {
   }
 }
 
-export const fetchProdId = async (prodId) => {
+export const fetchProdId = (async (prodId) => {
   try {
+    const response = await fetch(`${BASE_URL}/api/products/${prodId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+});
+
+export const fetchProdIdToCreate = async (prodId) => {
+  try {
+
     const response = await fetch(`/api/products/${prodId}`);
     return response.data;
   } catch (error) {
@@ -318,6 +329,28 @@ export const createProduct = async (productData) => {
     throw error;
   }
 };
+
+export const removeProductFromDB = async (prodId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/products/remove/${prodId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const result = await response.text();
+      return result;
+    } else {
+      throw new Error('Failed to remove product from database');
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 
 
 

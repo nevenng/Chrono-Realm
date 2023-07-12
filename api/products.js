@@ -5,7 +5,8 @@ const {
     getAllProducts,
     getProductById,
     checkUserRole,
-    createProduct
+    createProduct,
+    deleteProductById
 } = require('../db');
 
 
@@ -83,7 +84,18 @@ router.post("/create", async (req, res, next) => {
     }
 });
 
-
+// DELETE /api/products/:prodId
+router.delete("/remove/:prodId", async (req, res, next) => {
+    try {
+      const { prodId } = req.params;
+  
+      await deleteProductById(prodId);
+      res.json({ message: "Product deleted successfully" });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  });
 
 module.exports = router;
 
