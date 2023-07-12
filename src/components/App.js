@@ -25,7 +25,13 @@ const App = () => {
 
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null
+
+    if (storedUser !== "undefined") {
+      return JSON.parse(storedUser);
+    } else {
+      return null;
+    }
+    // return storedUser ? JSON.parse(storedUser) : null
   });
 
   useEffect(() => {
@@ -71,7 +77,7 @@ const App = () => {
         <Route
           path='/orders'
           render={() => (
-            <MyOrders />
+            <MyOrders user = {user} userToken = {userToken}/>
           )}
         />
         <Route

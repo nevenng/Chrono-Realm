@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { fetchOrderByOrderUser } from "../axios-services";
+import { fetchMyOrders } from "../axios-services";
 
-const MyItems = () => {
-    // { token, orderId }
+const MyItems = (props) => {
+
+    const {user , userToken} = props;
     const [myOrder, setMyOrder] = useState(true);
+    const userId = user.id;
+
     
-    // useEffect(() => {
-    //     const getMyOrder = async () => {
-    //         try {
-    //             const order = await fetchOrderByOrderUser(orderId);
-    //             console.log(orderId)
-    //             setMyOrder(order);
-    //         } catch (error) {
-    //             console.error("Error fetching order:", error);
-    //         }
-    //     };
-        
-    //     if (userToken && orderId) {
-    //         getMyOrder();
-    //     }
-    // }, [userToken, orderId]);
+    useEffect(() => {
+        const getMyOrder = async () => {
+          try {
+            const orders = await fetchMyOrders(userId, userToken);
+            console.log("Orders:", orders);
+            setMyOrder(orders);
+          } catch (error) {
+            console.error("Error fetching orders:", error);
+          }
+        };
+      
+        if (userToken && userId) {
+          getMyOrder();
+        }
+      }, [userToken, userId]);
+      
 
     return (
         <>
@@ -53,8 +57,10 @@ const MyItems = () => {
                                 <td>
                                     <p className="align-top">$20.00</p>
                                 </td>
+
                             </tr> */}
                             {/* {myOrder ? (
+
                                 <tr>
                                     <td>
                                         <img className="orders-img" src={myOrder.orderprodid} alt="Product Image" />
@@ -78,7 +84,7 @@ const MyItems = () => {
                                 <tr>
                                     <td colSpan="4">No order details available</td>
                                 </tr>
-                            )} */}
+                            )}
                         </tbody>
                     </table>
                 </div>
