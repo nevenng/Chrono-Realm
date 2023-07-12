@@ -196,7 +196,7 @@ const getOrdersByUser = async (userId) => {
         `
         SELECT o.*
         FROM orders AS o
-        WHERE o.userIdOrder = $1;
+        WHERE o.userId = $1;
         `,
         [userId]
       );
