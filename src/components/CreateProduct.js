@@ -66,24 +66,56 @@ const CreateProduct = () => {
                 <h2 className="create-prod-title">Create Product</h2>
                 <form onSubmit={handleSubmit} className="product-form">
                     <div className="form-group">
-                        <label htmlFor="prodId">Product ID:</label>
-                        <input
-                            type="text"
-                            name="prodId"
-                            value={productData.prodId}
-                            onChange={handleInputChange}
-                            placeholder="Product ID"
-                        />
+                        <div className="grid-container">
+                            <div className="grid-item">
+                                <label htmlFor="prodId">Product ID:</label>
+                                <input
+                                    type="text"
+                                    name="prodId"
+                                    value={productData.prodId}
+                                    onChange={handleInputChange}
+                                    placeholder="Product ID"
+                                    required
+                                />
+                            </div>
+                            <div className="grid-item">
+                                <label htmlFor="brand">Brand:</label>
+                                <input
+                                    type="text"
+                                    name="brand"
+                                    value={productData.brand}
+                                    onChange={handleInputChange}
+                                    placeholder="Brand"
+                                    required
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="brand">Brand:</label>
-                        <input
-                            type="text"
-                            name="brand"
-                            value={productData.brand}
-                            onChange={handleInputChange}
-                            placeholder="Brand"
-                        />
+                        <div className="grid-container">
+                            <div className="grid-item">
+                                <label htmlFor="prodPrice">Product Price:</label>
+                                <input
+                                    type="number"
+                                    name="prodPrice"
+                                    value={productData.prodPrice}
+                                    onChange={handleInputChange}
+                                    placeholder="Product Price"
+                                    required
+                                />
+                            </div>
+                            <div className="grid-item">
+                                <label htmlFor="inventory">Inventory:</label>
+                                <input
+                                    type="number"
+                                    name="inventory"
+                                    value={productData.inventory}
+                                    onChange={handleInputChange}
+                                    placeholder="Inventory"
+                                    required
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="prodModelName">Product Model Name:</label>
@@ -93,26 +125,17 @@ const CreateProduct = () => {
                             value={productData.prodModelName}
                             onChange={handleInputChange}
                             placeholder="Product Model Name"
+                            required
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="prodDescription">Product Description:</label>
-                        <input
-                            type="text"
+                        <textarea
                             name="prodDescription"
                             value={productData.prodDescription}
                             onChange={handleInputChange}
                             placeholder="Product Description"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="prodPrice">Product Price:</label>
-                        <input
-                            type="number"
-                            name="prodPrice"
-                            value={productData.prodPrice}
-                            onChange={handleInputChange}
-                            placeholder="Product Price"
+                            required
                         />
                     </div>
                     <div className="form-group">
@@ -123,36 +146,7 @@ const CreateProduct = () => {
                             value={productData.prodImg}
                             onChange={handleInputChange}
                             placeholder="Product Image URL"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="prodAttributes">Product Attributes:</label>
-                        <input
-                            type="text"
-                            name="prodAttributes"
-                            value={productData.prodAttributes}
-                            onChange={handleInputChange}
-                            placeholder="Product Attributes"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="reviews">Reviews:</label>
-                        <input
-                            type="text"
-                            name="reviews"
-                            value={productData.reviews}
-                            onChange={handleInputChange}
-                            placeholder="Reviews"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="inventory">Inventory:</label>
-                        <input
-                            type="number"
-                            name="inventory"
-                            value={productData.inventory}
-                            onChange={handleInputChange}
-                            placeholder="Inventory"
+                            required
                         />
                     </div>
                     <button type="submit" className="btn-create">
@@ -160,42 +154,47 @@ const CreateProduct = () => {
                     </button>
                 </form>
             </div>
-            <div className="preview-container">
 
+
+            <div className="preview-container">
+                <h2 className="preview-title">Preview:</h2>
                 <div className="preview-section">
-                    <h3>Preview:</h3>
-                    <p>
-                        <strong>Product ID:</strong> {productData.prodId}
-                    </p>
-                    <p>
-                        <strong>Brand:</strong> {productData.brand}
-                    </p>
-                    <p>
-                        <strong>Product Model Name:</strong> {productData.prodModelName}
-                    </p>
-                    <p>
-                        <strong>Product Description:</strong> {productData.prodDescription}
-                    </p>
-                    <p>
-                        <strong>Product Price:</strong> {productData.prodPrice}
-                    </p>
-                    <p>
-                        <strong>Product Image URL:</strong>{" "}
-                        <img src={productData.prodImg} alt="Product" />
-                    </p>
-                    <p>
-                        <strong>Product Attributes:</strong> {productData.prodAttributes}
-                    </p>
-                    <p>
-                        <strong>Reviews:</strong> {productData.reviews}
-                    </p>
-                    <p>
-                        <strong>Inventory:</strong> {productData.inventory}
-                    </p>
+                    <div className="preview-grid-container">
+                        <div className="preview-grid-item">
+                            <p>
+                                <strong>Product ID:</strong> {productData.prodId}
+                            </p>
+                            <p>
+                                <strong>Brand:</strong> {productData.brand}
+                            </p>
+                        </div>
+                        <div className="preview-grid-item">
+                            <p>
+                                <strong>Product Price:</strong> {productData.prodPrice}
+                            </p>
+                            <p>
+                                <strong>Inventory:</strong> {productData.inventory}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="preview-additional-info">
+                        <p>
+                            <strong>Product Description:</strong> {productData.prodDescription}
+                        </p>
+                        <div className="product-image-container">
+                            <p>
+                                <strong>Product Image URL:</strong>{" "}
+                                {productData.prodImg ? (
+                                    <img src={productData.prodImg} alt="Product" />
+                                ) : (
+                                    "Insert Image Url"
+                                )}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     );
 };
 
