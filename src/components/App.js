@@ -13,7 +13,7 @@ import {
   CartSummary,
   ProductDisplayPage,
   ConfirmationPage,
-  Home, 
+  Home,
   Footer,
   AdminDashboard
 } from '../components'
@@ -56,10 +56,10 @@ const App = () => {
           )}
         />
         <Route
-        path = '/home'
-        render = {() => (
-          <Home />
-        )}
+          path='/home'
+          render={() => (
+            <Home />
+          )}
         />
         <Route
           exact path='/products'
@@ -70,19 +70,19 @@ const App = () => {
         <Route
           exact path='/products/:prodId'
           render={() => (
-            <ProductDisplayPage user={user} sessionId={sessionId}/>
+            <ProductDisplayPage user={user} sessionId={sessionId} />
           )}
         />
         <Route
           path='/orders'
           render={() => (
-            <MyOrders user = {user} userToken = {userToken}/>
+            <MyOrders user={user} userToken={userToken} />
           )}
         />
         <Route
           path='/cart'
           render={() => (
-            <CartSummary user={user} sessionId={sessionId}/>
+            <CartSummary user={user} sessionId={sessionId} />
           )}
         />
         <Route

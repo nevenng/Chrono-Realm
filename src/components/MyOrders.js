@@ -33,7 +33,7 @@ const MyOrders = ({user, userToken}) => {
         <>
             <div className="myOrders-container">
                 <h3>Your Orders</h3>
-                <MyItems user = {user} userToken = {userToken} />
+                {/* <MyItems user = {user} userToken = {userToken} /> */}
                
             </div>
         </>
